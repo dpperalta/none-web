@@ -16,8 +16,8 @@ export const AppRouter = () => {
 
     // Datos de autenticación que vendrían del state, por ahora quemados
     const checking = false;
-    const userID = '1';
-    const roleName = 'User';
+    const userID =  null;//'1';
+    const roleName = null; //'User';
 
     // For show components and routes by role
     let isAdmin;
