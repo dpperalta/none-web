@@ -8,7 +8,12 @@ import { AdminRoutes } from './AdminRoutes';
 // Components
 import { Login } from '../components/auth/Login';
 import { None } from '../components/none/dashboard/None';
+<<<<<<< Updated upstream
 
+=======
+import { MainUI } from '../components/ui/MainUI';
+import Dashboard  from '../components/none/dashboard/Dashboard';
+>>>>>>> Stashed changes
 export const AppRouter = () => {
 
     // TODO: Cambiar el valor por el que retorne el API
@@ -31,6 +36,11 @@ export const AppRouter = () => {
                 <Switch>
                     <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/>
                     <PrivateRoutes exact path="/" component={ None } isAuthenticated={ !!userID }/>
+<<<<<<< Updated upstream
+=======
+                    <PrivateRoutes exact path='/dashboard' component={ MainUI } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/dashboard2' component={ Dashboard } isAuthenticated={ !!userID } />
+>>>>>>> Stashed changes
                     {/* For Admin and Super Admin Routes */}
                     {/* <AdminRoutes exact path="/route"  /> */}
                     <Redirect to="/" />
