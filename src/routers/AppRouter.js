@@ -8,6 +8,7 @@ import { AdminRoutes } from './AdminRoutes';
 // Components
 import { Login } from '../components/auth/Login';
 import { None } from '../components/none/dashboard/None';
+import { MainUI } from '../components/ui/MainUI';
 
 export const AppRouter = () => {
 
@@ -16,8 +17,8 @@ export const AppRouter = () => {
 
     // Datos de autenticación que vendrían del state, por ahora quemados
     const checking = false;
-    const userID =  null;//'1';
-    const roleName = null; //'User';
+    const userID =  '1';//null;//'1';
+    const roleName = 'User'; //null; //'User';
 
     // For show components and routes by role
     let isAdmin;
@@ -31,6 +32,7 @@ export const AppRouter = () => {
                 <Switch>
                     <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/>
                     <PrivateRoutes exact path="/" component={ None } isAuthenticated={ !!userID }/>
+                    <PrivateRoutes exact path='/dashboard' component={ MainUI } isAuthenticated={ !!userID } />
                     {/* For Admin and Super Admin Routes */}
                     {/* <AdminRoutes exact path="/route"  /> */}
                     <Redirect to="/" />
