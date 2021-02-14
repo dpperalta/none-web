@@ -9,6 +9,7 @@ import { AdminRoutes } from './AdminRoutes';
 import { Login } from '../components/auth/Login';
 import { None } from '../components/none/dashboard/None';
 import { MainUI } from '../components/ui/MainUI';
+import { Formulario } from '../components/ui/Formulario';
 import Dashboard  from '../components/none/dashboard/Dashboard';
 export const AppRouter = () => {
 
@@ -31,9 +32,10 @@ export const AppRouter = () => {
             <div>
                 <Switch>
                     <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/>
-                    <PrivateRoutes exact path="/" component={ None } isAuthenticated={ !!userID }/>
-                    <PrivateRoutes exact path='/dashboard' component={ MainUI } isAuthenticated={ !!userID } />
-                    <PrivateRoutes exact path='/dashboard2' component={ Dashboard } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path="/demo" component={ None } isAuthenticated={ !!userID }/>
+                    <PrivateRoutes exact path='/' component={ MainUI } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form' component={ Formulario } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/dashboard' component={ Dashboard } isAuthenticated={ !!userID } />
                     {/* For Admin and Super Admin Routes */}
                     {/* <AdminRoutes exact path="/route"  /> */}
                     <Redirect to="/" />

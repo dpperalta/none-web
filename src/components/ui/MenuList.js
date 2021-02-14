@@ -9,7 +9,7 @@ import BorderColorIcon from '@material-ui/icons/BorderColor';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import PeopleIcon from '@material-ui/icons/People';
 import MessageIcon from '@material-ui/icons/Message';
-import AssignmentIcon from '@material-ui/icons/Assessment';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 
 /* export const mainMenuList = () => {
     return ( */
@@ -65,19 +65,19 @@ export const secondMenuItems = (
         </ListSubheader>
         <ListItem button>
             <ListItemIcon>
-                <AssignmentIcon />
+                <ArrowBack />
             </ListItemIcon>
             <ListItemText primary="Semana Actual" />
         </ListItem>
         <ListItem button>
             <ListItemIcon>
-                <AssignmentIcon />
+                <ArrowBack/>
             </ListItemIcon>
             <ListItemText primary="Próxima Semana" />
         </ListItem>
         <ListItem button>
             <ListItemIcon>
-                <AssignmentIcon />
+                <ArrowBack />
             </ListItemIcon>
             <ListItemText primary="Tareas Pasadas" />
         </ListItem>

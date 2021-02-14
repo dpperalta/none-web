@@ -19,6 +19,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { mainMenuList, secondMenuItems } from './MenuList';
+import { ComponentsUI } from './ComponentsUI';
+import mentoredLogo from '../../assets/images/logo-mentored-main.png';
 
 
 function Copyright() {
@@ -165,6 +167,7 @@ export const MainUI = () => {
                     <IconButton
                         onClick={ handleDrawerClose }
                     >
+                        <img src={ mentoredLogo } alt="Mentored logo" width="175px" />
                         <ChevronLeftIcon />
                     </IconButton>
                 </div>
@@ -179,12 +182,12 @@ export const MainUI = () => {
             </Drawer>
             <main className={ classes.content }>
                 <div className={ classes.appBarSpacer }></div>
-                <Container>
+                <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={ 3 }>
-                        <Grid item xs={ 12 } md={ 8 } lg={ 9 }>
-                            <Paper className={ fixedHeightPaper }>
-                                <p>Contenido del dashboard aquí</p>
-                            </Paper>
+                        <Grid item xs={ 12 } md={ 12 } lg={ 12 }>
+                            
+                            < ComponentsUI />
+
                         </Grid>
                     </Grid>
                     <Box pt={ 4 }>

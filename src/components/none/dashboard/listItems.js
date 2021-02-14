@@ -7,7 +7,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import BarChartIcon from '@material-ui/icons/BarChart';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import MessageIcon from '@material-ui/icons/Message';
 
@@ -59,19 +59,19 @@ export const secondaryListItems = (
         </ListSubheader>
         <ListItem button>
             <ListItemIcon>
-                <AssignmentIcon />
+                <ArrowBack />
             </ListItemIcon>
             <ListItemText primary="Semana Actual" />
         </ListItem>
         <ListItem button>
             <ListItemIcon>
-                <AssignmentIcon />
+                <ArrowBack />
             </ListItemIcon>
             <ListItemText primary="Próxima Semana" />
         </ListItem>
         <ListItem button>
             <ListItemIcon>
-                <AssignmentIcon />
+                <ArrowBack />
             </ListItemIcon>
             <ListItemText primary="Tareas Pasadas" />
         </ListItem>
