@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import { es} from "date-fns/locale";
@@ -51,6 +51,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 // Yup and Formik Validation
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Swal from 'sweetalert2';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -84,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
 .test('numbers', 'Solo se admiten números', (value) => {return /^[0-9]+$/.test(value);})
 .test('alphabets', 'Solo se admiten alfanuméricos', (value) => {return /^[0-9A-Za-z áéíóúÁÉÍÓÚÑñ]+$/.test(value);})
 .email("Correo Electronico Invalido")
-.test('numbers', 'Solo se admiten teéfonos', (value) => {return /^[0-9+-() ]+$/.test(value);})
+.test('numbers', 'Solo se admiten teléfonos', (value) => {return /^[0-9+-() ]+$/.test(value);})
 .oneOf(['Banco 1', 'Banco 2'])
 .test('numbers', 'Solo se admiten solo números y separador decimal coma ', (value) => {return /^[0-9,]+$/.test(value);})
 .oneOf([true], 'Es necesaria esta declaración para poder guardar los datos') //Terms: Yup.bool()
@@ -131,6 +132,8 @@ export const ComponentsUI = () => {
     setSelectedDate(date);
   };
 
+  const [ object, setObject ] = useState({});
+
   //Formik initial values
   const formik = useFormik({
     initialValues: {
@@ -147,22 +150,35 @@ export const ComponentsUI = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      setObject(values);
+      Swal.fire('Datos', JSON.stringify(values, null, 2), 'info');
+      mostrarMensaje();
+     alert(JSON.stringify(values, null, 2));
     },
     
 });
 
+  const mostrarMensaje = () => {
+    setTimeout(() => {
+      
+      Swal.fire('Correcto', 'Datos guardados correctamente', 'success');
+    }, 200);
+    //Swal.fire('Datos', JSON.stringify(object, null, 2), 'info');
+  }
+
   return (
-    //<Container component="main" maxWidth="xs"> // SI se quiere el formulario pequeño
-    <Container component="main" maxWidth="s">
+    //<Container component="main" maxWidth="xs"> // SI se quiere el formulario pequeño, hay tamaños: sm, {md, lg} recomendados esos dos
+    <Container component="main" maxWidth="md">
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+      <div className={classes.form}>
+      <Grid container direction="row" alignItems="center" justify="center">
+        <Avatar id="avatar" className={classes.avatar}>
           <LockOutlinedIcon />
-        </Avatar>
+        </Avatar> 
         <Typography component="h1" variant="h5">
-          Ingreso de datos
+          Listado de controles
         </Typography>
+        </Grid>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
