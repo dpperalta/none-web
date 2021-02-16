@@ -4,17 +4,15 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import BorderColorIcon from '@material-ui/icons/BorderColor';
-import BarChartIcon from '@material-ui/icons/BarChart';
 import PeopleIcon from '@material-ui/icons/People';
-import MessageIcon from '@material-ui/icons/Message';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import BarChartIcon from '@material-ui/icons/BarChart';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+import BorderColorIcon from '@material-ui/icons/BorderColor';
+import MessageIcon from '@material-ui/icons/Message';
 
-/* export const mainMenuList = () => {
-    return ( */
-export const mainMenuList = (
-    <div>
+export const mainListItems = (
+  <div>
         <ListItem button>
             <ListItemIcon>
                 <DashboardIcon />
@@ -53,13 +51,9 @@ export const mainMenuList = (
         </ListItem>
     </div>
 );
-/*     );
-} */
 
-/* export const secondMenuItems  = () => {
-    return ( */
-export const secondMenuItems = (
-    <div>
+export const secondaryListItems = (
+  <div>
         <ListSubheader inset>
             Tareas Pendientes
         </ListSubheader>
@@ -71,7 +65,7 @@ export const secondMenuItems = (
         </ListItem>
         <ListItem button>
             <ListItemIcon>
-                <ArrowBack/>
+                <ArrowBack />
             </ListItemIcon>
             <ListItemText primary="Próxima Semana" />
         </ListItem>
@@ -83,6 +77,3 @@ export const secondMenuItems = (
         </ListItem>
     </div>
 );
-/*     );
-}
- */
