@@ -89,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
 .oneOf(['Banco 1', 'Banco 2'])
 .test('numbers', 'Solo se admiten solo números y separador decimal coma ', (value) => {return /^[0-9,]+$/.test(value);})
 .oneOf([true], 'Es necesaria esta declaración para poder guardar los datos') //Terms: Yup.bool()
+BASE DE DAQTOS HEROKU HDB: dftjdgo4a61ifl
 */
 // Validation Schema
 const validationSchema = Yup.object({
