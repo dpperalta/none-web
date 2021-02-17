@@ -8,8 +8,6 @@ import { AdminRoutes } from './AdminRoutes';
 // Components
 import { Login } from '../components/auth/Login';
 import { None } from '../components/none/dashboard/None';
-<<<<<<< Updated upstream
-=======
 import { MainUI } from '../components/ui/MainUI';
 import { Formulario } from '../components/ui/Formulario';
 import { FormCreatePerson } from '../components/none/view/Person/FormCreatePerson';
@@ -19,7 +17,6 @@ import { FormCreateSubject } from '../components/none/view/Subject/FormCreateSub
 import { FormCreateContent } from '../components/none/view/Subject/Content/FormCreateContent';
 import { FormCreateTask } from '../components/none/view/Subject/Task/FormCreateTask';
 import { FormCreateEnrollmentStatus } from '../components/none/view/Enrollment/FormCreateEnrollmentStatus';
->>>>>>> Stashed changes
 
 export const AppRouter = () => {
 
@@ -28,8 +25,8 @@ export const AppRouter = () => {
 
     // Datos de autenticación que vendrían del state, por ahora quemados
     const checking = false;
-    const userID = '1';
-    const roleName = 'User';
+    const userID =  '1';//null;//'1';
+    const roleName = 'User'; //null; //'User';
 
     // For show components and routes by role
     let isAdmin;
@@ -42,9 +39,6 @@ export const AppRouter = () => {
             <div>
                 <Switch>
                     <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/>
-<<<<<<< Updated upstream
-                    <PrivateRoutes exact path="/" component={ None } isAuthenticated={ !!userID }/>
-=======
                     <PrivateRoutes exact path="/demo" component={ None } isAuthenticated={ !!userID }/>
                     <PrivateRoutes exact path='/' component={ MainUI } isAuthenticated={ !!userID } />
                     <PrivateRoutes exact path='/form' component={ Formulario } isAuthenticated={ !!userID } />
@@ -56,8 +50,7 @@ export const AppRouter = () => {
                     <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
                     <PrivateRoutes exact path='/form/enrollment-status' component={ FormCreateEnrollmentStatus } isAuthenticated={ !!userID } />
                     
-                    <PrivateRoutes exact path='/dashboard' component={ Dashboard } isAuthenticated={ !!userID } />
->>>>>>> Stashed changes
+                    
                     {/* For Admin and Super Admin Routes */}
                     {/* <AdminRoutes exact path="/route"  /> */}
                     <Redirect to="/" />
