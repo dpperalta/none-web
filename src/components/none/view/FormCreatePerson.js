@@ -188,21 +188,21 @@ export const FormCreatePerson = () => {
       <CssBaseline />
       <div className={classes.form}>
         <Grid container direction="row" alignItems="center" justify="center">
-        <Avatar id="avatar" className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar> 
-        <Typography component="h1" variant="h5">
-          Registro de Persona
-        </Typography>
+          <Avatar id="avatar" className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar> 
+          <Typography component="h1" variant="h5">
+            Registro de Persona
+          </Typography>
         </Grid>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
-            <Grid container direction="row" alignContent="center" alignItems="center" justify="center"> 
-              <Grid item><PersonIcon /></Grid>
-              <Grid item>DATOS BASICOS</Grid>
-            </Grid>
-        <Grid container spacing={2}>
-        <Grid item xs={12}>
-        <TextField
+          <Grid container direction="row" alignContent="center" alignItems="center" justify="center"> 
+            <Grid item><PersonIcon /></Grid>
+            <Grid item>DATOS BASICOS</Grid>
+          </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
                 autoComplete="dni"
                 name="dni"
                 variant="outlined"
@@ -216,16 +216,16 @@ export const FormCreatePerson = () => {
                 onBlur={ formik.handleBlur }
               />
               {
-                            formik.errors.dni && formik.touched.dni
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.dni }</Alert>
-                                </div>
-                             )
-                            : null
+                formik.errors.dni && formik.touched.dni
+                ? ( 
+                    <div className={ classes.alert }>
+                        <Alert severity="error">{ formik.errors.dni }</Alert>
+                    </div>
+                )
+                : null
               }
-              </Grid>
-        </Grid>
+            </Grid>
+          </Grid>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -241,41 +241,43 @@ export const FormCreatePerson = () => {
                 onBlur={ formik.handleBlur }
               />
               {
-                            formik.errors.firstName && formik.touched.firstName
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.firstName }</Alert>
-                                </div>
-                             )
-                            : null
+                formik.errors.firstName && formik.touched.firstName
+                ? ( 
+                    <div className={ classes.alert }>
+                        <Alert severity="error">{ formik.errors.firstName }</Alert>
+                    </div>
+                  )
+                : null
               }
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Apellidos"
-                name="lastName"
-                autoComplete="lname"
-                value={ formik.values.lastName }
-                onChange={ formik.handleChange }
-                onBlur={ formik.handleBlur }
-              />
-              {
-                            formik.errors.lastName && formik.touched.lastName
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.lastName }</Alert>
-                                </div>
-                             )
-                            : null
-              }
-            </Grid>
-            <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="lastName"
+              label="Apellidos"
+              name="lastName"
+              autoComplete="lname"
+              value={ formik.values.lastName }
+              onChange={ formik.handleChange }
+              onBlur={ formik.handleBlur }
+            />
+            {
+              formik.errors.lastName && formik.touched.lastName
+              ? ( 
+                  <div className={ classes.alert }>
+                      <Alert severity="error">{ formik.errors.lastName }</Alert>
+                  </div>
+                )
+              : null
+            }
+          </Grid>
+          <Grid item xs={12}>
             <FormControl variant="outlined" Style="width:100%" className={classes.formControl}>
-                <InputLabel id="select-label">Tipo de persona</InputLabel>
+                <InputLabel id="select-label">
+                  Tipo de persona
+                </InputLabel>
                 <Select
                   labelId="select-label"
                   id="selector"
@@ -295,62 +297,60 @@ export const FormCreatePerson = () => {
                   <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
                 {
-                            formik.errors.selector && formik.touched.selector
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.selector }</Alert>
-                                </div>
-                             )
-                            : null
+                  formik.errors.selector && formik.touched.selector
+                  ? ( 
+                      <div className={ classes.alert }>
+                          <Alert severity="error">{ formik.errors.selector }</Alert>
+                      </div>
+                  )
+                  : null
                 }
               </FormControl>
             </Grid>
             <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6}>
                 &nbsp;&nbsp;&nbsp;
                 <MuiPickersUtilsProvider locale={es}  utils={DateFnsUtils}>                  
-                        <KeyboardDatePicker
-                        margin="normal"
-                        id="fecha"
-                        Style="width:95%"
-                        name="fecha"
-                        label="Fecha de nacimiento"
-                        format="dd/MM/yyyy"
-                        required
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        onBlur={ formik.handleBlur }
-                        />
-                        {
-                                formik.errors.fecha && formik.touched.fecha
-                                ? ( 
-                                    <div className={ classes.alert }>
-                                        <Alert severity="error">{ formik.errors.fecha }</Alert>
-                                    </div>
-                                )
-                                : null
-                        }
+                  <KeyboardDatePicker
+                  margin="normal"
+                  id="fecha"
+                  Style="width:95%"
+                  name="fecha"
+                  label="Fecha de nacimiento"
+                  format="dd/MM/yyyy"
+                  required
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  onBlur={ formik.handleBlur }
+                  />
+                  {
+                    formik.errors.fecha && formik.touched.fecha
+                    ? ( 
+                        <div className={ classes.alert }>
+                            <Alert severity="error">{ formik.errors.fecha }</Alert>
+                        </div>
+                    )
+                    : null
+                  }
                 </MuiPickersUtilsProvider>
-            </Grid>
-            
+              </Grid>
                 <Grid item xs={12} sm={6}>
                     <FormControl component="fieldset">
-                    <label >Sexo</label>
-                        <RadioGroup aria-label="gender" name="radio" id="radio" value={formik.values.radio} onChange={ formik.handleChange} row>
+                      <label >Sexo</label>
+                      <RadioGroup aria-label="gender" name="radio" id="radio" value={formik.values.radio} onChange={ formik.handleChange} row>
                         <FormControlLabel value="female" control={<Radio />} label="Femenino" />
-                            <FormControlLabel value="male" control={<Radio />} label="Masculino" />
-                        </RadioGroup>
+                        <FormControlLabel value="male" control={<Radio />} label="Masculino" />
+                      </RadioGroup>
                     </FormControl>
                 </Grid>
-                </Grid>
-                
             </Grid>
-            <br/>
-            <Grid container direction="row" alignContent="center" alignItems="center" justify="center"> 
-              <Grid item><HomeIcon /></Grid>
-              <Grid item>DIRECCION DE DOMICILIO</Grid>
-            </Grid>
-            <Grid container spacing={2}>
+          </Grid>
+          <br/>
+          <Grid container direction="row" alignContent="center" alignItems="center" justify="center"> 
+            <Grid item><HomeIcon /></Grid>
+            <Grid item>DIRECCION DE DOMICILIO</Grid>
+          </Grid>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="mainStreet"
@@ -365,13 +365,13 @@ export const FormCreatePerson = () => {
                 onBlur={ formik.handleBlur }
               />
               {
-                            formik.errors.mainStreet && formik.touched.mainStreet
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.mainStreet }</Alert>
-                                </div>
-                             )
-                            : null
+                formik.errors.mainStreet && formik.touched.mainStreet
+                ? ( 
+                    <div className={ classes.alert }>
+                        <Alert severity="error">{ formik.errors.mainStreet }</Alert>
+                    </div>
+                )
+                : null
               }
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -388,17 +388,17 @@ export const FormCreatePerson = () => {
                 onBlur={ formik.handleBlur }
               />
               {
-                            formik.errors.number && formik.touched.number
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.number }</Alert>
-                                </div>
-                             )
-                            : null
+                formik.errors.number && formik.touched.number
+                ? ( 
+                    <div className={ classes.alert }>
+                        <Alert severity="error">{ formik.errors.number }</Alert>
+                    </div>
+                )
+                : null
               }
-              </Grid>
             </Grid>
-            <Grid container spacing={2}>
+          </Grid>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="secondStreet"
@@ -413,55 +413,54 @@ export const FormCreatePerson = () => {
                 onBlur={ formik.handleBlur }
               />
               {
-                            formik.errors.secondStreet && formik.touched.secondStreet
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.secondStreet }</Alert>
-                                </div>
-                             )
-                            : null
+                formik.errors.secondStreet && formik.touched.secondStreet
+                ? ( 
+                    <div className={ classes.alert }>
+                        <Alert severity="error">{ formik.errors.secondStreet }</Alert>
+                    </div>
+                )
+                : null
               }
             </Grid>
             <Grid item xs={12} sm={6}>
-              	<FormControl variant="outlined" Style="width:100%" className={classes.formControl}>
-                <InputLabel id="select-label">Ciudad</InputLabel>
-                <Select
-                  labelId="select-label"
-                  id="selectorCity"
-                  name="selectorCity"
-                  required
-                  fullWidth
-                  value={formik.values.selectorCity}
-                  onChange={formik.handleChange}
-                  onBlur={ formik.handleBlur }
-                  label="Tipo de persona"
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-                {
-                            formik.errors.selectorCity && formik.touched.selectorCity
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.selectorCity }</Alert>
-                                </div>
-                             )
-                            : null
-                }
+                <FormControl variant="outlined" Style="width:100%" className={classes.formControl}>
+                  <InputLabel id="select-label">Ciudad</InputLabel>
+                  <Select
+                    labelId="select-label"
+                    id="selectorCity"
+                    name="selectorCity"
+                    required
+                    fullWidth
+                    value={formik.values.selectorCity}
+                    onChange={formik.handleChange}
+                    onBlur={ formik.handleBlur }
+                    label="Tipo de persona"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                  {
+                    formik.errors.selectorCity && formik.touched.selectorCity
+                    ? ( 
+                        <div className={ classes.alert }>
+                            <Alert severity="error">{ formik.errors.selectorCity }</Alert>
+                        </div>
+                    )
+                    : null
+                  }
               </FormControl>
-              </Grid>
             </Grid>
-           
-            <br/>
-            <Grid container direction="row" alignContent="center" alignItems="center" justify="center"> 
-              <Grid item><PhoneIcon /></Grid>
-              <Grid item>TELEFONOS PARA CONTACTO</Grid>
-            </Grid>
-            <Grid container spacing={2}>
+          </Grid>
+          <br/>
+          <Grid container direction="row" alignContent="center" alignItems="center" justify="center"> 
+            <Grid item><PhoneIcon /></Grid>
+            <Grid item>TELEFONOS PARA CONTACTO</Grid>
+          </Grid>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="numberPhone1"
@@ -476,17 +475,17 @@ export const FormCreatePerson = () => {
                 onBlur={ formik.handleBlur }
               />
               {
-                            formik.errors.numberPhone1 && formik.touched.numberPhone1
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.numberPhone1 }</Alert>
-                                </div>
-                             )
-                            : null
+                formik.errors.numberPhone1 && formik.touched.numberPhone1
+                ? ( 
+                    <div className={ classes.alert }>
+                        <Alert severity="error">{ formik.errors.numberPhone1 }</Alert>
+                    </div>
+                )
+                : null
               }
             </Grid>
             <Grid item xs={12} sm={6}>
-              	<FormControl variant="outlined" Style="width:100%" className={classes.formControl}>
+              <FormControl variant="outlined" Style="width:100%" className={classes.formControl}>
                 <InputLabel id="select-label">Operadora</InputLabel>
                 <Select
                   labelId="select-label"
@@ -507,18 +506,18 @@ export const FormCreatePerson = () => {
                   <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
                 {
-                            formik.errors.selectorOperator1 && formik.touched.selectorOperator1
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.selectorOperator1 }</Alert>
-                                </div>
-                             )
-                            : null
+                  formik.errors.selectorOperator1 && formik.touched.selectorOperator1
+                  ? ( 
+                      <div className={ classes.alert }>
+                          <Alert severity="error">{ formik.errors.selectorOperator1 }</Alert>
+                      </div>
+                  )
+                  : null
                 }
               </FormControl>
             </Grid>
-            </Grid>
-            <Grid container spacing={2}>
+          </Grid>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="numberPhone2"
@@ -533,17 +532,17 @@ export const FormCreatePerson = () => {
                 onBlur={ formik.handleBlur }
               />
               {
-                            formik.errors.numberPhone2 && formik.touched.numberPhone2
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.numberPhone2 }</Alert>
-                                </div>
-                             )
-                            : null
+                formik.errors.numberPhone2 && formik.touched.numberPhone2
+                ? ( 
+                    <div className={ classes.alert }>
+                        <Alert severity="error">{ formik.errors.numberPhone2 }</Alert>
+                    </div>
+                )
+                : null
               }
             </Grid>
             <Grid item xs={12} sm={6}>
-              	<FormControl variant="outlined" Style="width:100%" className={classes.formControl}>
+                <FormControl variant="outlined" Style="width:100%" className={classes.formControl}>
                 <InputLabel id="select-label">Operadora</InputLabel>
                 <Select
                   labelId="select-label"
@@ -564,24 +563,23 @@ export const FormCreatePerson = () => {
                   <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
                 {
-                            formik.errors.selectorOperator2 && formik.touched.selectorOperator2
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.selectorOperator2 }</Alert>
-                                </div>
-                             )
-                            : null
+                  formik.errors.selectorOperator2 && formik.touched.selectorOperator2
+                  ? ( 
+                      <div className={ classes.alert }>
+                          <Alert severity="error">{ formik.errors.selectorOperator2 }</Alert>
+                      </div>
+                  )
+                  : null
                 }
               </FormControl>
             </Grid>
-          </Grid>
-         
+            </Grid>         
           <br/>
-            <Grid container direction="row" alignContent="center" alignItems="center" justify="center"> 
-              <Grid item><ContactMailIcon /></Grid>
-              <Grid item>&nbsp;DATOS PARA EL USUARIO</Grid>
-            </Grid>
-            <Grid container spacing={2}>
+          <Grid container direction="row" alignContent="center" alignItems="center" justify="center"> 
+            <Grid item><ContactMailIcon /></Grid>
+            <Grid item>&nbsp;DATOS PARA EL USUARIO</Grid>
+          </Grid>
+          <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -596,17 +594,17 @@ export const FormCreatePerson = () => {
                 onBlur={ formik.handleBlur }
               />
               {
-                            formik.errors.email && formik.touched.email
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.email }</Alert>
-                                </div>
-                             )
-                            : null
+                formik.errors.email && formik.touched.email
+                ? ( 
+                    <div className={ classes.alert }>
+                        <Alert severity="error">{ formik.errors.email }</Alert>
+                    </div>
+                )
+                : null
               }
             </Grid>
-            </Grid>
-            <Grid container spacing={2}>
+          </Grid>
+          <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -622,41 +620,37 @@ export const FormCreatePerson = () => {
                 onBlur={ formik.handleBlur }
             />
             {
-                formik.errors.pass && formik.touched.pass
-                ? ( 
-                    <div className={ classes.alert }>
-                        <Alert severity="error">{ formik.errors.pass }</Alert>
-                    </div>
-                 )
-                : null
+              formik.errors.pass && formik.touched.pass
+              ? ( 
+                  <div className={ classes.alert }>
+                      <Alert severity="error">{ formik.errors.pass }</Alert>
+                  </div>
+              )
+              : null
             }
             </Grid>
-            </Grid>
-         
-                  
+          </Grid>       
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        startIcon={<SaveIcon />}
-                    >
-                        Guardar datos
-                    </Button>
+              <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  startIcon={<SaveIcon />}
+              >
+                  Guardar datos
+              </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
-                        <Button variant="outlined" Style="width:100%" color="primary" className={classes.submit} onClick={formik.handleReset} startIcon={<BackspaceIcon />}>
-                            Limpiar Datos
-                    </Button>
+              <Button variant="outlined" Style="width:100%" color="primary" className={classes.submit} onClick={formik.handleReset} startIcon={<BackspaceIcon />}>
+                  Limpiar Datos
+              </Button>
             </Grid>
-          </Grid>         
-          
+          </Grid>
         </form>
       </div>
-      
     </Container>
   );
   
