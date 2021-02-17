@@ -16,7 +16,13 @@ import { FormCreateCourse } from '../components/none/view/Course/FormCreateCours
 import { FormCreateSubject } from '../components/none/view/Subject/FormCreateSubject';
 import { FormCreateContent } from '../components/none/view/Subject/Content/FormCreateContent';
 import { FormCreateTask } from '../components/none/view/Subject/Task/FormCreateTask';
+import { FormCreateTaskResource } from '../components/none/view/Subject/Task/Resource/FormCreateTaskResource'
+import App from '../components/none/view/Subject/Task/Resolution/FormCreateTaskResolution'
+import {FormCreateTaskResolutionResource} from '../components/none/view/Subject/Task/Resolution/Resource/FormCreateTaskResolutionResource'
+import { FormCreateTaskEvaluation } from '../components/none/view/Subject/Task/Evaluation/FormCreateTaskEvaluation';
 import { FormCreateEnrollmentStatus } from '../components/none/view/Enrollment/FormCreateEnrollmentStatus';
+import { FormCreateEnrollment } from '../components/none/view/Enrollment/FormCreateEnrollment';
+import {FormCreateAcademicPeriod} from '../components/none/view/AcademicPeriod/FormCreateAcademicPeriod';
 
 export const AppRouter = () => {
 
@@ -48,8 +54,13 @@ export const AppRouter = () => {
                     <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
                     <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
                     <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form/task-resource' component={ FormCreateTaskResource } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form/task-res-res' component={ FormCreateTaskResolutionResource } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form/task-resolution' component={ App } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form/task-evaluation' component={ FormCreateTaskEvaluation } isAuthenticated={ !!userID } />
                     <PrivateRoutes exact path='/form/enrollment-status' component={ FormCreateEnrollmentStatus } isAuthenticated={ !!userID } />
-                    
+                    <PrivateRoutes exact path='/form/enrollment' component={ FormCreateEnrollment } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form/academic-period' component={ FormCreateAcademicPeriod } isAuthenticated={ !!userID } />
                     
                     {/* For Admin and Super Admin Routes */}
                     {/* <AdminRoutes exact path="/route"  /> */}
