@@ -8,6 +8,18 @@ import { AdminRoutes } from './AdminRoutes';
 // Components
 import { Login } from '../components/auth/Login';
 import { None } from '../components/none/dashboard/None';
+<<<<<<< Updated upstream
+=======
+import { MainUI } from '../components/ui/MainUI';
+import { Formulario } from '../components/ui/Formulario';
+import { FormCreatePerson } from '../components/none/view/Person/FormCreatePerson';
+import { FormCreateCollege } from '../components/none/view/College/FormCreateCollege';
+import { FormCreateCourse } from '../components/none/view/Course/FormCreateCourse';
+import { FormCreateSubject } from '../components/none/view/Subject/FormCreateSubject';
+import { FormCreateContent } from '../components/none/view/Subject/Content/FormCreateContent';
+import { FormCreateTask } from '../components/none/view/Subject/Task/FormCreateTask';
+import { FormCreateEnrollmentStatus } from '../components/none/view/Enrollment/FormCreateEnrollmentStatus';
+>>>>>>> Stashed changes
 
 export const AppRouter = () => {
 
@@ -30,7 +42,22 @@ export const AppRouter = () => {
             <div>
                 <Switch>
                     <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/>
+<<<<<<< Updated upstream
                     <PrivateRoutes exact path="/" component={ None } isAuthenticated={ !!userID }/>
+=======
+                    <PrivateRoutes exact path="/demo" component={ None } isAuthenticated={ !!userID }/>
+                    <PrivateRoutes exact path='/' component={ MainUI } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form' component={ Formulario } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form/person' component={ FormCreatePerson } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form/college' component={ FormCreateCollege } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form/course' component={ FormCreateCourse } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/form/enrollment-status' component={ FormCreateEnrollmentStatus } isAuthenticated={ !!userID } />
+                    
+                    <PrivateRoutes exact path='/dashboard' component={ Dashboard } isAuthenticated={ !!userID } />
+>>>>>>> Stashed changes
                     {/* For Admin and Super Admin Routes */}
                     {/* <AdminRoutes exact path="/route"  /> */}
                     <Redirect to="/" />
