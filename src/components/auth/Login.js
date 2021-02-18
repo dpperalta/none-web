@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -21,6 +23,7 @@ import * as Yup from 'yup';
 // None images
 import imageMentored from '../../assets/images/auth-background.jpg';
 import mentoredLogo from '../../assets/images/logo-mentored-main.png';
+import { startLogin } from '../../redux/actions/auth';
 
 function Copyright() {
     return (
@@ -87,15 +90,32 @@ const validationSchema = Yup.object({
 
 export const Login = () => {
 
+    const dispatch = useDispatch();
+
     const classes = useStyles();
+
+    const getEmail = localStorage.getItem('email') || '';
+    const getRemember = JSON.parse(localStorage.getItem('remember')) || false;
 
     const formik = useFormik({
         initialValues: {
-            email: '',
-            pass: ''
+            email: getEmail,
+            pass: '',
+            rememberMe: getRemember
         },
-        validationSchema: validationSchema
-    })
+        validationSchema: validationSchema,
+        onSubmit: ( values ) => {
+            if(values.rememberMe === true) {
+                localStorage.setItem('email', values.email);
+                localStorage.setItem('remember', JSON.stringify(true));
+            } else {
+                localStorage.removeItem('email');
+                localStorage.removeItem('remember');
+            }
+            const { email, pass } = values;
+            dispatch( startLogin(email, pass) );
+        }
+    });
 
     return (
         <Grid container component="main" className={ classes.root }>
@@ -112,9 +132,13 @@ export const Login = () => {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Autenticación
                     </Typography>
-                    <form className={ classes.form } noValidate>
+                    <form 
+                        className={ classes.form } 
+                        noValidate
+                        onSubmit={ formik.handleSubmit }
+                    >
                         <TextField 
                             variant="outlined"
                             margin="normal"
@@ -162,8 +186,18 @@ export const Login = () => {
                             : null
                         }
                         <FormControlLabel 
-                            control={ <CheckBox  value="remember"  color="primary"/> }
-                            label="Remember me"
+                            control={ 
+                                <CheckBox  
+                                    name="rememberMe"
+                                    type="checkbox"
+                                    id="rememberMe"
+                                    color="primary"
+                                    checked={ formik.values.rememberMe }
+                                    value={ formik.values.rememberMe }
+                                    onChange={ formik.handleChange }
+                                /> 
+                            }
+                            label="Recordarme en este equipo"
                         />
                         <Button 
                             type="submit"
@@ -172,17 +206,17 @@ export const Login = () => {
                             color="primary"
                             className={ classes.submit }
                         >
-                            Sign In
+                            Iniciar Sesión
                         </Button>
                         <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">
-                                    Forgot password?
+                                    ¿Olvidó su contraseña?
                                 </Link>
                             </Grid>
                             <Grid item>
                                 <Link href="#" variant="body2">
-                                    { 'Does not have an account? Sign Up' }
+                                    { '¿No tiene cuenta? Registrarse' }
                                 </Link>
                             </Grid>
                         </Grid>

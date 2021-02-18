@@ -10,7 +10,6 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import PeopleIcon from '@material-ui/icons/People';
 import MessageIcon from '@material-ui/icons/Message';
 import ArrowBack from '@material-ui/icons/ArrowBack';
-
 /* export const mainMenuList = () => {
     return ( */
 export const mainMenuList = (
