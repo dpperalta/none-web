@@ -5,7 +5,6 @@ import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,6 +16,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+<<<<<<< Updated upstream
 import Paper from '@material-ui/core/Paper';
 import { mainMenuList, secondMenuItems } from './MenuList';
 import { ComponentsUI } from './ComponentsUI';
@@ -24,6 +24,22 @@ import mentoredLogo from '../../assets/images/logo-mentored-main.png';
 import { Provider } from 'react-redux';
 import { store } from '../../redux/store/store';
 import {AppRouter} from '../../routers/AppRouter';
+=======
+import { FormControlLabel, Switch } from '@material-ui/core';
+import {AppRouter} from '../../routers/AppRouter';
+import mentoredLogo from '../../assets/images/logo-mentored-main.png';
+import HomeIcon from "@material-ui/icons/Home";
+import ReceiptIcon from "@material-ui/icons/Receipt";
+import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows";
+import Sidebar from "./Sidebar";
+import { Redirect, useHistory } from 'react-router-dom';
+
+import PersonIcon from '@material-ui/icons/Person';
+import { useDispatch, useSelector } from 'react-redux';
+import { startLogout } from '../../redux/actions/auth';
+import Swal from 'sweetalert2';
+import { Person } from '@material-ui/icons';
+>>>>>>> Stashed changes
 
 function Copyright() {
     return (
@@ -36,6 +52,128 @@ function Copyright() {
         </Typography>
     );
 }
+
+
+function onClick(e, item) {
+    //window.alert(JSON.stringify(item, null, 2));
+    window.location.href = item.name;
+  }
+  
+  const items = [
+    { name: "/", label: "Inicio", Icon: HomeIcon },
+    {
+      name: "/list/college",
+      label: "Colegios",
+      Icon: ReceiptIcon,
+      items: [
+        { name: "/form/college", label: "Registrar nuevo", onClick },
+        { name: "Editar", label: "Editar", onClick },
+        { name: "listar", label: "Listar", onClick },
+      ]
+    },
+    {
+        name: "/list/college",
+        label: "Personas",
+        Icon: PersonIcon,
+        items: [
+          { name: "/form/person", label: "Profesores", Icon: PersonIcon, onClick },
+          { name: "/form/person", label: "Alumnos", Icon: PersonIcon, onClick },
+          { name: "/form/person", label: "Autoridades", Icon: PersonIcon, onClick },
+          { name: "Editar", label: "Editar", onClick },
+          { name: "listar", label: "Listar", onClick },
+        ]
+    },
+    {
+        name: "/list/college",
+        label: "Cursos",
+        Icon: ReceiptIcon,
+        items: [
+          { name: "/form/college", label: "Registrar nuevo", onClick },
+          { name: "Editar", label: "Editar", onClick },
+          { name: "listar", label: "Listar", onClick },
+        ]
+    },
+    {
+        name: "/list/college",
+        label: "Materias",
+        Icon: ReceiptIcon,
+        items: [
+          { name: "/form/college", label: "Registrar nuevo", onClick },
+          { name: "Editar", label: "Editar", onClick },
+          { name: "listar", label: "Listar", onClick },
+        ]
+    },
+    {
+        name: "/list/college",
+        label: "Tareas",
+        Icon: ReceiptIcon,
+        items: [
+          { name: "/form/college", label: "Registrar nuevo", onClick },
+          { name: "Editar", label: "Editar", onClick },
+          { name: "listar", label: "Listar", onClick },
+        ]
+    },
+    {
+        name: "/list/college",
+        label: "Exámenes",
+        Icon: ReceiptIcon,
+        items: [
+          { name: "/form/college", label: "Registrar nuevo", onClick },
+          { name: "Editar", label: "Editar", onClick },
+          { name: "listar", label: "Listar", onClick },
+        ]
+    },
+    {
+        name: "/list/college",
+        label: "Foros",
+        Icon: ReceiptIcon,
+        items: [
+          { name: "/form/college", label: "Registrar nuevo", onClick },
+          { name: "Editar", label: "Editar", onClick },
+          { name: "listar", label: "Listar", onClick },
+        ]
+    },
+    {
+        name: "/list/chats",
+        label: "Cursos",
+        Icon: ReceiptIcon,
+        items: [
+          { name: "/form/college", label: "Registrar nuevo", onClick },
+          { name: "Editar", label: "Editar", onClick },
+          { name: "listar", label: "Listar", onClick },
+        ]
+    },
+    "divider",
+    {
+      name: "settings",
+      label: "Settings",
+      Icon: SettingsIcon,
+      items: [
+        { name: "profile", label: "Profile" },
+        { name: "insurance", label: "Insurance", onClick },
+        "divider",
+        {
+          name: "notifications",
+          label: "Notifications",
+          Icon: NotificationsIcon,
+          items: [
+            { name: "email", label: "Email", onClick },
+            {
+              name: "desktop",
+              label: "Desktop",
+              Icon: DesktopWindowsIcon,
+              items: [
+                { name: "schedule", label: "Schedule" },
+                { name: "frequency", label: "Frequency" }
+              ]
+            },
+            { name: "sms", label: "SMS" }
+          ]
+        }
+      ]
+    }
+  ];
+  
 
 const drawerWidth = 240;
 
@@ -174,13 +312,7 @@ export const MainUI = () => {
                     </IconButton>
                 </div>
                 <Divider />
-                <List>
-                    { mainMenuList }
-                </List>
-                <Divider />
-                <List>
-                    { secondMenuItems }
-                </List>
+                <Sidebar items={items} />
             </Drawer>
             <main className={ classes.content }>
                 <div className={ classes.appBarSpacer }></div>
@@ -188,9 +320,15 @@ export const MainUI = () => {
                     <Grid container spacing={ 3 }>
                         <Grid item xs={ 12 } md={ 12 } lg={ 12 }>
                             
+<<<<<<< Updated upstream
                         <Provider store={ store }>
                              <AppRouter />
                         </Provider>
+=======
+                      
+                             <AppRouter />
+                       
+>>>>>>> Stashed changes
 
                         </Grid>
                     </Grid>
