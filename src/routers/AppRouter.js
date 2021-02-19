@@ -10,7 +10,6 @@ import { AdminRoutes } from './AdminRoutes';
 // Components
 import { Login } from '../components/auth/Login';
 import { None } from '../components/none/dashboard/None';
-import { MainUI } from '../components/ui/MainUI';
 import { Formulario } from '../components/ui/Formulario';
 import { FormCreatePerson } from '../components/none/view/Person/FormCreatePerson';
 import { FormCreateCollege } from '../components/none/view/College/FormCreateCollege';
@@ -19,6 +18,7 @@ import { FormCreateSubject } from '../components/none/view/Subject/FormCreateSub
 import { FormCreateContent } from '../components/none/view/Subject/Content/FormCreateContent';
 import { FormCreateTask } from '../components/none/view/Subject/Task/FormCreateTask';
 import { FormCreateEnrollmentStatus } from '../components/none/view/Enrollment/FormCreateEnrollmentStatus';
+import { MainUI } from '../components/ui/MainUI';
 
 import Dashboard  from '../components/none/dashboard/Dashboard';
 
@@ -63,7 +63,7 @@ export const AppRouter = () => {
                 <Switch>
                     <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/>
                     <PrivateRoutes exact path="/demo" component={ None } isAuthenticated={ !!userID }/>
-                    <PrivateRoutes exact path='/' component={ MainUI } isAuthenticated={ !!userID } />
+                    <PrivateRoutes exact path='/' component={ None } isAuthenticated={ !!userID } />
                     <PrivateRoutes exact path='/form' component={ Formulario } isAuthenticated={ !!userID } />
                     <PrivateRoutes exact path='/form/person' component={ FormCreatePerson } isAuthenticated={ !!userID } />
                     <PrivateRoutes exact path='/form/college' component={ FormCreateCollege } isAuthenticated={ !!userID } />
