@@ -21,7 +21,9 @@ import Paper from '@material-ui/core/Paper';
 import { mainMenuList, secondMenuItems } from './MenuList';
 import { ComponentsUI } from './ComponentsUI';
 import mentoredLogo from '../../assets/images/logo-mentored-main.png';
-
+import { Provider } from 'react-redux';
+import { store } from '../../redux/store/store';
+import {AppRouter} from '../../routers/AppRouter';
 
 function Copyright() {
     return (
@@ -186,7 +188,9 @@ export const MainUI = () => {
                     <Grid container spacing={ 3 }>
                         <Grid item xs={ 12 } md={ 12 } lg={ 12 }>
                             
-                            < ComponentsUI />
+                        <Provider store={ store }>
+                             <AppRouter />
+                        </Provider>
 
                         </Grid>
                     </Grid>
