@@ -10,7 +10,6 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -29,21 +28,23 @@ import HomeIcon from "@material-ui/icons/Home";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows";
 import Sidebar from "./Sidebar";
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect, useHistory , Link, BrowserRouter, Route} from 'react-router-dom';
 
 import PersonIcon from '@material-ui/icons/Person';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../redux/actions/auth';
 import Swal from 'sweetalert2';
 import { Person } from '@material-ui/icons';
+import { None } from '../../components/none/dashboard/None';
+import { FormCreatePerson } from '../../components/none/view/Person/FormCreatePerson';
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             { 'Copyright © ' }
-            <Link color="inherit" href="http://www.pm-bs.org">
+            
                 PM^BS
-            </Link>
+            
             { ' ' + new Date().getFullYear() + '.' }
         </Typography>
     );
@@ -52,7 +53,7 @@ function Copyright() {
 
 function onClick(e, item) {
     //window.alert(JSON.stringify(item, null, 2));
-    window.location.href = item.name;
+    //window.location.href = item.name;
   }
   
   const items = [
@@ -234,7 +235,7 @@ const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
     content: {
         flexGrow: 1,
-        height: '100vh',
+        height: '100%',
         overflow: 'auto'
     },
     container: {
@@ -316,6 +317,8 @@ export const MainUI = () => {
     }
 
     return (
+        <div>
+        <BrowserRouter>
         <ThemeProvider  theme={darkTheme}>
         <div className={ classes.root }>
             <CssBaseline />
@@ -417,7 +420,11 @@ export const MainUI = () => {
                         <Grid item xs={ 12 } md={ 12 } lg={ 12 }>
                             
                       
-                             <AppRouter />
+                        
+                            <Route exact path="/" component={None} isAuthenticated={ true }/>
+                            <Route path="/form/person" component={FormCreatePerson} isAuthenticated={ true } />
+                           
+                        
                        
 
                         </Grid>
@@ -429,78 +436,9 @@ export const MainUI = () => {
             </main>
         </div>
         </ThemeProvider>
+        </BrowserRouter>
+        </div>
+       
     );
 }
 
-
-/*
-import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-
-const options = [
-  'None',
-  'Atria',
-  'Callisto',
-  'Dione',
-  'Ganymede',
-  'Hangouts Call',
-  'Luna',
-  'Oberon',
-  'Phobos',
-  'Pyxis',
-  'Sedna',
-  'Titania',
-  'Triton',
-  'Umbriel',
-];
-
-const ITEM_HEIGHT = 48;
-
-export default function LongMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  return (
-    <div>
-      <IconButton
-        aria-label="more"
-        aria-controls="long-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        <MoreVertIcon />
-      </IconButton>
-      <Menu
-        id="long-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: '20ch',
-          },
-        }}
-      >
-        {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-            {option}
-          </MenuItem>
-        ))}
-      </Menu>
-    </div>
-  );
-}
-*/

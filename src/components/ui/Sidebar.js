@@ -5,7 +5,16 @@ import Divider from "@material-ui/core/Divider";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Collapse from "@material-ui/core/Collapse";
-import { Link, Redirect, Router, useHistory } from "react-router-dom";
+import { BrowserRouter, Link, Redirect} from "react-router-dom";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  link:{
+         textDecoration: 'none',
+         color: theme.palette.text.primary
+     }
+ }));
+ 
 
 function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
   const [collapsed, setCollapsed] = React.useState(true);
@@ -14,13 +23,15 @@ function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
   function toggleCollapse() {
     setCollapsed(prevValue => !prevValue);
   }
-
+  
   function onClick(e) {
     if (Array.isArray(items)) {
       toggleCollapse();
     }
     if (onClickProp) {
       onClickProp(e, item);
+    
+
     }
   }
 
@@ -37,7 +48,7 @@ function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
       <ExpandMoreIcon className="sidebar-item-expand-arrow" />
     );
   }
-
+  const classes = useStyles();
   return (
     <>
       <ListItem
@@ -63,16 +74,19 @@ function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
           <List disablePadding dense>
             {items.map((subItem, index) => (
               <React.Fragment key={`${subItem.name}${index}`}>
+                 
                 {subItem === "divider" ? (
                   <Divider style={{ margin: "6px 0" }} />
                 ) : (
+                  <Link to={`${subItem.name}`} className={classes.link}>
                       <SidebarItem
                         depth={depth + 1}
                         depthStep={depthStep}
                         item={subItem}
                       />
-                 
+                </Link> 
                 )}
+                
               </React.Fragment>
             ))}
           </List>
@@ -85,8 +99,11 @@ function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
 function Sidebar({ items, depthStep, depth, expanded }) {
   return (
     <div className="sidebar">
+     
       <List disablePadding dense>
+        
         {items.map((sidebarItem, index) => (
+          
           <React.Fragment key={`${sidebarItem.name}${index}`}>
             {sidebarItem === "divider" ? (
               <Divider style={{ margin: "6px 0" }} />
@@ -97,10 +114,12 @@ function Sidebar({ items, depthStep, depth, expanded }) {
                 expanded={expanded}
                 item={sidebarItem}
               />
-            )}
+            )} 
           </React.Fragment>
         ))}
       </List>
+
+    
     </div>
   );
 }
