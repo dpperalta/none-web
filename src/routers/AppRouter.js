@@ -46,17 +46,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { FormControlLabel} from '@material-ui/core';
 import mentoredLogo from '../assets/images/logo-mentored-main.png';
-import HomeIcon from "@material-ui/icons/Home";
-import ReceiptIcon from "@material-ui/icons/Receipt";
-import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows";
 import Sidebar from "../components/ui/Sidebar";
 import { useHistory , Link, BrowserRouter} from 'react-router-dom';
-import PersonIcon from '@material-ui/icons/Person';
 import { startLogout } from '../redux/actions/auth';
 import Swal from 'sweetalert2';
-import { Person } from '@material-ui/icons';
 import SwitchDark from '@material-ui/core/Switch';
 
+import {items} from '../components/ui/MenuStudentList';
 
 //MainUI
 function Copyright() {
@@ -71,127 +67,6 @@ function Copyright() {
     );
 }
 
-
-function onClick(e, item) {
-    //window.alert(JSON.stringify(item, null, 2));
-    //Para autorización
-  }
-  
-  const items = [
-    { name: "/", label: "Inicio", Icon: HomeIcon },
-    {
-      name: "/list/college",
-      label: "Colegios",
-      Icon: ReceiptIcon,
-      items: [
-        { name: "/form/college", label: "Registrar nuevo", onClick },
-        { name: "Editar", label: "Editar", onClick },
-        { name: "listar", label: "Listar", onClick },
-      ]
-    },
-    {
-        name: "/list/college",
-        label: "Personas",
-        Icon: PersonIcon,
-        items: [
-          { name: "/form/person", label: "Profesores", Icon: PersonIcon, onClick },
-          { name: "/form/person", label: "Alumnos", Icon: PersonIcon, onClick },
-          { name: "/form/person", label: "Autoridades", Icon: PersonIcon, onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "/list/person", label: "Listar", onClick },
-        ]
-    },
-    {
-        name: "/list/college",
-        label: "Cursos",
-        Icon: ReceiptIcon,
-        items: [
-          { name: "/form/college", label: "Registrar nuevo", onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    {
-        name: "/list/college",
-        label: "Materias",
-        Icon: ReceiptIcon,
-        items: [
-          { name: "/form/college", label: "Registrar nuevo", onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    {
-        name: "/list/college",
-        label: "Tareas",
-        Icon: ReceiptIcon,
-        items: [
-          { name: "/form/college", label: "Registrar nuevo", onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    {
-        name: "/list/college",
-        label: "Exámenes",
-        Icon: ReceiptIcon,
-        items: [
-          { name: "/form/college", label: "Registrar nuevo", onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    {
-        name: "/list/college",
-        label: "Foros",
-        Icon: ReceiptIcon,
-        items: [
-          { name: "/form/college", label: "Registrar nuevo", onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    {
-        name: "/list/chats",
-        label: "Cursos",
-        Icon: ReceiptIcon,
-        items: [
-          { name: "/form/college", label: "Registrar nuevo", onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    "divider",
-    {
-      name: "settings",
-      label: "Settings",
-      Icon: SettingsIcon,
-      items: [
-        { name: "profile", label: "Profile" },
-        { name: "insurance", label: "Insurance", onClick },
-        "divider",
-        {
-          name: "notifications",
-          label: "Notifications",
-          Icon: NotificationsIcon,
-          items: [
-            { name: "email", label: "Email", onClick },
-            {
-              name: "desktop",
-              label: "Desktop",
-              Icon: DesktopWindowsIcon,
-              items: [
-                { name: "schedule", label: "Schedule" },
-                { name: "frequency", label: "Frequency" }
-              ]
-            },
-            { name: "sms", label: "SMS" }
-          ]
-        }
-      ]
-    }
-  ];
-  
 
 const drawerWidth = 240;
 
