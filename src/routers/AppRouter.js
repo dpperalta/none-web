@@ -10,6 +10,7 @@ import { Login } from '../components/auth/Login';
 import { None } from '../components/none/dashboard/None';
 import { Formulario } from '../components/ui/Formulario';
 import { FormCreatePerson } from '../components/none/view/Person/FormCreatePerson';
+import { ListPerson } from '../components/none/view/Person/ListPerson';
 import { FormCreateCollege } from '../components/none/view/College/FormCreateCollege';
 import { FormCreateCourse } from '../components/none/view/Course/FormCreateCourse';
 import { FormCreateSubject } from '../components/none/view/Subject/FormCreateSubject';
@@ -97,7 +98,7 @@ function onClick(e, item) {
           { name: "/form/person", label: "Alumnos", Icon: PersonIcon, onClick },
           { name: "/form/person", label: "Autoridades", Icon: PersonIcon, onClick },
           { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
+          { name: "/list/person", label: "Listar", onClick },
         ]
     },
     {
@@ -488,6 +489,7 @@ const handleLeftMenuClose = () => {
                                         <PrivateRoutes exact path='/' component={ None } isAuthenticated={ !!userID } />
                                         <PrivateRoutes exact path='/form' component={ Formulario } isAuthenticated={ !!userID } />
                                         <PrivateRoutes exact path='/form/person' component={ FormCreatePerson } isAuthenticated={ !!userID } />
+                                        <PrivateRoutes exact path='/list/person' component={ ListPerson } isAuthenticated={ !!userID } />
                                         <PrivateRoutes exact path='/form/college' component={ FormCreateCollege } isAuthenticated={ !!userID } />
                                         <PrivateRoutes exact path='/form/course' component={ FormCreateCourse } isAuthenticated={ !!userID } />
                                         <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
