@@ -8,8 +8,9 @@ import LockOutlinedIcon from '@material-ui/icons/Create';
 import { useFormik } from 'formik';
 import SaveIcon from '@material-ui/icons/Save';
 import BackspaceIcon from '@material-ui/icons/Backspace';
+import Swal from 'sweetalert2';
 
-class App extends Component {
+class Editor extends Component {
     editor = null;
 
 
@@ -36,26 +37,32 @@ class App extends Component {
             },
           }));
          
-          
+          function submitForm() {
+            //var values = document.getElementById('miform').elements['editor'].data;
+            //alert(JSON.stringify(values, null, 2));
+            Swal.fire('Correcto', 'Tarea guardada correctamente', 'success');
+            return false;
+          }   
 
         return (
             
             <div className="App" Style="margin-right: 50px;margin-left: 50px;">
+              <form onsubmit={submitForm()} id="miform">
                <br/>
                 <div className="form">
-        <Grid container direction="row" alignItems="center" justify="center">
-        <Avatar id="avatar" className="avatar">
-          <LockOutlinedIcon />
-        </Avatar> 
-        <Typography component="h1" variant="h5">
-          &nbsp;Desarrolle su tarea
-        </Typography>
-        </Grid>
-        <br/>
-            
+                    <Grid container direction="row" alignItems="center" justify="center">
+                    <Avatar id="avatar" className="avatar">
+                      <LockOutlinedIcon />
+                    </Avatar> 
+                    <Typography component="h1" variant="h5">
+                      &nbsp;Desarrolle su tarea
+                    </Typography>
+                    </Grid>
+                    <br/>
 
-      </div>    
-                <CKEditor
+                </div>    
+      
+                <CKEditor id="editor"
                     onReady={ editor => {
                         console.log( 'Editor is ready to use!', editor );
 
@@ -106,9 +113,10 @@ class App extends Component {
                     </Button>
             </Grid>
           </Grid>
+          </form>
                 </div>
         );
     }
 }
 
-export default App;
+export default Editor;

@@ -50,4 +50,12 @@ body {
     color: #09bb12;
     font-weight: bold;
   }
-  
+
+  .ck-editor__editable {
+    min-height: 400px;
+    /* Make sure the toolbar container is always above the editable. */
+  z-index: 1;
+
+
+}
+ 
