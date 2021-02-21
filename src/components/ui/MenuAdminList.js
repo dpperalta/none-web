@@ -44,22 +44,45 @@ import BajarIcon from '@material-ui/icons/SystemUpdateAlt';
 import Subir2Icon from '@material-ui/icons/AttachFile';
 import PresenciaIcon from '@material-ui/icons/PanTool';
 import PermisoIcon from '@material-ui/icons/ImportContacts';
+import RegaloIcon from '@material-ui/icons/Redeem';
 
 
 
 function onClick(e, item) {
     //Para autorización
-    window.alert(JSON.stringify(' Soy estudiante, estoy en ' + item.name , null, 2));
+    window.alert(JSON.stringify(' Soy el administrador, estoy en ' + item.name , null, 2));
   }
 
 export const items = [
    
-    {
-      name: "/", label: "Mi curso", Icon: HomeIcon,
+  {
+    name: "colleges", label: "Colegios", Icon: HomeIcon,
+    items: [
+      { name: "/form/college", label: "Registrar nuevo", Icon: RegistrarIcon, onClick },
+      { name: "/list/college", label: "Gestionar colegios", Icon: ListarIcon, onClick },
+      { name: "/form/college-rules", label: "Parametrización", Icon: SettingsIcon, onClick }
+    ]
+},  
+  {
+    name: "periods", label: "Periodo académico", Icon: CalendarioIcon,
+    items: [
+      { name: "/form/task", label: "Agregar actividad", Icon: RegistrarIcon, onClick },
+      { name: "/list/general", label: "Gestionar periodos", Icon: ListarIcon, onClick },
+      { name: "/list/calendar", label: "Calendario académico", Icon: CalendarioIcon, onClick },
+    ]
+},  
+{
+  name: "persons", label: "Personas", Icon: PersonasIcon,
+  items: [
+    { name: "/form/person", label: "Registrar personal", Icon: RegistrarIcon, onClick },
+    { name: "/list/person", label: "Gestionar personal", Icon: ListarIcon, onClick },
+  ]
+}, 
+  {
+      name: "/", label: "Cursos", Icon: CursoIcon,
       items: [
-        { name: "/list/general", label: "Resumen general", Icon: ListarIcon, onClick },
-        { name: "/list/calendar", label: "Calendario académico", Icon: CalendarioIcon, onClick },
-        { name: "/list/dashboard", label: "Dashboard", Icon: ReportesIcon, onClick }
+        { name: "/form/course", label: "Registrar curso", Icon: RegistrarIcon, onClick },
+        { name: "/list/course", label: "Gestionar cursos", Icon: ListarIcon, onClick }
       ]
   },
   
@@ -68,48 +91,16 @@ export const items = [
         label: "Materias",
         Icon: MateriaIcon,
         items: [
-          { name: "/list/subject", label: "Mis materias", Icon: ListaIcon, onClick },
-          { name: "/report/assistance", label: "Asistencias", Icon: PresenciaIcon, onClick },
-          { name: "/form/permission", label: "Permisos", Icon: PermisoIcon, onClick },
-          { name: "/list/contect", label: "Bajar contenido", Icon: BajarIcon, onClick }
-        ]
-    },
-    {
-        name: "tasks",
-        label: "Tareas",
-        Icon: TareaIcon,
-        items: [
-          { name: "/list/task", label: "Tareas Pendientes", Icon: ListaIcon, onClick },
-          { name: "/form/task-resolve", label: "Resolver tarea", Icon: DeberIcon, onClick },
-          { name: "/form/task-load", label: "Cargar tarea", Icon: Subir2Icon, onClick },
-          { name: "/report/task", label: "Calificaciones", Icon: ReporteIcon, onClick }
-        ]
-    },
-    {
-        name: "exams",
-        label: "Exámenes",
-        Icon: ExamenIcon,
-        items: [
-          { name: "/list/exam", label: "Exámenes Pendientes", Icon: ListaIcon, onClick },
-          { name: "/form/exam-resolve", label: "Rendir examen", Icon: ReceiptIcon, onClick },
-          { name: "/report/exam", label: "Calificaciones", Icon: ReporteIcon, onClick }
+          { name: "/form/subject", label: "Registrar materia", Icon: RegistrarIcon, onClick },
+          { name: "/list/subject", label: "Gestionar materias", Icon: ListarIcon, onClick },
+          { name: "/form/subject-enroll", label: "Asignar profesores", Icon: RegistrarIcon, onClick },
+          { name: "/form/subject-rules", label: "Parametrización", Icon: SettingsIcon, onClick }
         ]
     },
     "divider",
     {
-        name: "/list/college",
-        label: "Foros",
-        Icon: ForoIcon,
-        items: [
-          { name: "/forum/class", label: "Foros de clase", Icon: Foro2Icon, onClick },
-          { name: "/forum/global", label: "Foros generales", Icon: Foro3Icon, onClick },
-          { name: "report/activiry", label: "Mi actividad", Icon: ReporteIcon, onClick },
-          
-        ]
-    },
-    {
       name: "mails",
-      label: "Correo",
+      label: "Notificaciones",
       Icon: CorreoIcon,
       items: [
         { name: "/mail/new", label: "Crear nuevo", Icon: Correo2Icon, onClick },
@@ -117,37 +108,14 @@ export const items = [
         { name: "/mail/sent", label: "Enviados", Icon: EnviadoIcon, onClick }
       ]
   },
-    {
-        name: "chats",
-        label: "Chats",
-        Icon: ChatIcon,
-        items: [
-          { name: "/chat/one", label: "Individual", Icon: Chat2Icon, onClick },
-          { name: "/chat/group", label: "Grupal", Icon: ChatIcon, onClick },
-          { name: "/chat/list", label: "Lista Chats", Icon: ListaIcon, onClick },
-        ]
-    },
     "divider",
-    {
-      name: "payments",
-      label: "Pensiones",
-      Icon: PagosIcon,
-      items: [
-        { name: "/payment/pay", label: "Pagar pensiones", Icon: PagarIcon, onClick },
-        { name: "/payment/bill", label: "Facturas", Icon: FacturaIcon, onClick },
-        { name: "/report/payment", label: "Historial de pagos", Icon: ReporteIcon, onClick }
-       
-      ]
-  },
+    
   {
     name: "reports",
     label: "Reportes",
     Icon: ReportesIcon,
     items: [
-      { name: "/report/grade", label: "Libreta calificaciones", Icon: ReporteIcon, onClick },
-      { name: "/report/subject", label: "Resumen materias", Icon: ReporteIcon, onClick },
-      { name: "/report/assistance", label: "Asistencias", Icon: ReporteIcon, onClick },
-      { name: "/report/persmission", label: "Permisos", Icon: ReporteIcon, onClick }
+      { name: "/report/grade", label: "Uso del sistema", Icon: ReporteIcon, onClick }
       
     ]
 },

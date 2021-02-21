@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {items} from '../components/ui/MenuAdminList';
 // Router and routes
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { PublicRoutes } from './PublicRoutes';
@@ -52,7 +53,7 @@ import { startLogout } from '../redux/actions/auth';
 import Swal from 'sweetalert2';
 import SwitchDark from '@material-ui/core/Switch';
 
-import {items} from '../components/ui/MenuStudentList';
+
 
 //MainUI
 function Copyright() {

@@ -229,7 +229,7 @@ export const FormCreatePerson = () => {
   }
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" maxWidth="lg">
       <CssBaseline />
       <div className={classes.form}>
         <Grid container direction="row" alignItems="center" justify="center">

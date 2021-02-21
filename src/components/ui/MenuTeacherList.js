@@ -44,18 +44,19 @@ import BajarIcon from '@material-ui/icons/SystemUpdateAlt';
 import Subir2Icon from '@material-ui/icons/AttachFile';
 import PresenciaIcon from '@material-ui/icons/PanTool';
 import PermisoIcon from '@material-ui/icons/ImportContacts';
+import RegaloIcon from '@material-ui/icons/Redeem';
 
 
 
 function onClick(e, item) {
     //Para autorización
-    window.alert(JSON.stringify(' Soy estudiante, estoy en ' + item.name , null, 2));
+    window.alert(JSON.stringify(' Soy profesor, estoy en ' + item.name , null, 2));
   }
 
 export const items = [
    
     {
-      name: "/", label: "Mi curso", Icon: HomeIcon,
+      name: "/", label: "Mis cursos", Icon: HomeIcon,
       items: [
         { name: "/list/general", label: "Resumen general", Icon: ListarIcon, onClick },
         { name: "/list/calendar", label: "Calendario académico", Icon: CalendarioIcon, onClick },
@@ -65,13 +66,14 @@ export const items = [
   
     {
         name: "subjects",
-        label: "Materias",
+        label: "Mis materias",
         Icon: MateriaIcon,
         items: [
           { name: "/list/subject", label: "Mis materias", Icon: ListaIcon, onClick },
-          { name: "/report/assistance", label: "Asistencias", Icon: PresenciaIcon, onClick },
-          { name: "/form/permission", label: "Permisos", Icon: PermisoIcon, onClick },
-          { name: "/list/contect", label: "Bajar contenido", Icon: BajarIcon, onClick }
+          { name: "/report/assistance", label: "Registrar asistencias", Icon: PresenciaIcon, onClick },
+          { name: "/form/permission", label: "Registrar permisos", Icon: PermisoIcon, onClick },
+          { name: "/form/gifts", label: "Registrar incentivos", Icon: RegaloIcon, onClick },
+          { name: "/list/content", label: "Gestionar contenido", Icon: SubirIcon, onClick }
         ]
     },
     {
@@ -79,9 +81,9 @@ export const items = [
         label: "Tareas",
         Icon: TareaIcon,
         items: [
-          { name: "/list/task", label: "Tareas Pendientes", Icon: ListaIcon, onClick },
-          { name: "/form/task-resolve", label: "Resolver tarea", Icon: DeberIcon, onClick },
-          { name: "/form/task-load", label: "Cargar tarea", Icon: Subir2Icon, onClick },
+          { name: "/form/task", label: "Nueva tarea", Icon: RegistrarIcon, onClick },
+          { name: "/list/task", label: "Listar tareas", Icon: ListaIcon, onClick },
+          { name: "/form/task-resolve", label: "Calificar tareas", Icon: DeberIcon, onClick },
           { name: "/report/task", label: "Calificaciones", Icon: ReporteIcon, onClick }
         ]
     },
@@ -90,8 +92,9 @@ export const items = [
         label: "Exámenes",
         Icon: ExamenIcon,
         items: [
-          { name: "/list/exam", label: "Exámenes Pendientes", Icon: ListaIcon, onClick },
-          { name: "/form/exam-resolve", label: "Rendir examen", Icon: ReceiptIcon, onClick },
+          { name: "/form/exam", label: "Nuevo examen", Icon: RegistrarIcon, onClick },
+          { name: "/list/exam", label: "Listar exámenes", Icon: ListaIcon, onClick },
+          { name: "/form/exam-resolve", label: "Calificar exámenes", Icon: ReceiptIcon, onClick },
           { name: "/report/exam", label: "Calificaciones", Icon: ReporteIcon, onClick }
         ]
     },
@@ -101,9 +104,10 @@ export const items = [
         label: "Foros",
         Icon: ForoIcon,
         items: [
+          { name: "/forum/create", label: "Nuevo foro", Icon: RegistrarIcon, onClick },
           { name: "/forum/class", label: "Foros de clase", Icon: Foro2Icon, onClick },
           { name: "/forum/global", label: "Foros generales", Icon: Foro3Icon, onClick },
-          { name: "report/activiry", label: "Mi actividad", Icon: ReporteIcon, onClick },
+          { name: "report/activiry", label: "Alumnos de foros", Icon: PersonasIcon, onClick },
           
         ]
     },
@@ -128,26 +132,15 @@ export const items = [
         ]
     },
     "divider",
-    {
-      name: "payments",
-      label: "Pensiones",
-      Icon: PagosIcon,
-      items: [
-        { name: "/payment/pay", label: "Pagar pensiones", Icon: PagarIcon, onClick },
-        { name: "/payment/bill", label: "Facturas", Icon: FacturaIcon, onClick },
-        { name: "/report/payment", label: "Historial de pagos", Icon: ReporteIcon, onClick }
-       
-      ]
-  },
+    
   {
     name: "reports",
     label: "Reportes",
     Icon: ReportesIcon,
     items: [
       { name: "/report/grade", label: "Libreta calificaciones", Icon: ReporteIcon, onClick },
-      { name: "/report/subject", label: "Resumen materias", Icon: ReporteIcon, onClick },
-      { name: "/report/assistance", label: "Asistencias", Icon: ReporteIcon, onClick },
-      { name: "/report/persmission", label: "Permisos", Icon: ReporteIcon, onClick }
+      { name: "/report/subject", label: "Resumen mis materias", Icon: ReporteIcon, onClick },
+      { name: "/report/assistance", label: "Resumen mis alumnos", Icon: ReporteIcon, onClick }
       
     ]
 },

@@ -49,13 +49,13 @@ import PermisoIcon from '@material-ui/icons/ImportContacts';
 
 function onClick(e, item) {
     //Para autorización
-    window.alert(JSON.stringify(' Soy estudiante, estoy en ' + item.name , null, 2));
+    window.alert(JSON.stringify(' Soy representante, estoy en ' + item.name , null, 2));
   }
 
 export const items = [
    
     {
-      name: "/", label: "Mi curso", Icon: HomeIcon,
+      name: "/", label: "Mis representados", Icon: HomeIcon,
       items: [
         { name: "/list/general", label: "Resumen general", Icon: ListarIcon, onClick },
         { name: "/list/calendar", label: "Calendario académico", Icon: CalendarioIcon, onClick },
@@ -68,10 +68,9 @@ export const items = [
         label: "Materias",
         Icon: MateriaIcon,
         items: [
-          { name: "/list/subject", label: "Mis materias", Icon: ListaIcon, onClick },
+          { name: "/list/subject", label: "Lista de materias", Icon: ListaIcon, onClick },
           { name: "/report/assistance", label: "Asistencias", Icon: PresenciaIcon, onClick },
           { name: "/form/permission", label: "Permisos", Icon: PermisoIcon, onClick },
-          { name: "/list/contect", label: "Bajar contenido", Icon: BajarIcon, onClick }
         ]
     },
     {
@@ -79,9 +78,7 @@ export const items = [
         label: "Tareas",
         Icon: TareaIcon,
         items: [
-          { name: "/list/task", label: "Tareas Pendientes", Icon: ListaIcon, onClick },
-          { name: "/form/task-resolve", label: "Resolver tarea", Icon: DeberIcon, onClick },
-          { name: "/form/task-load", label: "Cargar tarea", Icon: Subir2Icon, onClick },
+          { name: "/list/task", label: "Tareas Pendientes", Icon: ListaIcon, onClick },          
           { name: "/report/task", label: "Calificaciones", Icon: ReporteIcon, onClick }
         ]
     },
@@ -91,22 +88,10 @@ export const items = [
         Icon: ExamenIcon,
         items: [
           { name: "/list/exam", label: "Exámenes Pendientes", Icon: ListaIcon, onClick },
-          { name: "/form/exam-resolve", label: "Rendir examen", Icon: ReceiptIcon, onClick },
           { name: "/report/exam", label: "Calificaciones", Icon: ReporteIcon, onClick }
         ]
     },
     "divider",
-    {
-        name: "/list/college",
-        label: "Foros",
-        Icon: ForoIcon,
-        items: [
-          { name: "/forum/class", label: "Foros de clase", Icon: Foro2Icon, onClick },
-          { name: "/forum/global", label: "Foros generales", Icon: Foro3Icon, onClick },
-          { name: "report/activiry", label: "Mi actividad", Icon: ReporteIcon, onClick },
-          
-        ]
-    },
     {
       name: "mails",
       label: "Correo",
@@ -117,17 +102,7 @@ export const items = [
         { name: "/mail/sent", label: "Enviados", Icon: EnviadoIcon, onClick }
       ]
   },
-    {
-        name: "chats",
-        label: "Chats",
-        Icon: ChatIcon,
-        items: [
-          { name: "/chat/one", label: "Individual", Icon: Chat2Icon, onClick },
-          { name: "/chat/group", label: "Grupal", Icon: ChatIcon, onClick },
-          { name: "/chat/list", label: "Lista Chats", Icon: ListaIcon, onClick },
-        ]
-    },
-    "divider",
+      "divider",
     {
       name: "payments",
       label: "Pensiones",
