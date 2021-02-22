@@ -313,9 +313,6 @@ export const AppRouter = () => {
     let isSuperAdmin;
     role === 'Administrator' ? isAdmin = true : isAdmin = false;
     role === 'Super Administrator' ? isSuperAdmin = true : isSuperAdmin = false;
-    
-    console.log('admin:', isAdmin);
-    console.log('super:',isSuperAdmin);
 
     if(checking){
         return (
@@ -335,16 +332,16 @@ export const AppRouter = () => {
     }
 
 
-// For left menu
+    // For left menu
 
-const leftMenuOpen = Boolean( anchorEl );
+    const leftMenuOpen = Boolean( anchorEl );
 
-const handleLeftMenuClick = (event) => {
-    setAnchorEl( event.currentTarget );
-}
-const handleLeftMenuClose = () => {
-    setAnchorEl(null);
-}
+    const handleLeftMenuClick = (event) => {
+        setAnchorEl( event.currentTarget );
+    }
+    const handleLeftMenuClose = () => {
+        setAnchorEl(null);
+    }
 
 
     const handleThemeChange = () => {
@@ -375,150 +372,147 @@ const handleLeftMenuClose = () => {
         <>
           {
             !authUser
-            ? (<Login />)
-            : (
-            
-                <div>
-            
-                <BrowserRouter>
-                <ThemeProvider  theme={darkTheme}>
-                <div className={ classes.root }>
-                    <CssBaseline />
-                    <AppBar position="absolute" color="inherit" className={ clsx( classes.appBar, open && classes.appBarShift ) }>
-                        <Toolbar className={ classes.toolbar }>
-                            <IconButton
-                                edge="start"
-                                color="inherit"
-                                aria-label="open drawer"
-                                onClick={ handleDrawerOpen }
-                                className={ clsx( classes.menuButton, open && classes.menuButtonHidden ) }
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                            <Typography component="h1" variant="h6" color="inherit" noWrap className={ classes.title }>
-                                MentoRed Dashboard
-                            </Typography>
-                            <IconButton color="inherit">
-                                <Badge badgeContent={ 10 } color="secondary">
-                                    <NotificationsIcon />
-                                </Badge>
-                            </IconButton>
-                            &nbsp;
-                            {/* <FormControlLabel
-                                control={
-                                    <Switch checked={darkState}  color="default" onChange={handleThemeChange} />
-                                }
-                                label="Dark"
-                            /> */}
-                            <div
-                                style={{ display: 'flex', justifyContent: 'space-between' }}
-                            >
-                                <IconButton 
-                                    aria-label="more"
-                                    aria-controls="left-menu"
-                                    aria-haspopup="true"
-                                    onClick={ handleLeftMenuClick }
-                                >
-                                    <MoreVertIcon />
-                                </IconButton>
-                                <Menu
-                                    id="left-menu"
-                                    anchorEl={ anchorEl }
-                                    keepMounted
-                                    open={ leftMenuOpen }
-                                    onClick={ handleLeftMenuClose }
-                                    PaperProps={{
-                                        style: {
-                                            maxHeight: 48 * 4.5,
-                                            width: '30ch',
-                                        },
-                                    }}
-                                >
-                                    <MenuItem>
-                                        <DarkModeIcon />
-                                        <FormControlLabel
-                                            control={
-                                                <SwitchDark checked={darkState}  color="default" onChange={handleThemeChange} />
-                                            }
-                                            label="Modo Oscuro"
-                                        />
-                                    </MenuItem>
-                                    <Divider />
-                                    <MenuItem>
-                                        <SettingsIcon/> Configuraciones
-                                    </MenuItem>
-                                    <Divider />
-                                    <MenuItem
-                                        onClick={ handleLogout }
-                                    >
-                                        <ExitToAppIcon/> Cerrar Sesión
-                                    </MenuItem>
-                                </Menu>
-                            </div>
-                        </Toolbar>
-                    </AppBar>
-                    <Drawer
-                        variant="permanent"
-                        classes={{
-                            paper: clsx( classes.drawerPaper, !open && classes.drawerPaperClose )
-                        }}
-                        open={ open }
-                    >
-                        <div className={ classes.toolbarIcon }>
-                            <IconButton
-                                onClick={ handleDrawerClose }
-                            >
-                                <img src={ mentoredLogo } alt="Mentored logo" width="175px" />
-                                <ChevronLeftIcon />
-                            </IconButton>
-                        </div>
-                        <Divider />
-                        <Sidebar items={items} />
-                    </Drawer>
-                    <main className={ classes.content }>
-                        <div className={ classes.appBarSpacer }></div>
-                        <Container maxWidth="lg" className={classes.container}>
-                            <Grid container spacing={ 3 }>
-                                <Grid item xs={ 12 } md={ 12 } lg={ 12 }>
-                                    
-                                <div>
-                                    <Switch>
-                                        {/* <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/> */}
-                                        <PrivateRoutes exact path="/demo" component={ None } isAuthenticated={ !!userID }/>
-                                        <PrivateRoutes exact path='/' component={ None } isAuthenticated={ !!userID } />
-                                        <PrivateRoutes exact path='/form' component={ Formulario } isAuthenticated={ !!userID } />
-                                        <PrivateRoutes exact path='/form/person' component={ FormCreatePerson } isAuthenticated={ !!userID } />
-                                        <PrivateRoutes exact path='/form/college' component={ FormCreateCollege } isAuthenticated={ !!userID } />
-                                        <PrivateRoutes exact path='/form/course' component={ FormCreateCourse } isAuthenticated={ !!userID } />
-                                        <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
-                                        <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
-                                        <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
-                                        <PrivateRoutes exact path='/form/enrollment-status' component={ FormCreateEnrollmentStatus } isAuthenticated={ !!userID } />
-                                        
-                                        
-                                        {/* For Admin and Super Admin Routes */}
-                                        {/* <AdminRoutes exact path="/route"  /> */}
-                                        <Redirect to="/" />
-                                    </Switch>
-                                </div>
-                               
-        
-                                </Grid>
-                            </Grid>
-                            <Box pt={ 4 }>
-                                <Copyright />
-                            </Box>
-                        </Container>
-                    </main>
-                </div>
-                </ThemeProvider>
-                </BrowserRouter>
-                </div>
-                  
-
+            ? (
+                <>
+                    <Router>
+                        <Switch>
+                            <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/>
+                            <Redirect to="/login" />
+                        </Switch>
+                    </Router>
+                </>
             )
+            : (
+                <div>
+                    <BrowserRouter>
+                        <ThemeProvider  theme={darkTheme}>
+                            <div className={ classes.root }>
+                                <CssBaseline />
+                                <AppBar position="absolute" color="inherit" className={ clsx( classes.appBar, open && classes.appBarShift ) }>
+                                    <Toolbar className={ classes.toolbar }>
+                                        <IconButton
+                                            edge="start"
+                                            color="inherit"
+                                            aria-label="open drawer"
+                                            onClick={ handleDrawerOpen }
+                                            className={ clsx( classes.menuButton, open && classes.menuButtonHidden ) }
+                                        >
+                                            <MenuIcon />
+                                        </IconButton>
+                                        <Typography component="h1" variant="h6" color="inherit" noWrap className={ classes.title }>
+                                            MentoRed Dashboard
+                                        </Typography>
+                                        <IconButton color="inherit">
+                                            <Badge badgeContent={ 10 } color="secondary">
+                                                <NotificationsIcon />
+                                            </Badge>
+                                        </IconButton>
+                                        &nbsp;
+                                        <div
+                                            style={{ display: 'flex', justifyContent: 'space-between' }}
+                                        >
+                                            <IconButton 
+                                                aria-label="more"
+                                                aria-controls="left-menu"
+                                                aria-haspopup="true"
+                                                onClick={ handleLeftMenuClick }
+                                            >
+                                                <MoreVertIcon />
+                                            </IconButton>
+                                            <Menu
+                                                id="left-menu"
+                                                anchorEl={ anchorEl }
+                                                keepMounted
+                                                open={ leftMenuOpen }
+                                                onClick={ handleLeftMenuClose }
+                                                PaperProps={{
+                                                    style: {
+                                                        maxHeight: 48 * 4.5,
+                                                        width: '30ch',
+                                                    },
+                                                }}
+                                            >
+                                                <MenuItem>
+                                                    <DarkModeIcon />
+                                                    <FormControlLabel
+                                                        control={
+                                                            <SwitchDark checked={darkState}  color="default" onChange={handleThemeChange} />
+                                                        }
+                                                        label="Modo Oscuro"
+                                                    />
+                                                </MenuItem>
+                                                <Divider />
+                                                <MenuItem>
+                                                    <SettingsIcon/> Configuraciones
+                                                </MenuItem>
+                                                <Divider />
+                                                <MenuItem
+                                                    onClick={ handleLogout }
+                                                >
+                                                    <ExitToAppIcon/> Cerrar Sesión
+                                                </MenuItem>
+                                            </Menu>
+                                        </div>
+                                    </Toolbar>
+                                </AppBar>
+                                <Drawer
+                                    variant="permanent"
+                                    classes={{
+                                        paper: clsx( classes.drawerPaper, !open && classes.drawerPaperClose )
+                                    }}
+                                    open={ open }
+                                >
+                                    <div className={ classes.toolbarIcon }>
+                                        <IconButton
+                                            onClick={ handleDrawerClose }
+                                        >
+                                            <img src={ mentoredLogo } alt="Mentored logo" width="175px" />
+                                            <ChevronLeftIcon />
+                                        </IconButton>
+                                    </div>
+                                    <Divider />
+                                    <Sidebar items={items} />
+                                </Drawer>
+                                <main className={ classes.content }>
+                                    <div className={ classes.appBarSpacer }></div>
+                                    <Container maxWidth="lg" className={classes.container}>
+                                        <Grid container spacing={ 3 }>
+                                            <Grid item xs={ 12 } md={ 12 } lg={ 12 }>
+                                                
+                                            <div>
+                                                <Switch>
+                                                    {/* <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/> */}
+                                                    <PrivateRoutes exact path="/demo" component={ None } isAuthenticated={ !!userID }/>
+                                                    <PrivateRoutes exact path='/' component={ None } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form' component={ Formulario } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/person' component={ FormCreatePerson } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/college' component={ FormCreateCollege } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/course' component={ FormCreateCourse } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/enrollment-status' component={ FormCreateEnrollmentStatus } isAuthenticated={ !!userID } />
+                                                    
+                                                    
+                                                    {/* For Admin and Super Admin Routes */}
+                                                    {/* <AdminRoutes exact path="/route"  /> */}
+                                                    <Redirect to="/" />
+                                                </Switch>
+                                            </div>
+                                        
+                    
+                                            </Grid>
+                                        </Grid>
+                                        <Box pt={ 4 }>
+                                            <Copyright />
+                                        </Box>
+                                    </Container>
+                                </main>
+                            </div>
+                        </ThemeProvider>
+                    </BrowserRouter>
+                </div>)
             }
         </>
-       
     );
 }

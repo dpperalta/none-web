@@ -32,4 +32,31 @@ export const types = {
     cityGetOk: '[city] Getting cities ok',
     cityClearError: '[city] Clear an error after actions',
 
+    // Person
+    personStartChecking: '[pers] Start checking',
+    personCheckingFinished: '[pers] Checking finished',
+    personCreatingError: '[pers] Creating person error',
+    personCreatingOK: '[pers] Creating person ok ',
+    personClearError: '[pers] Clear an error after acions',
+
+    // Address
+    addressStartChecking: '[addr] Start checking',
+    addressCheckingFinished: '[addr] Checking finished',
+    addressCreateError: '[addr] Create address errror',
+    addressCreateOK: '[addr] Create address ok',
+    addressClearError: '[addr] Clean an error after actions',
+
+    // Telephone
+    phoneStartChecking: '[phon] Start checking',
+    phoneCheckingFinished: '[phon] Checking finished',
+    phoneCreateError: '[phon] Create phone errror',
+    phoneCreateOK: '[phon] Create phone ok',
+    phoneClearError: '[phon] Clean an error after actions',
+
+    // User
+    userStartChecking: '[user] Start checking',
+    userCheckingFinished: '[user] Checking finished',
+    userCreateError: '[user] Create phone errror',
+    userCreateOK: '[user] Create phone ok',
+    userClearError: '[user] Clean an error after actions',
 }

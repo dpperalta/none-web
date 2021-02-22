@@ -39,6 +39,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startGettingOperators } from '../../../../redux/actions/phoneOperator';
 import { startGettingPersonTypes } from '../../../../redux/actions/personType';
 import { startGettingCities } from '../../../../redux/actions/city';
+import { startCreatePerson } from '../../../../redux/actions/person';
 
 //----------------------------------------------------------------ESTILOS-------------------------------------
 const useStyles = makeStyles((theme) => ({
@@ -154,11 +155,11 @@ export const FormCreatePerson = () => {
   const dispatch = useDispatch();
 
   const classes = useStyles();
-  
-  const [selectedDate, setSelectedDate] = useState(moment().format('YYYY-MM-DD'));
+
+  const [ selectedDate, setSelectedDate ] = useState(new Date());
 
   const handleDateChange = (date) => {
-    setSelectedDate(moment(date).format('YYYY-MM-DD'));
+    setSelectedDate(date);
   };
 
   // Effect to load information for selectable lists
@@ -212,21 +213,48 @@ export const FormCreatePerson = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log('Values:', values);
-      mostrarMensaje();
-      alert(JSON.stringify(values, null, 2));
+      let homePhone;
+      let mobilePhone;
+      if( values.numberPhone1 !== '' ){
+        homePhone = {
+          number: values.numberPhone1,
+          operatorID: values.selectorOperator1,
+          phoneType: 1
+        }
+      }
+      if( values.numberPhone2 !== '' ){
+        mobilePhone = {
+          number: values.numberPhone2,
+          operatorID: values.selectorOperator2,
+          phoneType: 2
+        }
+      }
+      const data = {
+        person: {
+          dni: values.dni,
+          names: values.firstName,
+          lastNames: values.lastName,
+          birthdate: selectedDate,//values.birthdate,
+          sex: values.sex,
+          personTypeID: values.personType
+        },
+        address: {
+          mainStreet: values.mainStreet,
+          number: values.number,
+          secondStreet: values.secondStreet,
+          cityID: values.cityName
+        },
+        user: {
+          email: values.email,
+          pass: values.pass
+        },
+        homePhone,
+        mobilePhone
+      }
+      dispatch(startCreatePerson( data ));
+      formik.handleReset();
     }
-});
-
-  const mostrarMensaje = () => {
-    Swal.fire('Correcto', 'Datos guardados correctamente', 'success');
-     //Si la operación fue correcta, limpia el formulario
-     let res = true;
-     if (res === true)
-     {
-        formik.handleReset();
-     }
-  }
+  });
 
   return (
     <Container component="main" maxWidth="md">
@@ -365,16 +393,19 @@ export const FormCreatePerson = () => {
                 &nbsp;&nbsp;&nbsp;
                 <MuiPickersUtilsProvider locale={es}  utils={DateFnsUtils}>                  
                   <KeyboardDatePicker
-                    margin="normal"
                     id="birthdate"
+                    margin="normal"
                     Style="width:95%"
                     name="birthdate"
                     label="Fecha de nacimiento"
                     format="yyyy-MM-dd"
                     required
-                    value={selectedDate}
-                    onChange={handleDateChange}
+                    value={ selectedDate }
+                    onChange={ handleDateChange }
                     onBlur={ formik.handleBlur }
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date',
+                    }}
                   />
                   {
                     formik.errors.birthdate && formik.touched.birthdate

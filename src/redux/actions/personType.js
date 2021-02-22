@@ -18,10 +18,11 @@ const errorHandling = (error) => {
 
 export const startGettingPersonTypes = () => {
     return async(dispatch) => {
+        const token1 = localStorage.getItem('none-token');
         try {
             const resp = await axiosClient.get('personType/active', {
                 headers: {
-                    'none-token': token
+                    'none-token': token1
                 }
             });
             dispatch(loadPersonTypes(resp.data.personTypes.rows));

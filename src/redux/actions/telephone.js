@@ -16,29 +16,27 @@ const errorHandling = (error) => {
     }
 }
 
-export const startGettingCities = () => {
-    const token = localStorage.getItem('none-token');
+export const startCreateTelephone = (phone) => {
     return async(dispatch) => {
         try {
-            const resp = await axiosClient.get('city', {
+            const resp = await axiosClient.post('telephone', phone, {
                 headers: {
                     'none-token': token
                 }
             });
-            console.log('resp:', resp.data.cities.rows);
-            dispatch(loadCities(resp.data.cities.rows));
+            dispatch(createPhone(resp.data.telephone));
         } catch (error) {
+            dispatch(createPhoneError());
             errorHandling(error);
-            dispatch(getCitiesError());
         }
     }
 }
 
-const loadCities = (citiesList) => ({
-    type: types.cityGetOk,
-    payload: citiesList
+const createPhoneError = () => ({
+    type: types.phoneClearError
 });
 
-const getCitiesError = () => ({
-    type: types.cityGetError
+const createPhone = (phone) => ({
+    type: types.phoneCreateOK,
+    payload: phone
 });
