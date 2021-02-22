@@ -40,30 +40,23 @@ export const startCreatePerson = (personData) => {
             });
             if (resp.data.ok) {
                 dispatch(createPerson(resp.data.person));
-                console.log('1');
 
                 address.personID = resp.data.person.personID;
                 user.personID = resp.data.person.personID;
 
                 dispatch(startCreateAddress(address));
-                console.log('2');
                 dispatch(startCreateUser(user));
-                console.log('3');
 
                 if (homePhone) {
                     homePhone.personID = resp.data.person.personID;
                     dispatch(startCreateTelephone(homePhone));
-                    console.log('4');
                 }
                 if (mobilePhone) {
                     mobilePhone.personID = resp.data.person.personID;
                     dispatch(startCreateTelephone(mobilePhone));
-                    console.log('5');
                 }
             }
-            console.log('6');
             Swal.fire('¡Correcto!', 'Datos registrados correctamente', 'success');
-            //dispatch(createPersonCheckingEnd());
         } catch (error) {
             dispatch(createError());
             errorHandling(error);
