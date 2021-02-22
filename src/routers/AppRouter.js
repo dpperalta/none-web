@@ -15,6 +15,7 @@ import { ListPerson } from '../components/none/view/Person/ListPerson';
 import { FormCreateCollege } from '../components/none/view/College/FormCreateCollege';
 import { FormCreateCourse } from '../components/none/view/Course/FormCreateCourse';
 import Quiz  from '../components/none/view/Exam/Quiz/quiz';
+import {ExamGenerator}  from '../components/none/view/Exam/ExamMaker/ExamGenerator';
 import { FormCreateSubject } from '../components/none/view/Subject/FormCreateSubject';
 import { FormCreateContent } from '../components/none/view/Subject/Content/FormCreateContent';
 import { FormCreateTask } from '../components/none/view/Subject/Task/FormCreateTask';
@@ -372,6 +373,7 @@ const handleLeftMenuClose = () => {
                                         <PrivateRoutes exact path='/form/college' component={ FormCreateCollege } isAuthenticated={ !!userID } />
                                         <PrivateRoutes exact path='/form/course' component={ FormCreateCourse } isAuthenticated={ !!userID } />
                                         <PrivateRoutes exact path='/form/exam' component={ Quiz } isAuthenticated={ !!userID } />
+                                        <PrivateRoutes exact path='/form/exam-generator' component={ ExamGenerator } isAuthenticated={ !!userID } />
                                         <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
                                         <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
                                         <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
