@@ -64,7 +64,7 @@ export default class QuizSingle extends Component {
           {choice && !hiding ? (
             <div className="px1 quiz__material anwser container--q mha">
               <span className="cw quiz__material_qstep">
-                Question {number} of 3
+                Pregunta {number} de 3
               </span>
               <div
                 className={cx("quiz__material_answer", {
@@ -72,7 +72,7 @@ export default class QuizSingle extends Component {
                 })}
               >
                 <div>
-                  <h3 className="cw">{selected ? `Correct!` : `Nope`}</h3>
+                  <h3 className="cw">{selected ? `¡Correcto!` : `¡Incorrecto!`}</h3>
                   <div
                     className="cw"
                     dangerouslySetInnerHTML={{ __html: fact }}
@@ -83,7 +83,7 @@ export default class QuizSingle extends Component {
           ) : (
             <div className={cx("px1 quiz__material question container--q mha")}>
               <span className="cw quiz__material_qstep">
-                Question {number} of 3
+                Pregunta {number} de 3
               </span>
               <h4
                 className={cx("cw quiz__material_question", {
@@ -119,7 +119,7 @@ export default class QuizSingle extends Component {
                       classes={`f jcb cw`}
                       clickHandle={() => this.handleNext()}
                     >
-                      {number === 3 ? `Calculate Score` : `Next Question`}
+                      {number === 3 ? `Calificación` : `Siguiente pregunta`}
                     </Button>
                   </div>
                 )}

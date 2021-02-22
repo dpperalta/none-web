@@ -1,48 +1,48 @@
 module.exports = {
   1: {
-    question: `How long as The Couch been a company?`,
-    fact: `The couch started in April of 2017, but a partnership agreement wasn't technically signed until May`,
+    question: `¿El Ecuador como república independiente, en qué año se estableció?`,
+    fact: `Fue el 10 de Agosto de 1822`,
     choices: [
       {
         id: Math.random(),
-        item: "About a Year",
-        answer: true
+        item: "1820",
+        answer: false
       },
       {
         id: Math.random(),
-        item: "Over 5 Years",
-        answer: false
+        item: "1822",
+        answer: true
       }
     ]
   },
   2: {
-    question: `What was the first client of The Couch?`,
-    fact: `The Wing was the project that allowed us to kick things into gear, once we solidifed a few more projects we went all in and commited to The Couch.`,
+    question: `¿Quién fue el primer presidente del Ecuador?`,
+    fact: `Fue Juan José Flores`,
     choices: [
       {
         id: Math.random(),
-        item: "The Wing",
+        item: "Juan José Flores",
         answer: true
       },
       {
         id: Math.random(),
-        item: "Wool & Oak",
+        item: "Eloy Alfaro",
         answer: false
       }
     ]
   },
   3: {
-    question: `Where does The Couch get their clients from?`,
-    fact: `The Couch is currently entirely referral based. Which is great because we don't have time to chase down leads we're busy making the internet ;)`,
+    question: `¿Cuál es la capital de Ecuador?`,
+    fact: `La capital es Quito`,
     choices: [
       {
         id: Math.random(),
-        item: "Linkedin Spamming",
+        item: "Guayaquil",
         answer: false
       },
       {
         id: Math.random(),
-        item: "Referrals",
+        item: "Quito",
         answer: true
       }
     ]
