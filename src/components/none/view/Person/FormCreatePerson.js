@@ -122,7 +122,7 @@ const validationSchema = Yup.object({
   number: Yup
       .string()
       .min(1, `Mínimo 1 caracter`)
-      .max(5, `Máximo 5 caracteres`)
+      .max(9, `Máximo 9 caracteres`)
       .required('Campo obligatorio'),
   secondStreet: Yup
       .string()
