@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {items} from '../components/ui/MenuAdminList';
 // Router and routes
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { PublicRoutes } from './PublicRoutes';
@@ -10,12 +11,18 @@ import { Login } from '../components/auth/Login';
 import { None } from '../components/none/dashboard/None';
 import { Formulario } from '../components/ui/Formulario';
 import { FormCreatePerson } from '../components/none/view/Person/FormCreatePerson';
+import { ListPerson } from '../components/none/view/Person/ListPerson';
 import { FormCreateCollege } from '../components/none/view/College/FormCreateCollege';
 import { FormCreateCourse } from '../components/none/view/Course/FormCreateCourse';
+import Quiz  from '../components/none/view/Exam/Quiz/quiz';
+import {ExamGenerator}  from '../components/none/view/Exam/ExamMaker/ExamGenerator';
 import { FormCreateSubject } from '../components/none/view/Subject/FormCreateSubject';
 import { FormCreateContent } from '../components/none/view/Subject/Content/FormCreateContent';
 import { FormCreateTask } from '../components/none/view/Subject/Task/FormCreateTask';
+import Editor from '../components/none/view/Subject/Task/Resolution/FormCreateTaskResolution';
 import { FormCreateEnrollmentStatus } from '../components/none/view/Enrollment/FormCreateEnrollmentStatus';
+import { ComponentsUI } from '../components/ui/ComponentsUI';
+
 import Dashboard  from '../components/none/dashboard/Dashboard';
 import { startChecking } from '../redux/actions/auth';
 import { ProgressBar } from '../components/ui/ProgressBar';
@@ -45,16 +52,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { FormControlLabel} from '@material-ui/core';
 import mentoredLogo from '../assets/images/logo-mentored-main.png';
-import HomeIcon from "@material-ui/icons/Home";
-import ReceiptIcon from "@material-ui/icons/Receipt";
-import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows";
 import Sidebar from "../components/ui/Sidebar";
 import { useHistory , Link, BrowserRouter} from 'react-router-dom';
-import PersonIcon from '@material-ui/icons/Person';
 import { startLogout } from '../redux/actions/auth';
 import Swal from 'sweetalert2';
-import { Person } from '@material-ui/icons';
 import SwitchDark from '@material-ui/core/Switch';
+
 
 
 //MainUI
@@ -70,127 +73,6 @@ function Copyright() {
     );
 }
 
-
-function onClick(e, item) {
-    //window.alert(JSON.stringify(item, null, 2));
-    //Para autorización
-  }
-  
-  const items = [
-    { name: "/", label: "Inicio", Icon: HomeIcon },
-    {
-      name: "/list/college",
-      label: "Colegios",
-      Icon: ReceiptIcon,
-      items: [
-        { name: "/form/college", label: "Registrar nuevo", onClick },
-        { name: "Editar", label: "Editar", onClick },
-        { name: "listar", label: "Listar", onClick },
-      ]
-    },
-    {
-        name: "/list/college",
-        label: "Personas",
-        Icon: PersonIcon,
-        items: [
-          { name: "/form/person", label: "Profesores", Icon: PersonIcon, onClick },
-          { name: "/form/person", label: "Alumnos", Icon: PersonIcon, onClick },
-          { name: "/form/person", label: "Autoridades", Icon: PersonIcon, onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    {
-        name: "/list/college",
-        label: "Cursos",
-        Icon: ReceiptIcon,
-        items: [
-          { name: "/form/college", label: "Registrar nuevo", onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    {
-        name: "/list/college",
-        label: "Materias",
-        Icon: ReceiptIcon,
-        items: [
-          { name: "/form/college", label: "Registrar nuevo", onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    {
-        name: "/list/college",
-        label: "Tareas",
-        Icon: ReceiptIcon,
-        items: [
-          { name: "/form/college", label: "Registrar nuevo", onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    {
-        name: "/list/college",
-        label: "Exámenes",
-        Icon: ReceiptIcon,
-        items: [
-          { name: "/form/college", label: "Registrar nuevo", onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    {
-        name: "/list/college",
-        label: "Foros",
-        Icon: ReceiptIcon,
-        items: [
-          { name: "/form/college", label: "Registrar nuevo", onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    {
-        name: "/list/chats",
-        label: "Cursos",
-        Icon: ReceiptIcon,
-        items: [
-          { name: "/form/college", label: "Registrar nuevo", onClick },
-          { name: "Editar", label: "Editar", onClick },
-          { name: "listar", label: "Listar", onClick },
-        ]
-    },
-    "divider",
-    {
-      name: "settings",
-      label: "Settings",
-      Icon: SettingsIcon,
-      items: [
-        { name: "profile", label: "Profile" },
-        { name: "insurance", label: "Insurance", onClick },
-        "divider",
-        {
-          name: "notifications",
-          label: "Notifications",
-          Icon: NotificationsIcon,
-          items: [
-            { name: "email", label: "Email", onClick },
-            {
-              name: "desktop",
-              label: "Desktop",
-              Icon: DesktopWindowsIcon,
-              items: [
-                { name: "schedule", label: "Schedule" },
-                { name: "frequency", label: "Frequency" }
-              ]
-            },
-            { name: "sms", label: "SMS" }
-          ]
-        }
-      ]
-    }
-  ];
-  
 
 const drawerWidth = 240;
 
@@ -274,15 +156,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
-
 export const AppRouter = () => {
 
-    // TODO: Cambiar el valor por el que retorne el API
-
     const dispatch = useDispatch();
-    //const { checking, uid } = useSelector( state => state.auth);
     const { checking, user, role, authUser } = useSelector( state => state.auth );
     let userID;
 
@@ -294,7 +170,6 @@ export const AppRouter = () => {
             type: palletType,
         }
     });
-
 
     const classes = useStyles();
     const [ open, setOpen ] = useState(true);
@@ -321,8 +196,6 @@ export const AppRouter = () => {
     }
 
     //MainUI
-   
-    
     const handleDrawerOpen = () => {
         setOpen(true);
     }
@@ -331,9 +204,7 @@ export const AppRouter = () => {
         setOpen(false);
     }
 
-
     // For left menu
-
     const leftMenuOpen = Boolean( anchorEl );
 
     const handleLeftMenuClick = (event) => {
@@ -342,7 +213,6 @@ export const AppRouter = () => {
     const handleLeftMenuClose = () => {
         setAnchorEl(null);
     }
-
 
     const handleThemeChange = () => {
         setDarkState(!darkState);
@@ -483,17 +353,20 @@ export const AppRouter = () => {
                                                 <Switch>
                                                     {/* <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/> */}
                                                     <PrivateRoutes exact path="/demo" component={ None } isAuthenticated={ !!userID }/>
-                                                    <PrivateRoutes exact path='/' component={ None } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/' component={ ComponentsUI } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form' component={ Formulario } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/person' component={ FormCreatePerson } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/list/person' component={ ListPerson } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/college' component={ FormCreateCollege } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/course' component={ FormCreateCourse } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/exam' component={ Quiz } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/exam-generator' component={ ExamGenerator } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/editor' component={ Editor } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/enrollment-status' component={ FormCreateEnrollmentStatus } isAuthenticated={ !!userID } />
-                                                    
-                                                    
+                                                                
                                                     {/* For Admin and Super Admin Routes */}
                                                     {/* <AdminRoutes exact path="/route"  /> */}
                                                     <Redirect to="/" />
