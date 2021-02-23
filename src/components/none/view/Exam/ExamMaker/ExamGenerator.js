@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { QuizzBuilder } from "react-quizzes";
 import QuizExample from "./PreviewExam";
-import "react-quizzes/lib/assets/antd.css";
+//import "react-quizzes/lib/assets/antd.css";
+import './antd.css';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
