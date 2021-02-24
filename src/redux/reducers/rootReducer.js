@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { addressReducer } from "./addressReducer";
 import { authReducer } from "./authReducer";
 import { cityReducer } from "./cityReducer";
+import { collegeReducer } from "./collegeReducer";
 import { personReducer } from "./personReducer";
 import { personTypeReducer } from "./personTypeReducer";
 import { phoneOperatorReducer } from "./phoneOperatorReducer";
@@ -16,9 +17,9 @@ export const rootReducer = combineReducers({
     person: personReducer,
     address: addressReducer,
     telephone: telephoneReducer,
-    user: userReducer
+    user: userReducer,
+    college: collegeReducer,
 
     // TODO: studentReducer,
-    // TODO: collegeReducer,
     // etc.
 });

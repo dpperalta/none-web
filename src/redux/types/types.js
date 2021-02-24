@@ -56,7 +56,14 @@ export const types = {
     // User
     userStartChecking: '[user] Start checking',
     userCheckingFinished: '[user] Checking finished',
-    userCreateError: '[user] Create phone errror',
-    userCreateOK: '[user] Create phone ok',
+    userCreateError: '[user] Create user errror',
+    userCreateOK: '[user] Create user ok',
     userClearError: '[user] Clean an error after actions',
+
+    // College
+    collegeStartChecking: '[cole] Start checking',
+    collegeCheckingFinished: '[cole] Checking finished',
+    collegeCreateError: '[cole] Create college error',
+    collegeCreateOK: '[cole] Create college ok',
+    collegeClearError: '[cole] Clean college error after actions'
 }

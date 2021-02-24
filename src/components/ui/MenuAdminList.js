@@ -50,7 +50,7 @@ import RegaloIcon from '@material-ui/icons/Redeem';
 
 function onClick(e, item) {
     //Para autorización
-    window.alert(JSON.stringify(' Soy el administrador, estoy en ' + item.name , null, 2));
+    //window.alert(JSON.stringify(' Soy el administrador, estoy en ' + item.name , null, 2));
   }
 
 export const items = [
