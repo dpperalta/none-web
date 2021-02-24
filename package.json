@@ -34,7 +34,8 @@
         "sass": "^1.32.8",
         "sweetalert2": "^10.14.1",
         "web-vitals": "^1.0.1",
-        "yup": "^0.32.8"
+        "yup": "^0.32.8",
+        "material-table": "^1.69.2"
     },
     "scripts": {
         "start": "react-scripts start",

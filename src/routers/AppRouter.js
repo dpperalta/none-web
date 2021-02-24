@@ -22,7 +22,8 @@ import { FormCreateTask } from '../components/none/view/Subject/Task/FormCreateT
 import Editor from '../components/none/view/Subject/Task/Resolution/FormCreateTaskResolution';
 import { FormCreateEnrollmentStatus } from '../components/none/view/Enrollment/FormCreateEnrollmentStatus';
 import { ComponentsUI } from '../components/ui/ComponentsUI';
-
+import {TableIndividual} from '../components/ui/MaterialTables/TableIndividual';
+import {TableGroups} from '../components/ui/MaterialTables/TableGroups';
 import Dashboard  from '../components/none/dashboard/Dashboard';
 import { startChecking } from '../redux/actions/auth';
 import { ProgressBar } from '../components/ui/ProgressBar';
@@ -366,6 +367,8 @@ export const AppRouter = () => {
                                                     <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/editor' component={ Editor } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/enrollment-status' component={ FormCreateEnrollmentStatus } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/tabla1' component={ TableIndividual } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/tabla2' component={ TableGroups } isAuthenticated={ !!userID } />
                                                                 
                                                     {/* For Admin and Super Admin Routes */}
                                                     {/* <AdminRoutes exact path="/route"  /> */}
