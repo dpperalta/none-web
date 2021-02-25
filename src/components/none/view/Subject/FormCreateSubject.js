@@ -48,29 +48,26 @@ const validationSchema = Yup.object({
     .max(200, `Máximo 200 caracteres`)
     .required('Campo obligatorio'),
   description: Yup
-  .string()
-  .min(3, `Mínimo 3 caracteres`)
-  .max(2000, `Máximo 2000 caracteres`)
-  .required('Campo obligatorio'),
+    .string()
+    .min(3, `Mínimo 3 caracteres`)
+    .max(2000, `Máximo 2000 caracteres`)
+    .required('Campo obligatorio'),
   gradeMinimun: Yup
-  .string()
-  .min(1, `Mínimo 1 caracteres`)
-  .max(4, `Máximo 4 caracteres`)
-  .required('Campo obligatorio')
-  .test('numbers', 'Solo se admiten números enteros', (value) => {return /^[0-9]+$/.test(value);}),
+    .string()
+    .min(1, `Mínimo 1 caracteres`)
+    .max(4, `Máximo 4 caracteres`)
+    .required('Campo obligatorio')
+    .test('numbers', 'Solo se admiten números enteros', (value) => {return /^[0-9]+$/.test(value);}),
   gradeMaximun: Yup
-  .string()
-  .min(1, `Mínimo 1 caracteres`)
-  .max(4, `Máximo 4 caracteres`)
-  .required('Campo obligatorio')
-  .test('numbers', 'Solo se admiten números enteros', (value) => {return /^[0-9]+$/.test(value);}),
+    .string()
+    .min(1, `Mínimo 1 caracteres`)
+    .max(4, `Máximo 4 caracteres`)
+    .required('Campo obligatorio')
+    .test('numbers', 'Solo se admiten números enteros', (value) => {return /^[0-9]+$/.test(value);}),
   selector: Yup
-  .string()
-  .required('Seleccione una opción')
-  
-
-})
-
+    .string()
+    .required('Seleccione una opción')
+});
 
 //----------------------------------------------------------------COMPONENT-------------------------------------
 export const FormCreateSubject = () => {

@@ -3,7 +3,8 @@ import { types } from '../types/types';
 const initialState = {
     collegeCreated: null,
     checking: false,
-    error: null
+    error: null,
+    usersCollege: null
 }
 
 export const collegeReducer = (state = initialState, action) => {
@@ -13,6 +14,7 @@ export const collegeReducer = (state = initialState, action) => {
                 ...state,
                 checking: true
             }
+        case types.collegeGetCollegeError:
         case types.collegeCreateError:
             return {
                 ...state,
@@ -31,38 +33,14 @@ export const collegeReducer = (state = initialState, action) => {
                 checking: false,
                 error: null
             }
-        default: 
-            return state;
-    }
-}
-/*
-export const personReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case types.personStartChecking:
+        case types.collegeGetCollegeOK:
             return {
                 ...state,
-                checking: true
-            }
-        case types.personCreatingError:
-            return {
-                ...state,
+                usersCollege: action.payload,
                 checking: false,
-                error: true
-            }
-        case types.personClearError:
-            return {
-                ...state,
-                error: false
-            }
-        case types.personCreatingOK:
-            return {
-                ...state,
-                checking: false,
-                error: false,
-                personCreated: action.payload
+                error: null
             }
         default:
             return state;
     }
 }
-*/

@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
+import { academicPeriodReducer } from "./academicPeriodReducer";
 import { addressReducer } from "./addressReducer";
 import { authReducer } from "./authReducer";
 import { cityReducer } from "./cityReducer";
 import { collegeReducer } from "./collegeReducer";
+import { courseReducer } from "./courseReducer";
 import { personReducer } from "./personReducer";
 import { personTypeReducer } from "./personTypeReducer";
 import { phoneOperatorReducer } from "./phoneOperatorReducer";
@@ -19,6 +21,8 @@ export const rootReducer = combineReducers({
     telephone: telephoneReducer,
     user: userReducer,
     college: collegeReducer,
+    course: courseReducer,
+    academicPeriod: academicPeriodReducer
 
     // TODO: studentReducer,
     // etc.

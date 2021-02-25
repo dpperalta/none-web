@@ -16,72 +16,71 @@ const errorHandling = (error) => {
     }
 }
 
-// Creation of a new college
-export const startCreateCollege = (college) => {
+// Creating a new course
+export const startCreateCourse = (course) => {
     return async(dispatch) => {
         dispatch(startChecking());
         try {
-            console.log('college:', college);
-            const resp = await axiosClient.post('college', college, {
+            console.log('course:', course);
+            const resp = await axiosClient.post('course', course, {
                 headers: {
                     'none-token': token
                 }
             });
-            console.log(resp.data.newCollege);
-            dispatch(createCollege(resp.data.newCollege));
+            console.log(resp.data);
+            dispatch(createCourse(resp.data.course));
             Swal.fire('¡Correcto!', resp.data.message, 'success');
         } catch (error) {
             errorHandling(error);
-            dispatch(createCollegeError());
+            dispatch(createCourseError());
         }
-        dispatch(checkingFinished());
+        dispatch(endChecking());
     }
 }
 
 const startChecking = () => ({
-    type: types.collegeStartChecking
+    type: types.courseStartChecking
 });
 
-const createCollegeError = () => ({
-    type: types.collegeCreateError
+const endChecking = () => ({
+    type: types.courseCheckingFinished
 });
 
-const checkingFinished = () => ({
-    type: types.collegeCheckingFinished
+const createCourseError = () => ({
+    type: types.courseClearError
 });
 
-const createCollege = (college) => ({
-    type: types.collegeCreateOK,
-    payload: college
+const createCourse = (course) => ({
+    type: types.courseCreateOK,
+    payload: course
 });
 
-// Getting information about the user's collge
-export const getCollegeInformation = (collegeID) => {
+// Getting all courses of a college
+export const getCollegeCourse = (collegeID) => {
     return async(dispatch) => {
         dispatch(startChecking());
         try {
             const token = localStorage.getItem('none-token');
-            console.log('collegeID:', collegeID);
-            const resp = await axiosClient.get(`college/${ collegeID }`, {
+            const resp = await axiosClient('course/college/all', {
                 headers: {
                     'none-token': token
                 }
             });
-            console.log(resp.data.college);
-            dispatch(getUsersCollege(resp.data.college));
+            //console.log('resp:', resp.data.courses);
+            dispatch(getCollegeCourses(resp.data.courses));
         } catch (error) {
             errorHandling(error);
-            dispatch(getCollegeError());
+            dispatch(getCollegeCoursesError())
         }
-        dispatch(checkingFinished());
-    }
+        dispatch(endChecking());
+    };
 }
 
-const getCollegeError = () => ({
+const getCollegeCoursesError = () => ({
     type: types.collegeGetCollegeError
 });
 
-const getUsersCollege = (usersCollege) => ({
-    type: types.collegeGetCollegeOK,
-    payload: usersCollege
+const getCollegeCourses = (courses) => ({
+    type: types.courseGetCollegeCoursesOK,
+    payload: courses
 });

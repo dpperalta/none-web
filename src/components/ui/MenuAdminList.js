@@ -66,7 +66,7 @@ export const items = [
   {
     name: "periods", label: "Periodo académico", Icon: CalendarioIcon,
     items: [
-      { name: "/form/task", label: "Agregar actividad", Icon: RegistrarIcon, onClick },
+      { name: "/form/academic-period", label: "Registrar nuevo", Icon: RegistrarIcon, onClick },
       { name: "/list/general", label: "Gestionar periodos", Icon: ListarIcon, onClick },
       { name: "/list/calendar", label: "Calendario académico", Icon: CalendarioIcon, onClick },
     ]

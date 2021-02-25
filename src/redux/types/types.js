@@ -65,5 +65,23 @@ export const types = {
     collegeCheckingFinished: '[cole] Checking finished',
     collegeCreateError: '[cole] Create college error',
     collegeCreateOK: '[cole] Create college ok',
-    collegeClearError: '[cole] Clean college error after actions'
+    collegeClearError: '[cole] Clean college error after actions',
+    collegeGetCollegeError: '[cole] Get college error',
+    collegeGetCollegeOK: '[cole] Get college of user ok',
+
+    // Course
+    courseStartChecking: '[cour] Start checking',
+    courseCheckingFinished: '[cour] Checking finished',
+    courseCreateError: '[cour] Create course error',
+    courseCreateOK: '[cour] Craete course ok',
+    courseClearError: '[cour] Clear course error after actions',
+    courseGetCollegeCourseError: '[cour] Get courses of college error',
+    courseGetCollegeCoursesOK: '[cour] Get courses of college ok',
+
+    // Academic Period
+    aperiodStartChecking: '[aper] Start checking',
+    aperiodCheckingFinished: '[aper] Checking finished',
+    aperiodCreateError: '[aper] Create academic perdiod error',
+    aperiodCreateOK: '[aper] Create academic period ok',
+    aperiodCleanError: '[aper] Celan academic period error after actions',
 }

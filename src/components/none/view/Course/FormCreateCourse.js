@@ -13,10 +13,13 @@ import Alert from '@material-ui/lab/Alert';
 import SaveIcon from '@material-ui/icons/Save';
 import BackspaceIcon from '@material-ui/icons/Backspace';
 import HomeIcon from '@material-ui/icons/Home';
+import CircularProgress from '@material-ui/core/CircularProgress';
 // Yup and Formik Validation
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from 'react-redux';
+import { startCreateCourse } from '../../../../redux/actions/course';
 
 //----------------------------------------------------------------ESTILOS-------------------------------------
 const useStyles = makeStyles((theme) => ({
@@ -57,10 +60,11 @@ const validationSchema = Yup.object({
 
 //----------------------------------------------------------------COMPONENT-------------------------------------
 export const FormCreateCourse = () => {
+  
   const classes = useStyles();
 
-
-  const [ object, setObject ] = useState({});
+  const dispatch = useDispatch();
+  const { checking } = useSelector( state => state.course );
 
   //Formik initial values
   const formik = useFormik({
@@ -70,126 +74,126 @@ export const FormCreateCourse = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      setObject(values);
-      Swal.fire('Datos', JSON.stringify(values, null, 2), 'info');
-      mostrarMensaje();
-     alert(JSON.stringify(values, null, 2));
+      dispatch ( startCreateCourse(values) );
+      formik.handleReset();
     },
-    
-});
+  });
 
-  const mostrarMensaje = () => {
-    setTimeout(() => {
-      
-      Swal.fire('Correcto', 'Datos guardados correctamente', 'success');
-    }, 200);
-    //Si la operación fue correcta, limpia el formulario
-    let res = true;
-    if (res === true)
-    {
-        formik.handleReset();
-    }
-    
+  if(checking){
+    return (
+      <div className={ classes.spiner }>
+        <Grid
+          container
+          spacing={ 0 }
+          direction="column"
+          alignItems="center"
+          justify="center"
+          style={ { minHeight: '100vh' } }
+        >
+          <Grid item xs={ 3 }>
+            <CircularProgress />
+          </Grid>
+        </Grid>
+      </div>
+    )
   }
 
   return (
-    <Container component="main" maxWidth="md">
-      <CssBaseline />
-      <div className={classes.form}>
-        <Grid container direction="row" alignItems="center" justify="center">
-        <Avatar id="avatar" className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar> 
-        <Typography component="h1" variant="h5">
-          Registro de Cursos
-        </Typography>
-        </Grid>
-        <form className={classes.form} onSubmit={formik.handleSubmit}>
+    <>
+      <Container component="main" maxWidth="md">
+        <CssBaseline />
+        <div className={classes.form}>
+          <Grid container direction="row" alignItems="center" justify="center">
+            <Avatar id="avatar" className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar> 
+            <Typography component="h1" variant="h5">
+              Registro de Cursos
+            </Typography>
+          </Grid>
+          <form className={classes.form} onSubmit={formik.handleSubmit}>
             <Grid container direction="row" alignContent="center" alignItems="center" justify="center"> 
               <Grid item><HomeIcon /></Grid>
               <Grid item>DATOS BASICOS</Grid>
             </Grid>
-        <Grid container spacing={2}>
-        <Grid item xs={12}>
-        <TextField
-                autoComplete="courseName"
-                name="courseName"
-                variant="outlined"
-                required
-                fullWidth
-                id="courseName"
-                label="Nombre del curso"
-                autoFocus
-                value={ formik.values.courseName }
-                onChange={ formik.handleChange }
-                onBlur={ formik.handleBlur }
-              />
-              {
-                            formik.errors.courseName && formik.touched.courseName
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.courseName }</Alert>
-                                </div>
-                             )
-                            : null
-              }
-              </Grid>
-        </Grid>
-         
             <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                multiline
-                rows="5"
-                id="description"
-                label="Descripción"
-                name="description"
-                autoComplete="description"
-                value={ formik.values.description }
-                onChange={ formik.handleChange }
-                onBlur={ formik.handleBlur }
-                className={classes.textField}
-              />
-              {
-                            formik.errors.description && formik.touched.description
-                            ? ( 
-                                <div className={ classes.alert }>
-                                    <Alert severity="error">{ formik.errors.description }</Alert>
-                                </div>
-                             )
-                            : null
-              }
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete="courseName"
+                  name="courseName"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="courseName"
+                  label="Nombre del curso"
+                  autoFocus
+                  value={ formik.values.courseName }
+                  onChange={ formik.handleChange }
+                  onBlur={ formik.handleBlur }
+                />
+                {
+                  formik.errors.courseName && formik.touched.courseName
+                  ? ( 
+                      <div className={ classes.alert }>
+                          <Alert severity="error">{ formik.errors.courseName }</Alert>
+                      </div>
+                  )
+                  : null
+                }
+              </Grid>
             </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  multiline
+                  rows="5"
+                  id="description"
+                  label="Descripción"
+                  name="description"
+                  autoComplete="description"
+                  value={ formik.values.description }
+                  onChange={ formik.handleChange }
+                  onBlur={ formik.handleBlur }
+                  className={classes.textField}
+                />
+                {
+                  formik.errors.description && formik.touched.description
+                  ? ( 
+                      <div className={ classes.alert }>
+                          <Alert severity="error">{ formik.errors.description }</Alert>
+                      </div>
+                  )
+                  : null
+                }
+              </Grid>
             </Grid>
-         
-                  
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        startIcon={<SaveIcon />}
-                    >
-                        Guardar datos
-                    </Button>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-                        <Button variant="outlined" Style="width:100%" color="primary" className={classes.submit} onClick={formik.handleReset} startIcon={<BackspaceIcon />}>
-                            Limpiar Datos
-                    </Button>
-            </Grid>
-          </Grid>         
-          
-        </form>
-      </div>
-      
-    </Container>
+                
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    startIcon={<SaveIcon />}
+                >
+                  Guardar datos
+                </Button>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Button variant="outlined" Style="width:100%" color="primary" className={classes.submit} onClick={formik.handleReset} startIcon={<BackspaceIcon />}>
+                  Limpiar Datos
+                </Button>
+              </Grid>
+            </Grid>         
+          </form>
+        </div>  
+      </Container>
+    </>
   );
   
 }

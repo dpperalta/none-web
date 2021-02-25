@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {items} from '../components/ui/MenuAdminList';
+
 // Router and routes
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { PublicRoutes } from './PublicRoutes';
 import { PrivateRoutes } from './PrivateRoutes';
 import { AdminRoutes } from './AdminRoutes';
+
 // Components
 import { Login } from '../components/auth/Login';
 import { None } from '../components/none/dashboard/None';
@@ -27,6 +29,8 @@ import {TableGroups} from '../components/ui/MaterialTables/TableGroups';
 import Dashboard  from '../components/none/dashboard/Dashboard';
 import { startChecking } from '../redux/actions/auth';
 import { ProgressBar } from '../components/ui/ProgressBar';
+import { FormCreateAcademicPeriod } from '../components/none/view/AcademicPeriod/FormCreateAcademicPeriod';
+import { ListCourse } from '../components/none/view/Course/ListCourse';
 
 //Imports MainUI
 import clsx from 'clsx';
@@ -58,8 +62,6 @@ import { useHistory , Link, BrowserRouter} from 'react-router-dom';
 import { startLogout } from '../redux/actions/auth';
 import Swal from 'sweetalert2';
 import SwitchDark from '@material-ui/core/Switch';
-
-
 
 //MainUI
 function Copyright() {
@@ -360,12 +362,14 @@ export const AppRouter = () => {
                                                     <PrivateRoutes exact path='/list/person' component={ ListPerson } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/college' component={ FormCreateCollege } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/course' component={ FormCreateCourse } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/list/course' component={ ListCourse } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/exam' component={ Quiz } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/exam-generator' component={ ExamGenerator } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/editor' component={ Editor } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/academic-period' component={ FormCreateAcademicPeriod } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/enrollment-status' component={ FormCreateEnrollmentStatus } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/tabla1' component={ TableIndividual } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/tabla2' component={ TableGroups } isAuthenticated={ !!userID } />
