@@ -4,7 +4,8 @@ const initialState = {
     collegeCourses: [],
     courseCreated: null,
     checking: false,
-    error: null
+    error: null,
+    selectedCourse: null
 }
 
 export const courseReducer = (state = initialState, action) => {
@@ -45,6 +46,13 @@ export const courseReducer = (state = initialState, action) => {
                 collegeCourses: action.payload,
                 error: false,
                 checking: false
+            }
+        case types.courseSelectCourse:
+            return {
+                ...state,
+                error: false,
+                checking: false,
+                selectedCourse: action.payload
             }
         default:
             return state;

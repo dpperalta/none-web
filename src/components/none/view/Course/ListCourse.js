@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import MaterialTable from 'material-table';
 
@@ -8,7 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core';
 
 import { getCollegeInformation } from '../../../../redux/actions/college';
-import { getCollegeCourse } from '../../../../redux/actions/course';
+import { getCollegeCourse, startCourseSelection } from '../../../../redux/actions/course';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +28,8 @@ export const ListCourse = () => {
     const dispatch = useDispatch();
     const { collegeID } = useSelector( state => state.auth.user  );
     const { checking } = useSelector( state => state.college );
+
+    const history = useHistory();
     
     useEffect(() => {
         const loadCollege = () => dispatch( getCollegeInformation(collegeID) );
@@ -64,10 +67,20 @@ export const ListCourse = () => {
         )
     }
 
+    const handleViewActions = ( course ) => {
+        dispatch( startCourseSelection(course) );
+        history.push('/list/subject');
+    }
+
+    const handleCreateCourse = () => {
+        history.push('/form/course');
+    }
+
     return (
         <>
+            <h2>Lista Cursos de: { usersCollege.collegeShowName }</h2>
             <MaterialTable
-                title={`Cursos de ${ usersCollege.collegeShowName }:` }
+                title={ 'Cursos'}
                 columns={[
                     { title: 'Código', field: 'courseCode' },
                     { title: 'Nombre', field: 'courseName' },
@@ -89,16 +102,22 @@ export const ListCourse = () => {
                 }}
                 actions={[
                     {
-                    icon: 'refresh',
-                    tooltip: 'Actualizar datos',
-                    isFreeAction: true,
-                    //onClick: () => tableRef.current && tableRef.current.onQueryChange(),
-                    onClick: () => console.log('Acción'),
+                        icon: 'add_box',
+                        tooltip: 'Crear curso',
+                        isFreeAction: true,
+                        //onClick: () => tableRef.current && tableRef.current.onQueryChange(),
+                        onClick: () => {
+                            console.log('Acción');
+                            handleCreateCourse();
+                        }
                     },
                     {
                         icon: 'visibility',
                         tooltip: 'Ver',
-                        onClick: (event, rowData) => alert("Se ha guardado " + rowData.courseName)
+                        onClick: (event, rowData) => {
+                            //alert("Se envía a ver " + rowData.courseID + ' ' + rowData.courseName) 
+                            handleViewActions( rowData );
+                        }
                     },
                     {
                         icon: 'edit',

@@ -50,11 +50,10 @@ const validationSchema = Yup.object({
     .max(500, `Máximo 500 caracteres`)
     .required('Campo obligatorio'),
   description: Yup
-  .string()
-  .min(3, `Mínimo 3 caracteres`)
-  .max(2000, `Máximo 2000 caracteres`)
-  .required('Campo obligatorio')
-
+    .string()
+    .min(3, `Mínimo 3 caracteres`)
+    .max(2000, `Máximo 2000 caracteres`)
+    .required('Campo obligatorio')
 })
 
 
@@ -119,7 +118,7 @@ export const FormCreateCourse = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  autoComplete="courseName"
+                  autoComplete="off"
                   name="courseName"
                   variant="outlined"
                   required
@@ -153,7 +152,7 @@ export const FormCreateCourse = () => {
                   id="description"
                   label="Descripción"
                   name="description"
-                  autoComplete="description"
+                  autoComplete="off"
                   value={ formik.values.description }
                   onChange={ formik.handleChange }
                   onBlur={ formik.handleBlur }

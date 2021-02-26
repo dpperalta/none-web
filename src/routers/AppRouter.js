@@ -31,6 +31,7 @@ import { startChecking } from '../redux/actions/auth';
 import { ProgressBar } from '../components/ui/ProgressBar';
 import { FormCreateAcademicPeriod } from '../components/none/view/AcademicPeriod/FormCreateAcademicPeriod';
 import { ListCourse } from '../components/none/view/Course/ListCourse';
+import { ListSubject } from '../components/none/view/Subject/ListSubject';
 
 //Imports MainUI
 import clsx from 'clsx';
@@ -366,6 +367,7 @@ export const AppRouter = () => {
                                                     <PrivateRoutes exact path='/form/exam' component={ Quiz } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/exam-generator' component={ ExamGenerator } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/list/subject' component={ ListSubject } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/editor' component={ Editor } isAuthenticated={ !!userID } />

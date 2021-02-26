@@ -311,7 +311,7 @@ export const FormCreatePerson = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  //autoComplete="dni"
+                  autoComplete="off"
                   name="dni"
                   variant="outlined"
                   required
@@ -337,7 +337,7 @@ export const FormCreatePerson = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  //autoComplete="fname"
+                  autoComplete="off"
                   name="firstName"
                   variant="outlined"
                   required
@@ -366,7 +366,7 @@ export const FormCreatePerson = () => {
                   id="lastName"
                   label="Apellidos Completos"
                   name="lastName"
-                  //autoComplete="lname"
+                  autoComplete="off"
                   value={ formik.values.lastName }
                   onChange={ formik.handleChange }
                   onBlur={ formik.handleBlur }
@@ -468,7 +468,7 @@ export const FormCreatePerson = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="mainStreet"
+                  autoComplete="off"
                   name="mainStreet"
                   variant="outlined"
                   required
@@ -515,7 +515,7 @@ export const FormCreatePerson = () => {
               <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="secondStreet"
+                  autoComplete="off"
                   name="secondStreet"
                   variant="outlined"
                   required
@@ -583,7 +583,7 @@ export const FormCreatePerson = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="numberPhone1"
+                  autoComplete="off"
                   name="numberPhone1"
                   variant="outlined"
                   //required
@@ -646,7 +646,7 @@ export const FormCreatePerson = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="numberPhone2"
+                  autoComplete="off"
                   name="numberPhone2"
                   variant="outlined"
                   //required
@@ -720,7 +720,7 @@ export const FormCreatePerson = () => {
                   id="email"
                   label="Correo electrónico"
                   name="email"
-                  autoComplete="email"
+                  autoComplete="off"
                   value={ formik.values.email }
                   onChange={ formik.handleChange }
                   onBlur={ formik.handleBlur }
@@ -746,7 +746,7 @@ export const FormCreatePerson = () => {
                   label="Contraseña"
                   type="password"
                   id="pass"
-                  autoComplete="current-password"
+                  autoComplete="off"
                   value={ formik.values.pass }
                   onChange={ formik.handleChange }
                   onBlur={ formik.handleBlur }
@@ -772,7 +772,7 @@ export const FormCreatePerson = () => {
                   label="Repetir Contraseña"
                   type="password"
                   id="pass2"
-                  autoComplete="current-password"
+                  autoComplete="off"
                   value={ formik.values.pass2 }
                   onChange={ formik.handleChange }
                   onBlur={ formik.handleBlur }

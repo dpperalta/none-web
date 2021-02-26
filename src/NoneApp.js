@@ -7,7 +7,7 @@ export const NoneApp = () => {
     return (
         <Provider store={ store }>
             <AppRouter />
-   </Provider>
+        </Provider>
 
     )
 }

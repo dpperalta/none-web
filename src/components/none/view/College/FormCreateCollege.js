@@ -133,7 +133,7 @@ export const FormCreateCollege = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  //autoComplete="collegeName"
+                  autoComplete="off"
                   name="collegeName"
                   variant="outlined"
                   required
@@ -159,7 +159,7 @@ export const FormCreateCollege = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  //autoComplete="collegeShowName"
+                  autoComplete="off"
                   name="collegeShowName"
                   variant="outlined"
                   required
@@ -192,7 +192,7 @@ export const FormCreateCollege = () => {
                   id="detail"
                   label="Descripción"
                   name="detail"
-                  //autoComplete="detail"
+                  autoComplete="off"
                   value={ formik.values.detail }
                   onChange={ formik.handleChange }
                   onBlur={ formik.handleBlur }

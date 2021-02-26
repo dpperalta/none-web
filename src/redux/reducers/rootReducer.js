@@ -8,6 +8,8 @@ import { courseReducer } from "./courseReducer";
 import { personReducer } from "./personReducer";
 import { personTypeReducer } from "./personTypeReducer";
 import { phoneOperatorReducer } from "./phoneOperatorReducer";
+import { subjectReducer } from "./subjectReducer";
+import { teacherReducer } from "./teacherReducer";
 import { telephoneReducer } from "./telephoneReducer";
 import { userReducer } from "./userReducer";
 
@@ -22,7 +24,9 @@ export const rootReducer = combineReducers({
     user: userReducer,
     college: collegeReducer,
     course: courseReducer,
-    academicPeriod: academicPeriodReducer
+    academicPeriod: academicPeriodReducer,
+    subject: subjectReducer,
+    teacher: teacherReducer,
 
     // TODO: studentReducer,
     // etc.

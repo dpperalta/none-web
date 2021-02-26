@@ -21,13 +21,11 @@ export const startCreateCollege = (college) => {
     return async(dispatch) => {
         dispatch(startChecking());
         try {
-            console.log('college:', college);
             const resp = await axiosClient.post('college', college, {
                 headers: {
                     'none-token': token
                 }
             });
-            console.log(resp.data.newCollege);
             dispatch(createCollege(resp.data.newCollege));
             Swal.fire('¡Correcto!', resp.data.message, 'success');
         } catch (error) {
@@ -61,13 +59,11 @@ export const getCollegeInformation = (collegeID) => {
         dispatch(startChecking());
         try {
             const token = localStorage.getItem('none-token');
-            console.log('collegeID:', collegeID);
             const resp = await axiosClient.get(`college/${ collegeID }`, {
                 headers: {
                     'none-token': token
                 }
             });
-            console.log(resp.data.college);
             dispatch(getUsersCollege(resp.data.college));
         } catch (error) {
             errorHandling(error);

@@ -84,3 +84,15 @@ const getCollegeCourses = (courses) => ({
     type: types.courseGetCollegeCoursesOK,
     payload: courses
 });
+
+// Select a course from de list
+export const startCourseSelection = (course) => {
+    return (dispatch) => {
+        dispatch(selectCourse(course));
+    }
+}
+
+const selectCourse = (course) => ({
+    type: types.courseSelectCourse,
+    payload: course
+})

@@ -77,6 +77,7 @@ export const types = {
     courseClearError: '[cour] Clear course error after actions',
     courseGetCollegeCourseError: '[cour] Get courses of college error',
     courseGetCollegeCoursesOK: '[cour] Get courses of college ok',
+    courseSelectCourse: '[cour] Select a listed course',
 
     // Academic Period
     aperiodStartChecking: '[aper] Start checking',
@@ -84,4 +85,22 @@ export const types = {
     aperiodCreateError: '[aper] Create academic perdiod error',
     aperiodCreateOK: '[aper] Create academic period ok',
     aperiodCleanError: '[aper] Celan academic period error after actions',
+
+    // Subject
+    subjectStartChecking: '[subj] Start checking',
+    subjectCheckingFinished: '[subj] Checking finished',
+    subjectClearError: '[subj] Clear subject error after actions',
+    subjectGetCourseSubjectError: '[subj] Get subjects of course error',
+    subjectGetCourseSubjectOK: '[subj] Get subjects of course ok',
+    subjectSelectSubject: '[subj] Select a listed subject',
+    subjectCreateError: '[subj] Create subject error',
+    subjectCreateOK: '[subj] Create subject ok',
+
+    // Teacher
+    teacherStartChecking: '[tech] Start checking',
+    teacherCheckingFinished: '[tech] Checking finished',
+    teacherCleanError: '[tech] Clean teacher error after actions',
+    teacherGetCollegeTeacherError: '[tech] Get college teachers error',
+    teacherGetCollegeTeacherOK: '[tech] Get college teachers ok',
+    teacherSelectTeacher: '[tech] Select a listed teacher',
 }

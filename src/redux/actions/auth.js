@@ -44,8 +44,9 @@ const checkingFinished = () => ({
 });
 
 export const startChecking = () => {
+
     const token = localStorage.getItem('none-token');
-    console.log('token:', token);
+
     return async(dispatch) => {
         try {
             const resp = await axiosClient.get('login/renew', {
