@@ -53,7 +53,7 @@ function onClick(e, item) {
     window.alert(JSON.stringify(' Soy profesor, estoy en ' + item.name , null, 2));
   }
 
-export const items = [
+export const teacherItems = [
    
     {
       name: "/", label: "Mis cursos", Icon: HomeIcon,
@@ -69,7 +69,7 @@ export const items = [
         label: "Mis materias",
         Icon: MateriaIcon,
         items: [
-          { name: "/list/subject", label: "Mis materias", Icon: ListaIcon, onClick },
+          { name: "/teacher/list/subject", label: "Mis materias", Icon: ListaIcon, onClick },
           { name: "/report/assistance", label: "Registrar asistencias", Icon: PresenciaIcon, onClick },
           { name: "/form/permission", label: "Registrar permisos", Icon: PermisoIcon, onClick },
           { name: "/form/gifts", label: "Registrar incentivos", Icon: RegaloIcon, onClick },
@@ -169,6 +169,6 @@ export const items = [
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    items,
+    teacherItems,
 }
   

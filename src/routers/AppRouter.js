@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {items} from '../components/ui/MenuAdminList';
+import { adminItems } from '../components/ui/MenuAdminList';
+import { collegeItems } from '../components/ui/MenuCollegeList';
+import { teacherItems } from '../components/ui/MenuTeacherList';
+import { studentItems } from '../components/ui/MenuStudentList';
 
 // Router and routes
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { PublicRoutes } from './PublicRoutes';
 import { PrivateRoutes } from './PrivateRoutes';
 import { AdminRoutes } from './AdminRoutes';
+import { TeacherRoutes } from './TeacherRoutes';
 
 // Components
 import { Login } from '../components/auth/Login';
@@ -32,6 +36,7 @@ import { ProgressBar } from '../components/ui/ProgressBar';
 import { FormCreateAcademicPeriod } from '../components/none/view/AcademicPeriod/FormCreateAcademicPeriod';
 import { ListCourse } from '../components/none/view/Course/ListCourse';
 import { ListSubject } from '../components/none/view/Subject/ListSubject';
+import { ListTeacherSubject } from '../components/none/view/Subject/Teacher/ListTeacherSubject';
 
 //Imports MainUI
 import clsx from 'clsx';
@@ -54,6 +59,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import DarkModeIcon from '@material-ui/icons/Brightness4';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import PersonIcon from '@material-ui/icons/Person';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { FormControlLabel} from '@material-ui/core';
@@ -63,6 +69,8 @@ import { useHistory , Link, BrowserRouter} from 'react-router-dom';
 import { startLogout } from '../redux/actions/auth';
 import Swal from 'sweetalert2';
 import SwitchDark from '@material-ui/core/Switch';
+import { startGettingPerson } from '../redux/actions/person';
+import { startGettingTeacher } from '../redux/actions/teacher';
 
 //MainUI
 function Copyright() {
@@ -165,6 +173,11 @@ export const AppRouter = () => {
     const dispatch = useDispatch();
     const { checking, user, role, authUser } = useSelector( state => state.auth );
     let userID;
+    let person;
+    let teacher;
+    // TODO: student and parent information
+    /*let student;
+    let parent;*/
 
     const boolDark = JSON.parse( localStorage.getItem('dark')) || false;
     const [darkState, setDarkState] = useState(boolDark);
@@ -181,22 +194,67 @@ export const AppRouter = () => {
 
     useEffect(() => {
         dispatch( startChecking() );
-    }, [dispatch]);
+        if(authUser){
+            dispatch( startGettingPerson( user.personID ) );
+        }
+    }, [dispatch, authUser]);
 
     if(user){
         userID = user.userID;
+    }
+    
+    person = useSelector( state => state.person.authPerson );
+    if(!person){
+        person = { nombres: '' };
     }
 
     // For show components and routes by role
     let isAdmin;
     let isSuperAdmin;
+    let isTeacher;
     role === 'Administrator' ? isAdmin = true : isAdmin = false;
     role === 'Super Administrator' ? isSuperAdmin = true : isSuperAdmin = false;
+    role === 'Teacher' ? isTeacher = true : isTeacher = false;
+
+    // Load especific information for users based in their role
+    // Loading teacher's information
+    useEffect(() => {
+        if( isTeacher ){
+            if(authUser){
+                if(person.id){
+                    console.log(person.id);
+                    dispatch( startGettingTeacher( person.id ) );
+                }
+            }
+        }
+        // TODO: Loading student's information
+        // TODO: Loading parent's information
+    }, [isTeacher, person] );
 
     if(checking){
         return (
             <ProgressBar />
         );
+    }
+
+    // Switcher of sidemenu items
+    let items;
+    switch (role) {
+        case 'Administrator':
+        case 'Super Administrator':
+            items = adminItems;
+            break;
+        case 'Teacher':
+            items = teacherItems;
+            break;
+        case 'Operative':
+            items = collegeItems;
+            break;
+        case 'Student':
+            items = studentItems;
+            break;
+        default:
+            items = adminItems;
     }
 
     //MainUI
@@ -242,6 +300,14 @@ export const AppRouter = () => {
         });
     }
     
+    // Load especific information for users
+    // Loading teacher's information
+    if( isTeacher ){
+        //const teacher = useSelector()
+    }
+    // TODO: Loading student's information
+    // TODO: Loading parent's information
+    
     return (
         <>
           {
@@ -274,7 +340,8 @@ export const AppRouter = () => {
                                             <MenuIcon />
                                         </IconButton>
                                         <Typography component="h1" variant="h6" color="inherit" noWrap className={ classes.title }>
-                                            MentoRed Dashboard
+                                            {/* MentoRed de { user.email } <small>{ role }</small> */}
+                                            MentoRed de { person.nombres } <small>{ role }</small>
                                         </Typography>
                                         <IconButton color="inherit">
                                             <Badge badgeContent={ 10 } color="secondary">
@@ -306,6 +373,10 @@ export const AppRouter = () => {
                                                     },
                                                 }}
                                             >
+                                                <MenuItem>
+                                                    <PersonIcon/> { user.email }
+                                                </MenuItem>
+                                                <Divider />
                                                 <MenuItem>
                                                     <DarkModeIcon />
                                                     <FormControlLabel
@@ -368,6 +439,7 @@ export const AppRouter = () => {
                                                     <PrivateRoutes exact path='/form/exam-generator' component={ ExamGenerator } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/list/subject' component={ ListSubject } isAuthenticated={ !!userID } />
+                                                    
                                                     <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/editor' component={ Editor } isAuthenticated={ !!userID } />
@@ -378,6 +450,8 @@ export const AppRouter = () => {
                                                                 
                                                     {/* For Admin and Super Admin Routes */}
                                                     {/* <AdminRoutes exact path="/route"  /> */}
+                                                    {/* TEACHER ROUTES */}
+                                                    <TeacherRoutes exact path='/teacher/list/subject' component={ ListTeacherSubject } isTeacherAuthenticated={ isTeacher } />
                                                     <Redirect to="/" />
                                                 </Switch>
                                             </div>

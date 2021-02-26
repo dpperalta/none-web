@@ -52,7 +52,7 @@ function onClick(e, item) {
     window.alert(JSON.stringify(' Soy estudiante, estoy en ' + item.name , null, 2));
   }
 
-export const items = [
+export const studentItems = [
    
     {
       name: "/", label: "Mi curso", Icon: HomeIcon,
@@ -176,6 +176,6 @@ export const items = [
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    items,
+    studentItems,
 }
   

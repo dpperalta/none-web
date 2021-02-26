@@ -53,7 +53,7 @@ function onClick(e, item) {
     //window.alert(JSON.stringify(' Soy el administrador, estoy en ' + item.name , null, 2));
   }
 
-export const items = [
+export const adminItems = [
    
   {
     name: "colleges", label: "Colegios", Icon: HomeIcon,
@@ -144,6 +144,6 @@ export const items = [
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    items,
+    adminItems,
 }
   

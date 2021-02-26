@@ -52,3 +52,34 @@ const getCollegeTeachers = (teachers) => ({
     type: types.teacherGetCollegeTeacherOK,
     payload: teachers
 });
+
+// Geatting information of authenticated teacher
+export const startGettingTeacher = (personID) => {
+    return async(dispatch) => {
+        console.log('personID:', personID);
+        dispatch(startChecking());
+        try {
+            const token = localStorage.getItem('none-token');
+            const resp = await axiosClient.get(`teacher/person/${ personID }`, {
+                headers: {
+                    'none-token': token
+                }
+            });
+            console.log('resp:', resp.data.teacher);
+            dispatch(getTeacherPerson(resp.data.teacher));
+        } catch (error) {
+            errorHandling(error);
+            dispatch(getTeacherPersonError());
+        }
+        dispatch(endChecking());
+    }
+}
+
+const getTeacherPersonError = () => ({
+    type: types.teacherGetTeacherPersonError
+});
+
+const getTeacherPerson = (teacher) => ({
+    type: types.teacherGetTeacherPersonOK,
+    payload: teacher
+});

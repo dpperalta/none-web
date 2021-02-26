@@ -5,6 +5,7 @@ const initialState = {
     checking: false,
     error: null,
     selectedTeacher: null,
+    authTeacher: null
 }
 
 export const teacherReducer = (state = initialState, action) => {
@@ -19,6 +20,7 @@ export const teacherReducer = (state = initialState, action) => {
                 ...state,
                 checking: false
             }
+        case types.teacherGetTeacherPersonError:
         case types.teacherGetCollegeTeacherError:
             return {
                 ...state,
@@ -36,6 +38,13 @@ export const teacherReducer = (state = initialState, action) => {
                 error: false,
                 checking: false,
                 collegeTeachers: action.payload
+            }
+        case types.teacherGetTeacherPersonOK:
+            return {
+                ...state,
+                error: false,
+                checking: false,
+                authTeacher: action.payload
             }
         default:
             return state;

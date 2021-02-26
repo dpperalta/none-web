@@ -20,10 +20,11 @@ const errorHandling = (error) => {
     }
 }
 
+// Create a new person
 export const startCreatePerson = (personData) => {
     return async(dispatch) => {
         console.log('personData:', personData);
-        dispatch(createPersonCheckingStart());
+        dispatch(startChecking());
         let person = personData.person;
         let address = personData.address;
         let homePhone = personData.homePhone;
@@ -61,7 +62,7 @@ export const startCreatePerson = (personData) => {
             dispatch(createError());
             errorHandling(error);
         }
-        dispatch(createPersonCheckingEnd());
+        dispatch(endChecking());
     }
 }
 
@@ -74,10 +75,39 @@ const createPerson = (person) => ({
     payload: person
 });
 
-const createPersonCheckingStart = () => ({
+const startChecking = () => ({
     type: types.personStartChecking
 });
 
-const createPersonCheckingEnd = () => ({
+const endChecking = () => ({
     type: types.personCheckingFinished
+});
+
+// Get person's information by the authenticated user
+export const startGettingPerson = (personID) => {
+    return async(dispatch) => {
+        dispatch(startChecking());
+        try {
+            const token = localStorage.getItem('none-token');
+            const resp = await axiosClient.get(`person/${ personID }`, {
+                headers: {
+                    'none-token': token
+                }
+            });
+            dispatch(getPerson(resp.data.person));
+        } catch (error) {
+            errorHandling(error);
+            dispatch(getPersonError());
+        }
+        dispatch(endChecking());
+    }
+}
+
+const getPersonError = () => ({
+    type: types.personGetPersonError
+});
+
+const getPerson = (person) => ({
+    type: types.personGetPersonOK,
+    payload: person
 });

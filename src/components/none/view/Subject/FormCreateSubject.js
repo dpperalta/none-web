@@ -102,8 +102,6 @@ export const FormCreateSubject = () => {
     teachers = [];
   }
   
-  console.log('teachers:', teachers);
-
   //Formik initial values
   const formik = useFormik({
     initialValues: {
@@ -112,7 +110,6 @@ export const FormCreateSubject = () => {
         gradeMinimun: 0,
         gradeMaximun: 10,
         selector:'',
-        //teacherID: teacher
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -125,30 +122,13 @@ export const FormCreateSubject = () => {
         courseID: course.courseID
       }
       
-      console.log('subject:', subject);
       dispatch( startCreateSubject(subject) );
       formik.handleReset();
       setTeacherID(null);
       setTeacher(null);
-      //Swal.fire('Datos', JSON.stringify(values, null, 2), 'info');
-      //mostrarMensaje();
-     //alert(JSON.stringify(values, null, 2));
-    },
-    
-});
-
-  const mostrarMensaje = () => {
-    setTimeout(() => {
       
-      Swal.fire('Correcto', 'Datos guardados correctamente', 'success');
-    }, 200);
-    //Si la operación fue correcta, limpia el formulario
-    let res = true;
-    if (res === true)
-    {
-    }
-    
-  }
+    },    
+  });
 
   if(checking){
     return (
@@ -169,7 +149,6 @@ export const FormCreateSubject = () => {
     )
   }
   
-
   return (
     <>
       <Container component="main" maxWidth="md">

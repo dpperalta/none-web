@@ -1,3 +1,35 @@
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import MaterialTable from 'material-table';
+
+import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+
+
+const useStyles = makeStyles((theme) => ({
+    spiner: {
+      display: 'flex',
+      '& > * + *': {
+        marginLeft: theme.spacing(2)
+      }
+    }
+  }
+));
+
+export const ListTeacherSubject = () => {
+    return (
+        <>
+            <h1>Teacher List</h1>  
+        </>
+    )
+}
+
+
+
+/*
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 

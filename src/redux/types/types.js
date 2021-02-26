@@ -1,5 +1,8 @@
 export const types = {
 
+    // Root
+    rootLogout: '[root]: Logout',
+
     // Authentication
     authChecking: '[auth] Checking login state',
     authCheckingFinished: '[auth] Checking finished',
@@ -38,6 +41,8 @@ export const types = {
     personCreatingError: '[pers] Creating person error',
     personCreatingOK: '[pers] Creating person ok ',
     personClearError: '[pers] Clear an error after acions',
+    personGetPersonError: '[pers] Get persons information error',
+    personGetPersonOK: '[pers] Get persons information ok',
 
     // Address
     addressStartChecking: '[addr] Start checking',
@@ -103,4 +108,6 @@ export const types = {
     teacherGetCollegeTeacherError: '[tech] Get college teachers error',
     teacherGetCollegeTeacherOK: '[tech] Get college teachers ok',
     teacherSelectTeacher: '[tech] Select a listed teacher',
+    teacherGetTeacherPersonError: '[tech] Get teacher by person error',
+    teacherGetTeacherPersonOK: '[tech] Get teacher by person ok',
 }
