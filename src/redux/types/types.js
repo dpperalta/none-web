@@ -101,6 +101,17 @@ export const types = {
     subjectCreateError: '[subj] Create subject error',
     subjectCreateOK: '[subj] Create subject ok',
 
+    // Task
+    taskStartChecking: '[task] Start checking',
+    taskCheckingFinished: '[task] Checking finished',
+    taskClearError: '[task] Clear task error after actions',
+    taskGetSubjectTaskError: '[task] Get tasks of course error',
+    taskGetSubjectTaskOK: '[task] Get tasks of subject ok',
+    tasktSelectTask: '[task] Select a listed task',
+    taskCreateError: '[task] Create task error',
+    taskCreateOK: '[task] Create task ok',
+
+
     // Teacher
     teacherStartChecking: '[tech] Start checking',
     teacherCheckingFinished: '[tech] Checking finished',

@@ -13,6 +13,7 @@ import Alert from '@material-ui/lab/Alert';
 import SaveIcon from '@material-ui/icons/Save';
 import BackspaceIcon from '@material-ui/icons/Backspace';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import CircularProgress from '@material-ui/core/CircularProgress';
 // Yup and Formik Validation
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -21,6 +22,10 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from '@material-ui/c
 import { KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { es} from "date-fns/locale";
+import { useDispatch, useSelector } from 'react-redux';
+import { startGetCollegeTeachers } from '../../../../../redux/actions/teacher';
+import { startCreateTask } from '../../../../../redux/actions/task';
+
 //----------------------------------------------------------------ESTILOS-------------------------------------
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -92,9 +97,22 @@ export const FormCreateTask = () => {
   const handleDateChange2 = (date) => {
     setSelectedDate2(date);
 };
-  
-
   const [ object, setObject ] = useState({});
+
+  const [ teacherID, setTeacherID ] = useState(null);
+  const [ teacher, setTeacher ] = useState(null);
+  
+  const dispatch = useDispatch();
+  let subject = useSelector( state => state.subject.selectedSubject );
+  let { collegeID } = useSelector( state => state.auth.user );
+  const { checking } = useSelector( state => state.subject );
+
+  if(!subject) {
+    subject = { subjectName: '' }
+  }
+
+
+
 
 
   //Formik initial values
@@ -111,27 +129,43 @@ export const FormCreateTask = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      setObject(values);
-      Swal.fire('Datos', JSON.stringify(values, null, 2), 'info');
-      mostrarMensaje();
-     alert(JSON.stringify(values, null, 2));
+      let task = {
+        startDate: values.startDate, // Falta la hora
+        endDate: values.endtDate, // Falta la hora
+        taskName: values.taskName,
+        taskDetail: values.description,
+        permitsDelay: values.radio,
+        maxDelay: values.maxDelay,
+        subjectID: subject.subjectID
+      }
+      
+      dispatch( startCreateTask(task) );
+      formik.handleReset();
+      setTeacherID(null);
+      setTeacher(null);  
     },
     
 });
 
-  const mostrarMensaje = () => {
-    setTimeout(() => {
-      
-      Swal.fire('Correcto', 'Datos guardados correctamente', 'success');
-    }, 200);
-    //Si la operación fue correcta, limpia el formulario
-    let res = true;
-    if (res === true)
-    {
-        formik.handleReset();
-    }
-    
-  }
+ 
+if(checking){
+  return (
+    <div className={ classes.spiner }>
+      <Grid
+        container
+        spacing={ 0 }
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={ { minHeight: '100vh' } }
+      >
+        <Grid item xs={ 3 }>
+          <CircularProgress />
+        </Grid>
+      </Grid>
+    </div>
+  )
+}
 
   return (
     <Container component="main" maxWidth="md">
