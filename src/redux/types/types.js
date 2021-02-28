@@ -111,7 +111,16 @@ export const types = {
     taskCreateError: '[task] Create task error',
     taskCreateOK: '[task] Create task ok',
 
-
+    // Exam
+    examStartChecking: '[exam] Start checking',
+    examCheckingFinished: '[exam] Checking finished',
+    examClearError: '[exam] Clear exam error after actions',
+    examGetSubjectExamError: '[exam] Get exams of course error',
+    examGetSubjectExamOK: '[exam] Get exams of subject ok',
+    examtSelectExam: '[exam] Select a listed exam',
+    examCreateError: '[exam] Create exam error',
+    examCreateOK: '[exam] Create exam ok',
+    
     // Teacher
     teacherStartChecking: '[tech] Start checking',
     teacherCheckingFinished: '[tech] Checking finished',

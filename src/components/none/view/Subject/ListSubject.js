@@ -69,9 +69,13 @@ export const ListSubject = () => {
     const handleSubjectCreation = () => {
         history.push('/form/subject');
     }
-    const handleViewActions = ( subject ) => {
+    const handleViewActionsTask = ( subject ) => {
         dispatch( startSubjectSelection(subject) );
         history.push('/list/task');
+    }
+    const handleViewActionsExam = ( subject ) => {
+        dispatch( startSubjectSelection(subject) );
+        history.push('/list/exam');
     }
 
 
@@ -112,13 +116,19 @@ export const ListSubject = () => {
                         } 
                     },
                     {
-                        icon: 'visibility',
-                        tooltip: 'Ver',
+                        icon: 'assignmentturnedin',
+                        tooltip: 'Gestionar tareas',
                         onClick: (event, rowData) => {
                             //alert("Se envía a ver " + rowData.courseID + ' ' + rowData.subjectName) 
-                            handleViewActions( rowData );
-                           //console.log('Acción');
-                            //handleCreateTask();
+                            handleViewActionsTask( rowData );
+                        }
+                    },
+                    {
+                        icon: 'description',
+                        tooltip: 'Gestionar Exámenes',
+                        onClick: (event, rowData) => {
+                            //alert("Se envía a ver " + rowData.courseID + ' ' + rowData.subjectName) 
+                            handleViewActionsExam( rowData );
                         }
                     },
                     {

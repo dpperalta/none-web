@@ -29,6 +29,7 @@ import {ExamGenerator}  from '../components/none/view/Exam/ExamMaker/ExamGenerat
 import { FormCreateSubject } from '../components/none/view/Subject/FormCreateSubject';
 import { FormCreateContent } from '../components/none/view/Subject/Content/FormCreateContent';
 import { FormCreateTask } from '../components/none/view/Subject/Task/FormCreateTask';
+import { FormCreateExam } from '../components/none/view/Exam/FormCreateExam';
 import Editor from '../components/none/view/Subject/Task/Resolution/FormCreateTaskResolution';
 import { FormCreateEnrollmentStatus } from '../components/none/view/Enrollment/FormCreateEnrollmentStatus';
 import { ComponentsUI } from '../components/ui/ComponentsUI';
@@ -43,6 +44,7 @@ import { FormCreateAcademicPeriod } from '../components/none/view/AcademicPeriod
 import { ListCourse } from '../components/none/view/Course/ListCourse';
 import { ListSubject } from '../components/none/view/Subject/ListSubject';
 import { ListTask } from '../components/none/view/Subject/Task/ListTask';
+import { ListExam } from '../components/none/view/Exam/ListExam';
 import { ListTeacherSubject } from '../components/none/view/Subject/Teacher/ListTeacherSubject';
 
 //Imports MainUI
@@ -499,14 +501,16 @@ export const AppRouter = () => {
                                                     <PrivateRoutes exact path='/form/college' component={ FormCreateCollege } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/course' component={ FormCreateCourse } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/list/course' component={ ListCourse } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form/exam' component={ Quiz } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/exam-solve' component={ Quiz } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/exam-generator' component={ ExamGenerator } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/list/subject' component={ ListSubject } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/list/task' component={ ListTask } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/list/exam' component={ ListExam } isAuthenticated={ !!userID } />
 
                                                     <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path='/form/exam' component={ FormCreateExam } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/editor' component={ Editor } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/academic-period' component={ FormCreateAcademicPeriod } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/enrollment-status' component={ FormCreateEnrollmentStatus } isAuthenticated={ !!userID } />

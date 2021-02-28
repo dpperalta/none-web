@@ -5,6 +5,7 @@ import { authReducer } from "./authReducer";
 import { cityReducer } from "./cityReducer";
 import { collegeReducer } from "./collegeReducer";
 import { courseReducer } from "./courseReducer";
+import { examReducer } from "./examReducer";
 import { personReducer } from "./personReducer";
 import { personTypeReducer } from "./personTypeReducer";
 import { phoneOperatorReducer } from "./phoneOperatorReducer";
@@ -28,7 +29,8 @@ export const rootReducer = combineReducers({
     academicPeriod: academicPeriodReducer,
     subject: subjectReducer,
     teacher: teacherReducer,
-    task: taskReducer
+    task: taskReducer,
+    exam: examReducer
 
     // TODO: studentReducer,
     // etc.

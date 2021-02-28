@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import MaterialTable from 'material-table';
@@ -6,10 +6,10 @@ import MaterialTable from 'material-table';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core';
-import { startGetSubjectTasks } from '../../../../../redux/actions/task';
+import { startGetSubjectExams } from '../../../../redux/actions/exam';
 import { useHistory } from 'react-router-dom';
-import { getSubjectTask, startTaskSelection } from '../../../../../redux/actions/task';
-import moment from 'moment';
+import { getSubjectExam, startExamSelection } from '../../../../redux/actions/exam';
+import QuizExample from "../Exam/ExamMaker/PreviewExam";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   }
 ));
 
-export const ListTask = () => {
+export const ListExam = () => {
 
     const classes = useStyles();
 
@@ -30,14 +30,14 @@ export const ListTask = () => {
     const history = useHistory();
 
     let subject = useSelector( state => state.subject.selectedSubject );
-    const { checking } = useSelector( state => state.task );
-
+    const { checking } = useSelector( state => state.exam );
+    const [formdata, setFormData] = useState([]);
 
     useEffect(() => {
         if(subject.subjectID){
            
-            const loadTasks = () => dispatch( startGetSubjectTasks( subject.subjectID ) );
-            loadTasks();
+            const loadExams = () => dispatch( startGetSubjectExams( subject.subjectID ) );
+            loadExams();
         }
     }, []);
 
@@ -45,10 +45,10 @@ export const ListTask = () => {
         subject = { subjectName: 'POR FAVOR SELECCIONE UN CURSO' }
     }
 
-    let tasks = useSelector( state => state.task.subjectTasks.rows );
-    
-    if(!tasks){
-        tasks = []
+    let exams = useSelector( state => state.exam.subjectExams.rows );
+    console.log("Los examenes",exams)
+    if(!exams){
+        exams = []
     } 
     
     if(checking){
@@ -70,33 +70,33 @@ export const ListTask = () => {
         )
     }
 
-    const handleTaskCreation = () => {
-        history.push('/form/task');
+    const handleExamCreation = () => {
+        history.push('/form/exam');
     }
-    const handleViewActions = ( task ) => {
-        dispatch( startTaskSelection(task) );
-        history.push('/list/task');
+    const handleViewActions = ( exam ) => {
+        //dispatch( startExamSelection(exam) );
+        history.push('/form/exam-generator');
     }
 
-    function afinarFecha(fechaX)
-    {
-        return moment(fechaX).format('YYYY-MM-DD');
-    }
+   
+    
 
     return (
         <>
-            <h2> Lista de Tareas de: { subject.subjectName }</h2>
+            <h2> Lista de Exámenes de: { subject.subjectName }</h2>
             <MaterialTable 
-                title={ 'Tareas' }
+                title={ 'Exámenes' }
                 columns={[
-                    { title: 'Código', field: 'taskCode' },
-                    { title: 'Nombre', field: 'taskName' },
-                    { title: 'Descripción', field: 'taskDetail' },
+                    { title: 'Código', field: 'examID' },
                     { title: 'Materia', field: 'subject.subjectName' },
-                    { title: 'Entrega', field:  'endDate'},
+                    { title: 'Tipo', field: 'isPartial', lookup: { true: 'Parcial', false: 'Final' }},
+                    { title: 'Fecha Inicio', field: 'startDate' },
+                    { title: 'Hora Inicio', field: 'startHour' },
+                    { title: 'Fecha Fin', field: 'endDate' },
+                    { title: 'Hora Fin', field: 'endHour' },
                     { title: 'Activo', field: 'isActive', lookup: { true: 'Si', false: 'No' }}
                 ]}
-                data={ tasks }
+                data={ exams }
                 options={{
                     selection: false, //Se se habilita, permite acciones grupales (sobre los seleccionados)
                     sorting: true,
@@ -112,33 +112,31 @@ export const ListTask = () => {
                 actions={[
                     {
                         icon: 'add_box',
-                        tooltip: 'Crear tarea',
+                        tooltip: 'Crear examen',
                         isFreeAction: true,
                         //onClick: () => tableRef.current && tableRef.current.onQueryChange(),
                         onClick: () => {
-                            handleTaskCreation();
-                            console.log('Formulario de creación de materia');
+                            handleExamCreation();
                         } 
                     },
                     {
                         icon: 'visibility',
                         tooltip: 'Ver',
                         onClick: (event, rowData) => {
-                            //alert("Se envía a ver " + rowData.subjectID + ' ' + rowData.taskName) 
-                            handleViewActions( rowData );
-                           //console.log('Acción');
-                            //handleCreateTask();
+                         <QuizExample data={formdata} />
                         }
                     },
                     {
                         icon: 'edit',
-                        tooltip: 'Editar',
-                        onClick: (event, rowData) => alert("Se está editando " + rowData.taskName)
+                        tooltip: 'Gestionar preguntas',
+                        onClick: (event, rowData) => {
+                            handleViewActions( rowData );
+                        }
                     },
                     {
                         icon: 'delete',
                         tooltip: 'Eliminar',
-                        onClick: (event, rowData) => alert("Se está eliminando" + rowData.taskName)
+                        onClick: (event, rowData) => alert("Se está eliminando" + rowData.examName)
                     }
                 ]}
                 localization={{

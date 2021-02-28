@@ -16,82 +16,83 @@ const errorHandling = (error) => {
     }
 }
 
-// Getting all tasks of a subject
-export const startGetSubjectTasks = (subjectID) => {
+// Getting all exams of a subject
+export const startGetSubjectExams = (subjectID) => {
     return async(dispatch) => {
         dispatch(startChecking());
         try {
             const token = localStorage.getItem('none-token');
-            const resp = await axiosClient.get(`/task/subject/${ subjectID }`, {
+            const resp = await axiosClient.get(`/exam/subject/${ subjectID }`, {
                 headers: {
                     'none-token': token
                 }
             });
             console.log('ACA');
             console.log(resp.data);
-            dispatch(getSubjectTasks(resp.data.tasks));
+            dispatch(getSubjectExams(resp.data.exams));
         } catch (error) {
             errorHandling(error);
-            dispatch(getSubjectTasksError());
+            dispatch(getSubjectExamsError());
         }
         dispatch(endChecking());
     }
 }
 
 const startChecking = () => ({
-    type: types.taskStartChecking
+    type: types.examStartChecking
 });
 
 const endChecking = () => ({
-    type: types.taskCheckingFinished
+    type: types.examCheckingFinished
 });
 
-const getSubjectTasksError = () => ({
-    type: types.taskGetSubjectTaskError
+const getSubjectExamsError = () => ({
+    type: types.examGetSubjectExamError
 });
 
-const getSubjectTasks = (tasks) => ({
-    type: types.taskGetSubjectTaskOK,
-    payload: tasks
+const getSubjectExams = (exams) => ({
+    type: types.examGetSubjectExamOK,
+    payload: exams
 });
 
-// Create a new task
-export const startCreateTask = (task) => {
+// Create a new exam
+export const startCreateExam = (exam) => {
     return async(dispatch) => {
         dispatch(startChecking());
         try {
-            const resp = await axiosClient.post('task', task, {
+            console.log ('EL TOKEN', token);
+            const resp = await axiosClient.post('exam', exam, {
                 headers: {
                     'none-token': token
                 }
             });
            
-            dispatch(createTask(resp.data.task));
+            dispatch(createExam(resp.data.exam));
             Swal.fire('¡Correcto!', resp.data.message, 'success');
         } catch (error) {
             errorHandling(error);
-            dispatch(createTaskError());
+            dispatch(createExamError());
         }
         dispatch(endChecking());
     }
 }
 
-const createTaskError = () => ({
-    type: types.taskCreateError
+const createExamError = () => ({
+    type: types.examCreateError
 });
 
-const createTask = (task) => ({
-    type: types.taskCreateOK,
-    payload: task
+const createExam = (exam) => ({
+    type: types.examCreateOK,
+    payload: exam
 });
 
 // Select a subject from de list
-export const startTaskSelection = (task) => {
+export const startExamSelection = (exam) => {
     return (dispatch) => {
-        dispatch(selectTask(task));
+        dispatch(selectExam(exam));
     }
 }
-const selectTask = (task) => ({
-    type: types.taskSelectTask,
-    payload: task
+const selectExam = (exam) => ({
+    type: types.examSelectExam,
+    payload: exam
 })
