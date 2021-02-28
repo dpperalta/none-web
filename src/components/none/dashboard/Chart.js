@@ -9,15 +9,13 @@ function createData(time, amount) {
 }
 
 const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00', undefined),
+  createData('1', 0),
+  createData('5', 3000),
+  createData('10', 2000),
+  createData('15', 4000),
+  createData('20', 10000),
+  createData('25', 5000),
+  createData('30', 4000)
 ];
 
 export default function Chart() {
@@ -25,7 +23,7 @@ export default function Chart() {
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>Ingresos del mes de diciembre 2020</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -43,7 +41,7 @@ export default function Chart() {
               position="left"
               style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
             >
-              Sales ($)
+              Ingreso económico($)
             </Label>
           </YAxis>
           <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />

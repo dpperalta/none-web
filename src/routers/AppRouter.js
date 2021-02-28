@@ -4,6 +4,11 @@ import { adminItems } from '../components/ui/MenuAdminList';
 import { collegeItems } from '../components/ui/MenuCollegeList';
 import { teacherItems } from '../components/ui/MenuTeacherList';
 import { studentItems } from '../components/ui/MenuStudentList';
+import { parentItems } from '../components/ui/MenuParentList';
+
+import Dashboard from '../components/none/dashboard/Dashboard';
+import DashboardStudent  from '../components/none/dashStudent/index';
+import DashboardTeacher  from '../components/none/dashTeacher/index';
 
 // Router and routes
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
@@ -14,7 +19,6 @@ import { TeacherRoutes } from './TeacherRoutes';
 
 // Components
 import { Login } from '../components/auth/Login';
-import { None } from '../components/none/dashboard/None';
 import { Formulario } from '../components/ui/Formulario';
 import { FormCreatePerson } from '../components/none/view/Person/FormCreatePerson';
 import { ListPerson } from '../components/none/view/Person/ListPerson';
@@ -30,12 +34,15 @@ import { FormCreateEnrollmentStatus } from '../components/none/view/Enrollment/F
 import { ComponentsUI } from '../components/ui/ComponentsUI';
 import {TableIndividual} from '../components/ui/MaterialTables/TableIndividual';
 import {TableGroups} from '../components/ui/MaterialTables/TableGroups';
-import Dashboard  from '../components/none/dashboard/Dashboard';
+import None  from '../components/none/dashboard/Dashboard';
+import TareaIcon from '@material-ui/icons/Description';
+import ExamenIcon from '@material-ui/icons/AssignmentTurnedIn';
 import { startChecking } from '../redux/actions/auth';
 import { ProgressBar } from '../components/ui/ProgressBar';
 import { FormCreateAcademicPeriod } from '../components/none/view/AcademicPeriod/FormCreateAcademicPeriod';
 import { ListCourse } from '../components/none/view/Course/ListCourse';
 import { ListSubject } from '../components/none/view/Subject/ListSubject';
+import { ListTask } from '../components/none/view/Subject/Task/ListTask';
 import { ListTeacherSubject } from '../components/none/view/Subject/Teacher/ListTeacherSubject';
 
 //Imports MainUI
@@ -57,8 +64,12 @@ import MoreVertIcon  from '@material-ui/icons/MoreVert';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DarkModeIcon from '@material-ui/icons/Brightness4';
+import AssignmentIcon from '@material-ui/icons/AssignmentSharp';
+import ForoIcon from '@material-ui/icons/Forum';
+import Chat2Icon from '@material-ui/icons/Sms';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -84,6 +95,7 @@ function Copyright() {
         </Typography>
     );
 }
+
 
 
 const drawerWidth = 240;
@@ -164,10 +176,20 @@ const useStyles = makeStyles((theme) => ({
     },
     fixedHeight: {
         height: 240
+    },
+    link:{
+        textDecoration: 'none',
+        color: theme.palette.text.primary
     }
 }));
 
 
+function RandomNumber(userID,number){
+    return (
+        userID + number
+        //Math.floor(Math.random() * 10)
+    );
+}
 export const AppRouter = () => {
 
     const dispatch = useDispatch();
@@ -239,20 +261,29 @@ export const AppRouter = () => {
 
     // Switcher of sidemenu items
     let items;
+    let DashboardBase = Dashboard;
     switch (role) {
         case 'Administrator':
         case 'Super Administrator':
             items = adminItems;
+            DashboardBase = DashboardTeacher;
             break;
         case 'Teacher':
             items = teacherItems;
+            DashboardBase = DashboardTeacher;
             break;
         case 'Operative':
             items = collegeItems;
+            DashboardBase = Dashboard;
             break;
         case 'Student':
             items = studentItems;
+            DashboardBase = DashboardStudent;
             break;
+        case 'Parent':
+                items = parentItems;
+                DashboardBase = DashboardStudent;
+                break;    
         default:
             items = adminItems;
     }
@@ -343,10 +374,42 @@ export const AppRouter = () => {
                                             {/* MentoRed de { user.email } <small>{ role }</small> */}
                                             MentoRed de { person.nombres } <small>{ role }</small>
                                         </Typography>
+                                        
                                         <IconButton color="inherit">
-                                            <Badge badgeContent={ 10 } color="secondary">
+                                        <Link to="/list/task" className={classes.link}>
+                                            <Badge badgeContent={ RandomNumber(userID,2) } color="primary">
+                                                <TareaIcon />
+                                            </Badge>
+                                        </Link> 
+                                        </IconButton>
+                                        <IconButton color="inherit">
+                                        <Link to="/list/exam" className={classes.link}>
+                                            <Badge badgeContent={ RandomNumber(userID,1) } color="primary">
+                                                <ExamenIcon />
+                                            </Badge>
+                                        </Link> 
+                                        </IconButton>
+                                        <IconButton color="inherit">
+                                        <Link to="/list/todo" className={classes.link}>
+                                            <Badge badgeContent={ RandomNumber(userID,4) } color="secondary">
                                                 <NotificationsIcon />
                                             </Badge>
+                                        </Link> 
+                                        </IconButton>
+                                        
+                                        <IconButton color="inherit">
+                                        <Link to="/list/inbox" className={classes.link}>
+                                            <Badge badgeContent={ RandomNumber(userID,6) } color="secondary">
+                                                <MailIcon />
+                                            </Badge>
+                                        </Link> 
+                                        </IconButton>
+                                        <IconButton color="inherit">
+                                        <Link to="/list/chat" className={classes.link}>
+                                            <Badge badgeContent={ RandomNumber(userID,7) } color="secondary">
+                                                <Chat2Icon />
+                                            </Badge>
+                                        </Link> 
                                         </IconButton>
                                         &nbsp;
                                         <div
@@ -428,7 +491,8 @@ export const AppRouter = () => {
                                                 <Switch>
                                                     {/* <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/> */}
                                                     <PrivateRoutes exact path="/demo" component={ None } isAuthenticated={ !!userID }/>
-                                                    <PrivateRoutes exact path='/' component={ ComponentsUI } isAuthenticated={ !!userID } />
+                                                    <PrivateRoutes exact path="/dashboard" component={ DashboardStudent } isAuthenticated={ !!userID }/>
+                                                    <PrivateRoutes exact path='/' component={ DashboardBase } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form' component={ Formulario } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/person' component={ FormCreatePerson } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/list/person' component={ ListPerson } isAuthenticated={ !!userID } />
@@ -439,7 +503,8 @@ export const AppRouter = () => {
                                                     <PrivateRoutes exact path='/form/exam-generator' component={ ExamGenerator } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/list/subject' component={ ListSubject } isAuthenticated={ !!userID } />
-                                                    
+                                                    <PrivateRoutes exact path='/list/task' component={ ListTask } isAuthenticated={ !!userID } />
+
                                                     <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
                                                     <PrivateRoutes exact path='/form/editor' component={ Editor } isAuthenticated={ !!userID } />

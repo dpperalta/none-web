@@ -27,6 +27,8 @@ export const startGetSubjectTasks = (subjectID) => {
                     'none-token': token
                 }
             });
+            console.log('ACA');
+            console.log(resp.data);
             dispatch(getSubjectTasks(resp.data.tasks));
         } catch (error) {
             errorHandling(error);
@@ -63,6 +65,7 @@ export const startCreateTask = (task) => {
                     'none-token': token
                 }
             });
+            
             dispatch(createTask(resp.data.task));
             Swal.fire('¡Correcto!', resp.data.message, 'success');
         } catch (error) {
@@ -81,3 +84,14 @@ const createTask = (task) => ({
     type: types.taskCreateOK,
     payload: task
 });
+
+// Select a subject from de list
+export const startTaskSelection = (task) => {
+    return (dispatch) => {
+        dispatch(selectTask(task));
+    }
+}
+const selectTask = (task) => ({
+    type: types.taskSelectTask,
+    payload: task
+})

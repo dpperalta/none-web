@@ -25,6 +25,7 @@ import { es} from "date-fns/locale";
 import { useDispatch, useSelector } from 'react-redux';
 import { startGetCollegeTeachers } from '../../../../../redux/actions/teacher';
 import { startCreateTask } from '../../../../../redux/actions/task';
+import moment from 'moment';
 
 //----------------------------------------------------------------ESTILOS-------------------------------------
 const useStyles = makeStyles((theme) => ({
@@ -129,24 +130,38 @@ export const FormCreateTask = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      let inicio = moment(selectedDate).format('YYYY-MM-DD'); 
+      let fin = moment(selectedDate2).format('YYYY-MM-DD');
+      let inicioHora = moment(selectedDate).format('HH:mm:ss'); 
+      let finHora = moment(selectedDate2).format('HH:mm:ss');
+      
       let task = {
-        startDate: values.startDate, // Falta la hora
-        endDate: values.endtDate, // Falta la hora
+        startDate: inicio + ' ' + inicioHora,
+        endDate: fin + ' ' + finHora,
         taskName: values.taskName,
-        taskDetail: values.description,
+        taskDetail: values.taskDetail,
         permitsDelay: values.radio,
         maxDelay: values.maxDelay,
         subjectID: subject.subjectID
       }
+      console.log(task);
       
       dispatch( startCreateTask(task) );
       formik.handleReset();
       setTeacherID(null);
       setTeacher(null);  
+      setSelectedDate(new Date());
+      setSelectedDate2(new Date());
     },
     
 });
 
+const handleLimpiar = () =>
+{
+  formik.handleReset();
+  setSelectedDate(new Date());
+  setSelectedDate2(new Date());
+}
  
 if(checking){
   return (
@@ -176,7 +191,7 @@ if(checking){
           <LockOutlinedIcon />
         </Avatar> 
         <Typography component="h1" variant="h5">
-          Registro de Tarea para la materia "Materia"
+          Registro de Tarea para la materia { subject.subjectName }
         </Typography>
         </Grid>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
@@ -275,6 +290,7 @@ if(checking){
                         id="startHour"
                         Style="width:95%"
                         name="startHour"
+                        ampm={false}
                         required
                         label="Hora de inicio"
                         value={selectedDate}
@@ -329,6 +345,7 @@ if(checking){
                         id="endHour"
                         Style="width:95%"
                         name="endHour"
+                        ampm={false}
                         required
                         label="Hora de finalización"
                         value={selectedDate2}
@@ -397,7 +414,7 @@ if(checking){
                     </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
-                        <Button variant="outlined" Style="width:100%" color="primary" className={classes.submit} onClick={formik.handleReset} startIcon={<BackspaceIcon />}>
+                        <Button variant="outlined" Style="width:100%" color="primary" className={classes.submit} onClick={handleLimpiar} startIcon={<BackspaceIcon />}>
                             Limpiar Datos
                     </Button>
             </Grid>

@@ -8,6 +8,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core';
 import { startGetCourseSubjects } from '../../../../redux/actions/subject';
 import { useHistory } from 'react-router-dom';
+import { getCourseSubject, startSubjectSelection } from '../../../../redux/actions/subject';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -68,6 +69,11 @@ export const ListSubject = () => {
     const handleSubjectCreation = () => {
         history.push('/form/subject');
     }
+    const handleViewActions = ( subject ) => {
+        dispatch( startSubjectSelection(subject) );
+        history.push('/list/task');
+    }
+
 
     return (
         <>
@@ -109,8 +115,10 @@ export const ListSubject = () => {
                         icon: 'visibility',
                         tooltip: 'Ver',
                         onClick: (event, rowData) => {
-                            alert("Se envía a ver " + rowData.courseID + ' ' + rowData.subjectName) 
-                            //handleViewActions( rowData );
+                            //alert("Se envía a ver " + rowData.courseID + ' ' + rowData.subjectName) 
+                            handleViewActions( rowData );
+                           //console.log('Acción');
+                            //handleCreateTask();
                         }
                     },
                     {

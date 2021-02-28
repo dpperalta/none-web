@@ -52,7 +52,7 @@ function onClick(e, item) {
     window.alert(JSON.stringify(' Soy representante, estoy en ' + item.name , null, 2));
   }
 
-export const items = [
+  export const parentItems = [
    
     {
       name: "/", label: "Mis representados", Icon: HomeIcon,
@@ -151,6 +151,6 @@ export const items = [
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    items,
+    parentItems,
 }
   

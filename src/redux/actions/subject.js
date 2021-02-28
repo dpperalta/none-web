@@ -81,3 +81,14 @@ const createSubject = (subject) => ({
     type: types.subjectCreateOK,
     payload: subject
 });
+
+// Select a course from de list
+export const startSubjectSelection = (subject) => {
+    return (dispatch) => {
+        dispatch(selectSubject(subject));
+    }
+}
+const selectSubject = (subject) => ({
+    type: types.subjectSelectSubject,
+    payload: subject
+})

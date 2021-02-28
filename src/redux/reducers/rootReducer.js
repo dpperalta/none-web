@@ -9,6 +9,7 @@ import { personReducer } from "./personReducer";
 import { personTypeReducer } from "./personTypeReducer";
 import { phoneOperatorReducer } from "./phoneOperatorReducer";
 import { subjectReducer } from "./subjectReducer";
+import { taskReducer } from "./taskReducer";
 import { teacherReducer } from "./teacherReducer";
 import { telephoneReducer } from "./telephoneReducer";
 import { userReducer } from "./userReducer";
@@ -27,6 +28,7 @@ export const rootReducer = combineReducers({
     academicPeriod: academicPeriodReducer,
     subject: subjectReducer,
     teacher: teacherReducer,
+    task: taskReducer
 
     // TODO: studentReducer,
     // etc.

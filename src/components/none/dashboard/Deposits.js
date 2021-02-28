@@ -18,16 +18,16 @@ export default function Deposits() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Recent Deposits</Title>
+      <Title>Total de ingresos</Title>
       <Typography component="p" variant="h4">
-        $3,024.00
+        $28.647,00
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        on 15 March, 2019
+        corte al 31/12/2020
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
+          Revisar todas las operaciones
         </Link>
       </div>
     </React.Fragment>

@@ -1,7 +1,7 @@
 import { types } from '../types/types';
 
 const initialState = {
-    courseTasks: [],
+    subjectTasks: [],
     checking: false,
     error: null,
     selectedTask: null,
@@ -37,7 +37,7 @@ export const taskReducer = (state = initialState, action) => {
                 ...state,
                 error: false,
                 checking: false,
-                courseTasks: action.payload
+                subjectTasks: action.payload
             }
         case types.taskCreateOK:
             return {

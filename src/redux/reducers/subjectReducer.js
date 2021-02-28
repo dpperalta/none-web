@@ -46,6 +46,13 @@ export const subjectReducer = (state = initialState, action) => {
                 checkig: false,
                 subjectCreated: action.payload
             }
+        case types.subjectSelectSubject:
+            return {
+                ...state,
+                error: false,
+                checkig: false,
+                selectedSubject: action.payload
+            }
         default:
             return state;
     }
