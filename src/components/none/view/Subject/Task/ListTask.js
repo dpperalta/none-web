@@ -42,7 +42,7 @@ export const ListTask = () => {
     }, []);
 
     if(!subject){
-        subject = { subjectName: 'POR FAVOR SELECCIONE UN CURSO' }
+        subject = { subjectName: 'POR FAVOR SELECCIONE UNA MATERIA' }
     }
 
     let tasks = useSelector( state => state.task.subjectTasks.rows );
@@ -75,7 +75,6 @@ export const ListTask = () => {
     }
     const handleViewActions = ( task ) => {
         dispatch( startTaskSelection(task) );
-        history.push('/list/task');
     }
 
     function afinarFecha(fechaX)
@@ -92,8 +91,8 @@ export const ListTask = () => {
                     { title: 'Código', field: 'taskCode' },
                     { title: 'Nombre', field: 'taskName' },
                     { title: 'Descripción', field: 'taskDetail' },
-                    { title: 'Materia', field: 'subject.subjectName' },
-                    { title: 'Entrega', field:  'endDate'},
+                    /* { title: 'Materia', field: 'subject.subjectName' }, */
+                    { title: 'Entrega', field:  'endDate', type: 'datetime', dateSetting: { locale: 'pt', format: 'dd-MM-yyyy hh:mm:ss' }},
                     { title: 'Activo', field: 'isActive', lookup: { true: 'Si', false: 'No' }}
                 ]}
                 data={ tasks }

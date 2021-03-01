@@ -2,8 +2,6 @@ import axiosClient from '../../config/axiosClient';
 import { types } from '../types/types';
 import Swal from 'sweetalert2';
 
-const token = localStorage.getItem('none-token');
-
 const errorHandling = (error) => {
     if (error.response) {
         Swal.fire('¡Error!', error.response.data.message, 'error');
@@ -58,6 +56,7 @@ export const startCreateSubject = (subject) => {
     return async(dispatch) => {
         dispatch(startChecking());
         try {
+            const token = localStorage.getItem('none-token');
             const resp = await axiosClient.post('subject', subject, {
                 headers: {
                     'none-token': token
@@ -91,4 +90,33 @@ export const startSubjectSelection = (subject) => {
 const selectSubject = (subject) => ({
     type: types.subjectSelectSubject,
     payload: subject
-})
+});
+
+export const startGettingTeacherSubjects = (teacherID) => {
+    return async(dispatch) => {
+        dispatch(startChecking());
+        try {
+            const token = localStorage.getItem('none-token');
+            const resp = await axiosClient.get(`subject/teacher/${ teacherID }`, {
+                headers: {
+                    'none-token': token
+                }
+            });
+            console.log('resp:', resp.data);
+            dispatch(getTeacherSubjects(resp.data.subjects));
+        } catch (error) {
+            errorHandling(error);
+            dispatch(getTeacherSubjectsError());
+        }
+        dispatch(endChecking());
+    }
+}
+
+const getTeacherSubjectsError = () => ({
+    type: types.subjectGetTeacherSubjectsError
+});
+
+const getTeacherSubjects = (subjects) => ({
+    type: types.subjectGetTeacherSubjectsOK,
+    payload: subjects
+});

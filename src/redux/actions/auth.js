@@ -49,15 +49,20 @@ export const startChecking = () => {
 
     return async(dispatch) => {
         try {
-            const resp = await axiosClient.get('login/renew', {
-                headers: {
-                    'none-token': token
-                }
-            });
-            localStorage.setItem('none-token', resp.data.token);
-            localStorage.setItem('none-token-init-date', new Date().getTime());
-            dispatch(setRole(resp.data.role));
-            dispatch(login(resp.data.user));
+            if (!token) {
+                console.log('Por favor, inicia sesión');
+                dispatch(checkingFinished());
+            } else {
+                const resp = await axiosClient.get('login/renew', {
+                    headers: {
+                        'none-token': token
+                    }
+                });
+                localStorage.setItem('none-token', resp.data.token);
+                localStorage.setItem('none-token-init-date', new Date().getTime());
+                dispatch(setRole(resp.data.role));
+                dispatch(login(resp.data.user));
+            }
         } catch (error) {
             dispatch(checkingFinished());
             errorHandling(error);

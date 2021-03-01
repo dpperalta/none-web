@@ -186,7 +186,8 @@ sup {
 }
 
 a {
-    color: #1890ff;
+    /*color: #1890ff;*/
+    color: inherit !important;
     text-decoration: none;
     background-color: transparent;
     outline: none;
@@ -197,7 +198,7 @@ a {
 }
 
 a:hover {
-    color: #40a9ff;
+    color: #40a9ff !important;
 }
 
 a:active {

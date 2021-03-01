@@ -27,7 +27,6 @@ export const startGetSubjectTasks = (subjectID) => {
                     'none-token': token
                 }
             });
-            console.log('ACA');
             console.log(resp.data);
             dispatch(getSubjectTasks(resp.data.tasks));
         } catch (error) {
@@ -65,7 +64,7 @@ export const startCreateTask = (task) => {
                     'none-token': token
                 }
             });
-           
+
             dispatch(createTask(resp.data.task));
             Swal.fire('¡Correcto!', resp.data.message, 'success');
         } catch (error) {

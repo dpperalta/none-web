@@ -492,6 +492,7 @@ export const FormCreatePerson = () => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
+                  autoComplete="off"
                   required
                   fullWidth
                   id="number"
@@ -521,7 +522,7 @@ export const FormCreatePerson = () => {
                   required
                   fullWidth
                   id="secondStreet"
-                  label="Calle principal"
+                  label="Calle secundaria"
                   value={ formik.values.secondStreet }
                   onChange={ formik.handleChange }
                   onBlur={ formik.handleBlur }

@@ -5,7 +5,8 @@ const initialState = {
     checking: false,
     error: null,
     selectedSubject: null,
-    subjectCreated: null
+    subjectCreated: null,
+    teacherSubjects: []
 }
 
 export const subjectReducer = (state = initialState, action) => {
@@ -20,6 +21,7 @@ export const subjectReducer = (state = initialState, action) => {
                 ...state,
                 checking: false
             }
+        case types.subjectGetTeacherSubjectsError:
         case types.subjectCreateError:
         case types.subjectGetCourseSubjectError:
             return {
@@ -52,6 +54,13 @@ export const subjectReducer = (state = initialState, action) => {
                 error: false,
                 checkig: false,
                 selectedSubject: action.payload
+            }
+        case types.subjectGetTeacherSubjectsOK:
+            return {
+                ...state,
+                error: false,
+                checking: false,
+                teacherSubjects: action.payload
             }
         default:
             return state;

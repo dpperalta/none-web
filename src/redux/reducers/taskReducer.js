@@ -46,6 +46,14 @@ export const taskReducer = (state = initialState, action) => {
                 checkig: false,
                 taskCreated: action.payload
             }
+        case types.taskSelectTask:
+            console.log('taskSelected:', action.payload);
+            return {
+                ...state,
+                error: false,
+                checking: false,
+                selectedTask: action.payload
+            }
         default:
             return state;
     }

@@ -100,6 +100,8 @@ export const types = {
     subjectSelectSubject: '[subj] Select a listed subject',
     subjectCreateError: '[subj] Create subject error',
     subjectCreateOK: '[subj] Create subject ok',
+    subjectGetTeacherSubjectsError: '[subj] Get teacher subjects error',
+    subjectGetTeacherSubjectsOK: '[subj] Get teacher subjects ok',
 
     // Task
     taskStartChecking: '[task] Start checking',
@@ -107,7 +109,7 @@ export const types = {
     taskClearError: '[task] Clear task error after actions',
     taskGetSubjectTaskError: '[task] Get tasks of course error',
     taskGetSubjectTaskOK: '[task] Get tasks of subject ok',
-    tasktSelectTask: '[task] Select a listed task',
+    taskSelectTask: '[task] Select a listed task',
     taskCreateError: '[task] Create task error',
     taskCreateOK: '[task] Create task ok',
 
@@ -120,7 +122,7 @@ export const types = {
     examtSelectExam: '[exam] Select a listed exam',
     examCreateError: '[exam] Create exam error',
     examCreateOK: '[exam] Create exam ok',
-    
+
     // Teacher
     teacherStartChecking: '[tech] Start checking',
     teacherCheckingFinished: '[tech] Checking finished',
