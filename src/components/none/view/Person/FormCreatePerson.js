@@ -267,6 +267,11 @@ export const FormCreatePerson = () => {
     }
   });
 
+  const handleLimpiar = () => {
+    formik.handleReset();
+    setSelectedDate(moment().format('YYYY-MM-DD'));
+  }
+
   if(checking){
     return (
       <div className={ classes.spiner }>
@@ -808,7 +813,7 @@ export const FormCreatePerson = () => {
                   Style="width:100%" 
                   color="primary" 
                   className={classes.submit} 
-                  onClick={formik.handleReset} 
+                  onClick={ handleLimpiar } 
                   startIcon={<BackspaceIcon />}>
                   Limpiar Datos
                 </Button>

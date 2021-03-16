@@ -21,6 +21,7 @@ export const startCreateCollege = (college) => {
     return async(dispatch) => {
         dispatch(startChecking());
         try {
+            const token = localStorage.getItem('none-token');
             const resp = await axiosClient.post('college', college, {
                 headers: {
                     'none-token': token

@@ -43,6 +43,9 @@ export const types = {
     personClearError: '[pers] Clear an error after acions',
     personGetPersonError: '[pers] Get persons information error',
     personGetPersonOK: '[pers] Get persons information ok',
+    personGetPersonStudentError: '[pers] Get person students error',
+    personGetPersonStudenOK: '[pers] Get person students ok',
+    personRemovePersonStudent: '[pers] Remove person student',
 
     // Address
     addressStartChecking: '[addr] Start checking',
@@ -83,6 +86,8 @@ export const types = {
     courseGetCollegeCourseError: '[cour] Get courses of college error',
     courseGetCollegeCoursesOK: '[cour] Get courses of college ok',
     courseSelectCourse: '[cour] Select a listed course',
+    courseGetActiveCoursesError: '[cour] Get active courses error',
+    courseGetAtiveCoursesOK: '[cour] Get active courses ok',
 
     // Academic Period
     aperiodStartChecking: '[aper] Start checking',
@@ -132,4 +137,13 @@ export const types = {
     teacherSelectTeacher: '[tech] Select a listed teacher',
     teacherGetTeacherPersonError: '[tech] Get teacher by person error',
     teacherGetTeacherPersonOK: '[tech] Get teacher by person ok',
+
+    // Student
+    studentStartChecking: '[stdt] Start checking',
+    studentCheckingFinished: '[stdt] Checking finished',
+    studentCleanError: '[stdt] Clean student error after actions',
+    studentCreateError: '[stdt] Create student error',
+    studentCreateOK: '[stdt] Create student ok',
+    studentGetTeacherStudentError: '[stdt] Get students teacher error',
+    studentGetTeacherStudentOK: '[stdt] Get students teahcer ok',
 }

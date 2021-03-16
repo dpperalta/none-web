@@ -6,11 +6,8 @@ import MaterialTable from 'material-table';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core';
-import { startGetSubjectTasks } from '../../../../../redux/actions/task';
 import { useHistory } from 'react-router-dom';
-import { getSubjectTask, startTaskSelection } from '../../../../../redux/actions/task';
-import moment from 'moment';
-
+import { startGetTeacherStudents } from '../../../../../redux/actions/student';
 
 const useStyles = makeStyles((theme) => ({
     spiner: {
@@ -22,35 +19,31 @@ const useStyles = makeStyles((theme) => ({
   }
 ));
 
-export const ListTask = () => {
+export const ListStudentCourse = () => {
 
     const classes = useStyles();
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    let subject = useSelector( state => state.subject.selectedSubject );
-    const { checking } = useSelector( state => state.task );
+    const course = useSelector( state => state.course );
+    let teacher = useSelector( state => state.teacher.authTeacher );
 
+    const { checking } = useSelector( state => state.student );
 
+    // Load all students of course of teacher
     useEffect(() => {
-        if(subject.subjectID){
-           
-            const loadTasks = () => dispatch( startGetSubjectTasks( subject.subjectID ) );
-            loadTasks();
-        }
+        if(teacher.teacherid){
+            const loadStudents = () => dispatch( startGetTeacherStudents( teacher.teacherid ) );
+            loadStudents();
+        } 
     }, []);
 
-    if(!subject){
-        subject = { subjectName: 'POR FAVOR SELECCIONE UNA MATERIA' }
+    let students = useSelector( state => state.student.studentTeacher );
+    if(!students){
+        students = [];
     }
 
-    let tasks = useSelector( state => state.task.subjectTasks.rows );
-    
-    if(!tasks){
-        tasks = []
-    } 
-    
     if(checking){
         return (
           <div className={ classes.spiner }>
@@ -68,34 +61,21 @@ export const ListTask = () => {
             </Grid>
           </div>
         )
-    }
-
-    const handleTaskCreation = () => {
-        history.push('/form/task');
-    }
-    const handleViewActions = ( task ) => {
-        dispatch( startTaskSelection(task) );
-    }
-
-    function afinarFecha(fechaX)
-    {
-        return moment(fechaX).format('YYYY-MM-DD');
-    }
+    }    
 
     return (
         <>
-            <h2> Lista de Tareas de: { subject.subjectName }</h2>
+            <h1>Lista de estudiantes</h1>
             <MaterialTable 
-                title={ 'Tareas' }
+                title={ 'Alumnos' }
                 columns={[
-                    { title: 'Código', field: 'taskCode' },
-                    { title: 'Nombre', field: 'taskName' },
-                    { title: 'Descripción', field: 'taskDetail' },
-                    /* { title: 'Materia', field: 'subject.subjectName' }, */
-                    { title: 'Entrega', field:  'endDate', type: 'datetime', dateSetting: { locale: 'pt', format: 'dd/MM/yyyy hh:mm:ss' }},
+                    { title: 'Código', field: 'studentCode' },
+                    { title: 'Nombre', field: 'completeName' },
+                    { title: 'Curso', field: 'courseName' },
+                    { title: 'Materia', field: 'subjectName' },
                     { title: 'Activo', field: 'isActive', lookup: { true: 'Si', false: 'No' }}
                 ]}
-                data={ tasks }
+                data={ students }
                 options={{
                     selection: false, //Se se habilita, permite acciones grupales (sobre los seleccionados)
                     sorting: true,
@@ -109,35 +89,37 @@ export const ListTask = () => {
                     }
                 }}
                 actions={[
-                    {
+                    /*{
                         icon: 'add_box',
                         tooltip: 'Crear tarea',
                         isFreeAction: true,
-                        //onClick: () => tableRef.current && tableRef.current.onQueryChange(),
                         onClick: () => {
-                            handleTaskCreation();
-                            console.log('Formulario de creación de materia');
+                            //handleTaskCreation();
+                            console.log('Review this task');
                         } 
-                    },
+                    },*/
                     {
                         icon: 'visibility',
                         tooltip: 'Ver',
                         onClick: (event, rowData) => {
-                            //alert("Se envía a ver " + rowData.subjectID + ' ' + rowData.taskName) 
-                            handleViewActions( rowData );
-                           //console.log('Acción');
-                            //handleCreateTask();
+                            console.log("Se envía a ver " + rowData.studentID + ' ' + rowData.completeName);
+                            //handleViewSubject( rowData );
                         }
                     },
                     {
                         icon: 'edit',
                         tooltip: 'Editar',
-                        onClick: (event, rowData) => alert("Se está editando " + rowData.taskName)
+                        onClick: (event, rowData) => {
+                            console.log("Se está editando " + rowData.completeName);
+                            //handleViewSubject( rowData );
+                        }
                     },
                     {
                         icon: 'delete',
                         tooltip: 'Eliminar',
-                        onClick: (event, rowData) => alert("Se está eliminando" + rowData.taskName)
+                        onClick: (event, rowData) => {
+                            console.log("Se está eliminando" + rowData.subjectName);
+                        }
                     }
                 ]}
                 localization={{

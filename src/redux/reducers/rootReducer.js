@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { types } from "../types/types";
 import { academicPeriodReducer } from "./academicPeriodReducer";
 import { addressReducer } from "./addressReducer";
 import { authReducer } from "./authReducer";
@@ -9,6 +10,7 @@ import { examReducer } from "./examReducer";
 import { personReducer } from "./personReducer";
 import { personTypeReducer } from "./personTypeReducer";
 import { phoneOperatorReducer } from "./phoneOperatorReducer";
+import { studentReducer } from "./studentReducer";
 import { subjectReducer } from "./subjectReducer";
 import { taskReducer } from "./taskReducer";
 import { teacherReducer } from "./teacherReducer";
@@ -30,8 +32,8 @@ export const rootReducer = combineReducers({
     subject: subjectReducer,
     teacher: teacherReducer,
     task: taskReducer,
-    exam: examReducer
+    exam: examReducer,
+    student: studentReducer
 
-    // TODO: studentReducer,
-    // etc.
+    // TODO: add reducers
 });

@@ -23,7 +23,7 @@ const errorHandling = (error) => {
 // Create a new person
 export const startCreatePerson = (personData) => {
     return async(dispatch) => {
-        console.log('personData:', personData);
+        const token = localStorage.getItem('none-token');
         dispatch(startChecking());
         let person = personData.person;
         let address = personData.address;
@@ -111,3 +111,40 @@ const getPerson = (person) => ({
     type: types.personGetPersonOK,
     payload: person
 });
+
+// Get person's information for perston type Student and no student assigned
+export const startGetPersonToStudent = () => {
+    return async(dispatch) => {
+        dispatch(startChecking());
+        try {
+            const token = localStorage.getItem('none-token');
+            const resp = await axiosClient.get('person/student/unassigned', {
+                headers: {
+                    'none-token': token
+                }
+            });
+            dispatch(getPersonStudent(resp.data.people));
+        } catch (error) {
+            errorHandling(error);
+            dispatch(getPersonStudentError());
+        }
+        dispatch(endChecking());
+    }
+}
+
+const getPersonStudentError = () => ({
+    type: types.personGetPersonStudentError
+});
+
+const getPersonStudent = (people) => ({
+    type: types.personGetPersonStudenOK,
+    payload: people
+});
+
+export const removePersonStudent = (personID) => {
+    console.log('Entra a eliminar:', personID);
+    return {
+        type: types.personRemovePersonStudent,
+        payload: personID
+    }
+}

@@ -56,7 +56,6 @@ const getCollegeTeachers = (teachers) => ({
 // Geatting information of authenticated teacher
 export const startGettingTeacher = (personID) => {
     return async(dispatch) => {
-        console.log('personID:', personID);
         dispatch(startChecking());
         try {
             const token = localStorage.getItem('none-token');
@@ -65,7 +64,6 @@ export const startGettingTeacher = (personID) => {
                     'none-token': token
                 }
             });
-            console.log('resp:', resp.data.teacher);
             dispatch(getTeacherPerson(resp.data.teacher));
         } catch (error) {
             errorHandling(error);

@@ -19,6 +19,7 @@ const errorHandling = (error) => {
 export const startCreateUser = (user) => {
     return async(dispatch) => {
         try {
+            const token = localStorage.getItem('none-token');
             const resp = await axiosClient.post('user', user, {
                 headers: {
                     'none-token': token

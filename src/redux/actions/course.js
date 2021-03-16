@@ -21,13 +21,12 @@ export const startCreateCourse = (course) => {
     return async(dispatch) => {
         dispatch(startChecking());
         try {
-            console.log('course:', course);
+            const token = localStorage.getItem('none-token');
             const resp = await axiosClient.post('course', course, {
                 headers: {
                     'none-token': token
                 }
             });
-            console.log(resp.data);
             dispatch(createCourse(resp.data.course));
             Swal.fire('¡Correcto!', resp.data.message, 'success');
         } catch (error) {
@@ -66,7 +65,6 @@ export const getCollegeCourse = (collegeID) => {
                     'none-token': token
                 }
             });
-            //console.log('resp:', resp.data.courses);
             dispatch(getCollegeCourses(resp.data.courses));
         } catch (error) {
             errorHandling(error);
@@ -95,4 +93,33 @@ export const startCourseSelection = (course) => {
 const selectCourse = (course) => ({
     type: types.courseSelectCourse,
     payload: course
-})
+});
+
+// Get active courses for student registration
+export const startGetActiveCourses = () => {
+    return async(dispatch) => {
+        dispatch(startChecking());
+        try {
+            const token = localStorage.getItem('none-token');
+            const resp = await axiosClient.get('course/college/active', {
+                headers: {
+                    'none-token': token
+                }
+            });
+            dispatch(getActiveCourses(resp.data.courses));
+        } catch (error) {
+            errorHandling(error);
+            dispatch(getActiveCoursesError());
+        }
+        dispatch(endChecking());
+    }
+}
+
+const getActiveCoursesError = () => ({
+    type: types.courseGetActiveCoursesError
+});
+
+const getActiveCourses = (courses) => ({
+    type: types.courseGetAtiveCoursesOK,
+    payload: courses
+});

@@ -16,6 +16,7 @@ import { PublicRoutes } from './PublicRoutes';
 import { PrivateRoutes } from './PrivateRoutes';
 import { AdminRoutes } from './AdminRoutes';
 import { TeacherRoutes } from './TeacherRoutes';
+import { StudentRoutes } from './StudentRoutes';
 
 // Components
 import { Login } from '../components/auth/Login';
@@ -46,6 +47,7 @@ import { ListSubject } from '../components/none/view/Subject/ListSubject';
 import { ListTask } from '../components/none/view/Subject/Task/ListTask';
 import { ListExam } from '../components/none/view/Exam/ListExam';
 import { ListTeacherSubject } from '../components/none/view/Subject/Teacher/ListTeacherSubject';
+import { FormCreateStudent } from '../components/none/view/Student/FormCreateStudent';
 
 //Imports MainUI
 import clsx from 'clsx';
@@ -84,6 +86,7 @@ import Swal from 'sweetalert2';
 import SwitchDark from '@material-ui/core/Switch';
 import { startGettingPerson } from '../redux/actions/person';
 import { startGettingTeacher } from '../redux/actions/teacher';
+import { ListStudentCourse } from '../components/none/view/Subject/Teacher/ListStudentCourse';
 
 //MainUI
 function Copyright() {
@@ -97,8 +100,6 @@ function Copyright() {
         </Typography>
     );
 }
-
-
 
 const drawerWidth = 240;
 
@@ -182,7 +183,11 @@ const useStyles = makeStyles((theme) => ({
     link:{
         textDecoration: 'none',
         color: theme.palette.text.primary
-    }
+    },
+    center: {
+        display: 'block',
+        margin: 'auto'
+    },
 }));
 
 
@@ -236,9 +241,11 @@ export const AppRouter = () => {
     let isAdmin;
     let isSuperAdmin;
     let isTeacher;
+    let isStudent;
     role === 'Administrator' ? isAdmin = true : isAdmin = false;
     role === 'Super Administrator' ? isSuperAdmin = true : isSuperAdmin = false;
     role === 'Teacher' ? isTeacher = true : isTeacher = false;
+    role === 'Student' ? isStudent = true : isStudent = false;
 
     // Load especific information for users based in their role
     // Loading teacher's information
@@ -246,7 +253,6 @@ export const AppRouter = () => {
         if( isTeacher ){
             if(authUser){
                 if(person.id){
-                    console.log(person.id);
                     dispatch( startGettingTeacher( person.id ) );
                 }
             }
@@ -283,11 +289,11 @@ export const AppRouter = () => {
             DashboardBase = DashboardStudent;
             break;
         case 'Parent':
-                items = parentItems;
-                DashboardBase = DashboardStudent;
-                break;    
+            items = parentItems;
+            DashboardBase = DashboardStudent;
+            break;    
         default:
-            items = adminItems;
+            items = studentItems;
     }
 
     //MainUI
@@ -473,10 +479,10 @@ export const AppRouter = () => {
                                     open={ open }
                                 >
                                     <div className={ classes.toolbarIcon }>
+                                        <img src={ mentoredLogo } alt="Mentored logo" width="165px" className={ classes.center } />
                                         <IconButton
                                             onClick={ handleDrawerClose }
                                         >
-                                            <img src={ mentoredLogo } alt="Mentored logo" width="175px" />
                                             <ChevronLeftIcon />
                                         </IconButton>
                                     </div>
@@ -487,45 +493,48 @@ export const AppRouter = () => {
                                     <div className={ classes.appBarSpacer }></div>
                                     <Container maxWidth="lg" className={classes.container}>
                                         <Grid container spacing={ 3 }>
-                                            <Grid item xs={ 12 } md={ 12 } lg={ 12 }>
-                                                
-                                            <div>
-                                                <Switch>
-                                                    {/* <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/> */}
-                                                    <PrivateRoutes exact path="/demo" component={ None } isAuthenticated={ !!userID }/>
-                                                    <PrivateRoutes exact path="/dashboard" component={ DashboardStudent } isAuthenticated={ !!userID }/>
-                                                    <PrivateRoutes exact path='/' component={ DashboardBase } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form' component={ Formulario } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form/person' component={ FormCreatePerson } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/list/person' component={ ListPerson } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form/college' component={ FormCreateCollege } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form/course' component={ FormCreateCourse } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/list/course' component={ ListCourse } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form/exam-solve' component={ Quiz } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form/exam-generator' component={ ExamGenerator } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/list/subject' component={ ListSubject } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/list/task' component={ ListTask } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/list/exam' component={ ListExam } isAuthenticated={ !!userID } />
+                                            <Grid item xs={ 12 } md={ 12 } lg={ 12 }>   
+                                                <div>
+                                                    <Switch>
+                                                        {/* <PublicRoutes exact path="/login" component={ Login }  isAuthenticated={ !!userID }/> */}
+                                                        <PrivateRoutes exact path="/demo" component={ None } isAuthenticated={ !!userID }/>
+                                                        <PrivateRoutes exact path="/dashboard" component={ DashboardStudent } isAuthenticated={ !!userID }/>
+                                                        <PrivateRoutes exact path='/' component={ DashboardBase } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/form' component={ Formulario } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/form/person' component={ FormCreatePerson } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/list/person' component={ ListPerson } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/form/college' component={ FormCreateCollege } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/form/course' component={ FormCreateCourse } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/list/course' component={ ListCourse } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/form/exam-solve' component={ Quiz } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/form/exam-generator' component={ ExamGenerator } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/form/subject' component={ FormCreateSubject } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/list/subject' component={ ListSubject } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/list/task' component={ ListTask } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/list/exam' component={ ListExam } isAuthenticated={ !!userID } />
 
-                                                    <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form/exam' component={ FormCreateExam } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form/editor' component={ Editor } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form/academic-period' component={ FormCreateAcademicPeriod } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/form/enrollment-status' component={ FormCreateEnrollmentStatus } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/tabla1' component={ TableIndividual } isAuthenticated={ !!userID } />
-                                                    <PrivateRoutes exact path='/tabla2' component={ TableGroups } isAuthenticated={ !!userID } />
-                                                                
-                                                    {/* For Admin and Super Admin Routes */}
-                                                    {/* <AdminRoutes exact path="/route"  /> */}
-                                                    {/* TEACHER ROUTES */}
-                                                    <TeacherRoutes exact path='/teacher/list/subject' component={ ListTeacherSubject } isTeacherAuthenticated={ isTeacher } />
-                                                    <Redirect to="/" />
-                                                </Switch>
-                                            </div>
-                                        
-                    
+                                                        <PrivateRoutes exact path='/form/content' component={ FormCreateContent } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/form/task' component={ FormCreateTask } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/form/exam' component={ FormCreateExam } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/form/editor' component={ Editor } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/form/academic-period' component={ FormCreateAcademicPeriod } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/form/enrollment-status' component={ FormCreateEnrollmentStatus } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/tabla1' component={ TableIndividual } isAuthenticated={ !!userID } />
+                                                        <PrivateRoutes exact path='/tabla2' component={ TableGroups } isAuthenticated={ !!userID } />
+                                                                    
+                                                        {/* For Admin and Super Admin Routes */}
+                                                        {/* <AdminRoutes exact path="/route"  /> */}
+                                                        
+                                                        {/* TEACHER ROUTES */}
+                                                        <TeacherRoutes exact path='/teacher/list/subject' component={ ListTeacherSubject } isTeacherAuthenticated={ isTeacher } />
+                                                        <TeacherRoutes exact path='/teacher/list/student' component={ ListStudentCourse } isTeacherAuthenticated={ isTeacher } />
+                                                        
+                                                        {/* OPERATIVE ROUTES */}
+                                                        <AdminRoutes exact path='/student/form/student' component={ FormCreateStudent } isAdminAuthenticated={ isSuperAdmin } />
+                                                        
+                                                        <Redirect to="/" />
+                                                    </Switch>
+                                                </div>
                                             </Grid>
                                         </Grid>
                                         <Box pt={ 4 }>

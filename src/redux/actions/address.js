@@ -19,7 +19,7 @@ const errorHandling = (error) => {
 export const startCreateAddress = (address) => {
     return async(dispatch) => {
         try {
-            console.log('address:', address);
+            const token = localStorage.getItem('none-token');
             const resp = await axiosClient.post('address', address, {
                 headers: {
                     'none-token': token

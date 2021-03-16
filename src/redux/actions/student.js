@@ -1,8 +1,7 @@
 import axiosClient from '../../config/axiosClient';
 import { types } from '../types/types';
 import Swal from 'sweetalert2';
-
-const token = localStorage.getItem('none-token');
+import { removePersonStudent } from './person';
 
 const errorHandling = (error) => {
     if (error.response) {
@@ -16,82 +15,71 @@ const errorHandling = (error) => {
     }
 }
 
-// Getting all exams of a subject
-export const startGetSubjectExams = (subjectID) => {
+// Create a new studente
+export const startCreateStudent = (student) => {
     return async(dispatch) => {
         dispatch(startChecking());
         try {
             const token = localStorage.getItem('none-token');
-            const resp = await axiosClient.get(`/exam/subject/${ subjectID }`, {
+            const resp = await axiosClient.post('student', student, {
                 headers: {
                     'none-token': token
                 }
             });
-            console.log('ACA');
-            console.log(resp.data);
-            dispatch(getSubjectExams(resp.data.exams));
+            dispatch(createStudent(resp.data.student));
+            dispatch(removePersonStudent(student.personID));
+            Swal.fire('¡Correcto!', resp.data.message, 'success');
         } catch (error) {
             errorHandling(error);
-            dispatch(getSubjectExamsError());
+            dispatch(createStudentError());
         }
         dispatch(endChecking());
     }
 }
 
 const startChecking = () => ({
-    type: types.examStartChecking
+    type: types.studentStartChecking
 });
 
 const endChecking = () => ({
-    type: types.examCheckingFinished
+    type: types.studentCheckingFinished
 });
 
-const getSubjectExamsError = () => ({
-    type: types.examGetSubjectExamError
+const createStudentError = () => ({
+    type: types.studentCreateError
 });
 
-const getSubjectExams = (exams) => ({
-    type: types.examGetSubjectExamOK,
-    payload: exams
+const createStudent = (student) => ({
+    type: types.studentCreateOK,
+    payload: student
 });
 
-// Create a new exam
-export const startCreateExam = (exam) => {
+// Get students information for a logged teacher
+export const startGetTeacherStudents = (teacherID) => {
     return async(dispatch) => {
         dispatch(startChecking());
         try {
             const token = localStorage.getItem('none-token');
-            const resp = await axiosClient.post('exam', exam, {
+            const resp = await axiosClient.get(`student/teacher/${ teacherID }`, {
                 headers: {
                     'none-token': token
                 }
             });
-            dispatch(createExam(resp.data.exam));
-            Swal.fire('¡Correcto!', resp.data.message, 'success');
+            console.log('resp: ', resp.data);
+            dispatch(getTeacherStudents(resp.data.students));
         } catch (error) {
             errorHandling(error);
-            dispatch(createExamError());
+            dispatch(getTeacherStudentsError());
         }
         dispatch(endChecking());
     }
 }
 
-const createExamError = () => ({
-    type: types.examCreateError
+const getTeacherStudentsError = () => ({
+    type: types.studentGetTeacherStudentError
 });
 
-const createExam = (exam) => ({
-    type: types.examCreateOK,
-    payload: exam
+const getTeacherStudents = (students) => ({
+    type: types.studentGetTeacherStudentOK,
+    payload: students
 });
-
-// Select a subject from de list
-export const startExamSelection = (exam) => {
-    return (dispatch) => {
-        dispatch(selectExam(exam));
-    }
-}
-const selectExam = (exam) => ({
-    type: types.examSelectExam,
-    payload: exam
-})

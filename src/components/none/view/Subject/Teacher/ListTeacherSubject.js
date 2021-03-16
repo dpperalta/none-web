@@ -9,7 +9,6 @@ import { makeStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { startGettingTeacherSubjects, startSubjectSelection } from '../../../../../redux/actions/subject';
 
-
 const useStyles = makeStyles((theme) => ({
     spiner: {
       display: 'flex',
@@ -80,6 +79,7 @@ export const ListTeacherSubject = () => {
                     { title: 'Código', field: 'subjectCode' },
                     { title: 'Nombre', field: 'subjectName' },
                     { title: 'Descripción', field: 'description' },
+                    { title: 'Curso', field: 'course.courseName' },
                     { title: 'Activo', field: 'isActive', lookup: { true: 'Si', false: 'No' }}
                 ]}
                 data={ subjects }

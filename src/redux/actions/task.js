@@ -59,6 +59,7 @@ export const startCreateTask = (task) => {
     return async(dispatch) => {
         dispatch(startChecking());
         try {
+            const token = localStorage.getItem('none-token');
             const resp = await axiosClient.post('task', task, {
                 headers: {
                     'none-token': token

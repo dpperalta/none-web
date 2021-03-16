@@ -45,8 +45,8 @@ import Subir2Icon from '@material-ui/icons/AttachFile';
 import PresenciaIcon from '@material-ui/icons/PanTool';
 import PermisoIcon from '@material-ui/icons/ImportContacts';
 import RegaloIcon from '@material-ui/icons/Redeem';
-
-
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 function onClick(e, item) {
     //Para autorización
@@ -69,11 +69,20 @@ export const teacherItems = [
         label: "Mis materias",
         Icon: MateriaIcon,
         items: [
-          { name: "/teacher/list/subject", label: "Mis materias", Icon: ListaIcon, onClick },
+          { name: "/teacher/list/subject", label: "Mis materias", Icon: ListaIcon, onClick },         
           { name: "/report/assistance", label: "Registrar asistencias", Icon: PresenciaIcon, onClick },
           { name: "/form/permission", label: "Registrar permisos", Icon: PermisoIcon, onClick },
           { name: "/form/gifts", label: "Registrar incentivos", Icon: RegaloIcon, onClick },
           { name: "/list/content", label: "Gestionar contenido", Icon: SubirIcon, onClick }
+        ]
+    },
+    {
+        name: "students",
+        label: 'Mis estudiantes',
+        Icon: EmojiPeopleIcon,
+        items: [
+          { name: "/teacher/list/student", label: "Mis estudiantes", Icon: AccountBoxIcon, onClick },
+          { name: "/teacher/list/grades", label: 'Calificaciones', Icon: PersonaIcon, onClick },
         ]
     },
     {

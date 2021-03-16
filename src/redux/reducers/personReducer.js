@@ -2,9 +2,10 @@ import { types } from '../types/types';
 
 const initialState = {
     authPerson: null,
-    personCreated: null,
     checking: false,
-    error: null
+    error: null,
+    personCreated: null,
+    personStudents: []
 }
 
 export const personReducer = (state = initialState, action) => {
@@ -14,6 +15,7 @@ export const personReducer = (state = initialState, action) => {
                 ...state,
                 checking: true
             }
+        case types.personGetPersonStudentError:
         case types.personGetPersonError:
         case types.personCreatingError:
             return {
@@ -39,6 +41,18 @@ export const personReducer = (state = initialState, action) => {
                 authPerson: action.payload,
                 error: false,
                 checking: false
+            }
+        case types.personGetPersonStudenOK:
+            return {
+                ...state,
+                personStudents: action.payload,
+                error: false,
+                checking: false
+            }
+        case types.personRemovePersonStudent:
+            return {
+                ...state,
+                personStudents: state.personStudents.filter(person => person.idpersona !== action.payload)
             }
         default:
             return state;

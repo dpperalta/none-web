@@ -19,6 +19,7 @@ const errorHandling = (error) => {
 export const startCreateTelephone = (phone) => {
     return async(dispatch) => {
         try {
+            const token = localStorage.getItem('none-token');
             const resp = await axiosClient.post('telephone', phone, {
                 headers: {
                     'none-token': token

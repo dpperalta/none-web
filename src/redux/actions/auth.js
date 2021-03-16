@@ -3,6 +3,7 @@ import { types } from '../types/types';
 import Swal from 'sweetalert2';
 
 const errorHandling = (error) => {
+    console.log('error:', error);
     if (error.response) {
         Swal.fire('¡Error!', error.response.data.message, 'error');
     } else {

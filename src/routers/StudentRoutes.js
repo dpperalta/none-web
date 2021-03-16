@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Route, Redirect } from 'react-router-dom';
 
-export const TeacherRoutes = ({
-    isTeacherAuthenticated,
+export const StudentRoutes = ({
+    isStudentAuthenticated,
     component: Component,
     ...rest
 }) => {
@@ -12,7 +12,7 @@ export const TeacherRoutes = ({
         <Route 
             { ...rest } 
             component={ (props) => (
-                (isTeacherAuthenticated)
+                (isStudentAuthenticated)
                 ? (<Component { ...props } />)
                 : ( <Redirect to='/' /> )
             )}
@@ -20,7 +20,7 @@ export const TeacherRoutes = ({
     )
 }
 
-TeacherRoutes.propTypes = {
-    isTeacherAuthenticated: PropTypes.bool.isRequired,
+StudentRoutes.propTypes = {
+    isStudentAuthenticated: PropTypes.bool.isRequired,
     component: PropTypes.func.isRequired
 }

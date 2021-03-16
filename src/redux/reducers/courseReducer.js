@@ -1,6 +1,7 @@
 import { types } from '../types/types';
 
 const initialState = {
+    activeCourses: [],
     collegeCourses: [],
     courseCreated: null,
     checking: false,
@@ -26,6 +27,7 @@ export const courseReducer = (state = initialState, action) => {
                 error: false,
                 checking: false
             }
+        case types.courseGetActiveCoursesError:
         case types.courseGetCollegeCourseError:
         case types.courseCreateError:
             return {
@@ -53,6 +55,13 @@ export const courseReducer = (state = initialState, action) => {
                 error: false,
                 checking: false,
                 selectedCourse: action.payload
+            }
+        case types.courseGetAtiveCoursesOK:
+            return {
+                ...state,
+                error: false,
+                checking: false,
+                activeCourses: action.payload
             }
         default:
             return state;

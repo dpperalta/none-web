@@ -25,6 +25,7 @@ export const startCreateAcademicPeriod = (academicPeriod) => {
         academicPeriodObject.startPeriod = moment(academicPeriodObject.startPeriod).format('YYYY-MM-DD');
         academicPeriodObject.endPeriod = moment(academicPeriodObject.endPeriod).format('YYYY-MM-DD');
         try {
+            const token = localStorage.getItem('none-token');
             const resp = await axiosClient.post('academicPeriod', academicPeriodObject, {
                 headers: {
                     'none-token': token
